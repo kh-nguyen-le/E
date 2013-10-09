@@ -15,4 +15,9 @@ public class HelloWorld {
     public void methodC{
     	//Both users should enter code below this line (Scenario 2)
     }
+	
+	public void methodD{
+		//User C created
+		
+	}
 }
