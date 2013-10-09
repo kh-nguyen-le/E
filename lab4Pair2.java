@@ -9,6 +9,6 @@ public class HelloWorld {
     public void methodB{
     	//User B: Enter your code below this line (Scenario 1)
 	printf("test");
-	
+	printf("notest");
     }
 }
