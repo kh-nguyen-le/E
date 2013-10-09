@@ -14,5 +14,6 @@ public class HelloWorld {
 
     public void methodC{
     	//Both users should enter code below this line (Scenario 2)
+	printf("test 2");
     }
 }
