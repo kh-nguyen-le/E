@@ -16,5 +16,6 @@ public class HelloWorld {
 	scenario 2
     	//Both users should enter code below this line (Scenario 2)
 	printf("test 2");
+	printf("no automerge");
     }
 }
