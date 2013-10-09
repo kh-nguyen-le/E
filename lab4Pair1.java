@@ -13,6 +13,7 @@ public class HelloWorld {
     }
 
     public void methodC{
+	scenario 2
     	//Both users should enter code below this line (Scenario 2)
     }
 }
