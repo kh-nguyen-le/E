@@ -12,13 +12,10 @@ public class HelloWorld {
 	printf("test");
 	printf("notest");
     }
-<<<<<<< HEAD
+
 	public void methodD{
 		//User C created
 		
 	}
 	
 }
-=======
-}
->>>>>>> e57233d4e6fba9d707b88bba8bd34d6829023c5a
