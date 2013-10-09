@@ -5,7 +5,7 @@ public class HelloWorld {
     	//User A: Enter your code below this line (Scenario 1)
     }
 
-    public void methodA{
+    public void methodB{
     	//User B: Enter your code below this line (Scenario 1)
     }
 
