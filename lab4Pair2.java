@@ -12,4 +12,9 @@ public class HelloWorld {
 	printf("test");
 	
     }
+	public void methodD{
+		//User C created
+		
+	}
+	
 }
