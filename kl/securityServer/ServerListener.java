@@ -21,11 +21,11 @@ public class ServerListener extends Listener {
 			c.setName(name);
 		}
 		if (o instanceof Packet3Snapshot) {
-			//sets off alarm on intercom
+			//sets off alarm on alarm client
 			Connection[] list = server.getConnections();
 			Packet1Alert alert = new Packet1Alert();
 			for (int i=0; i<list.length; i++){
-				if (list[i].toString()=="Intercom") list[i].sendTCP(alert);
+				if (list[i].toString()=="Alarm") list[i].sendTCP(alert);
 			}
 			
 			//code to send image here
