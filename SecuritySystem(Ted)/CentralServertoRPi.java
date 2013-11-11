@@ -12,7 +12,6 @@ import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.ImageIcon;
 import java.math.*;
-import net.sourceforge.jmmslib.*;
 
 public class CentralServertoRPi {
     ServerSocket server = null;
@@ -23,16 +22,24 @@ public class CentralServertoRPi {
     BufferedImage image;
     ImageIcon imageIcon;
     Image im;
-    
-    
-    public CentralServertoRPi(){
+    String host, username, password;
+    int port;
+    MyOzSmsClient osc;
+
+    public CentralServertoRPi() throws IOException, InterruptedException{
         cACK = new byte[1024];
         aACK = new byte[1024];
         camReq = new byte[1024];
         camSnap = new byte[256000];
+        host = "localhost";
+        port = 9500;
+        username = "admin";
+        password = "ozekiTeddy";    
+
+
     }
     
-    public void serverRun() throws IOException{
+    public void serverRun() throws IOException, InterruptedException{
         server = new ServerSocket(8080);
         String hostname = server.getInetAddress().getHostName();
         System.out.println("Waiting for clients at "+ hostname + "....");
@@ -40,6 +47,10 @@ public class CentralServertoRPi {
         alarmSocket.setKeepAlive(true);
         cameraSocket = server.accept();
         cameraSocket.setKeepAlive(true);
+        
+        //Connect to Ozeki NG SMS Gateway and logging in.
+        osc = new MyOzSmsClient(host, port);
+        osc.login(username, password);
         
         //PrintWriter outToAlarm = new PrintWriter(alarmSocket.getOutputStream(), true);
         //BufferedReader inFromAlarm = new BufferedReader(new InputStreamReader(alarmSocket.getInputStream()));
@@ -88,6 +99,11 @@ public class CentralServertoRPi {
                             dout.write(("Image "+ image.toString() +" rcvd\n").getBytes());
                             System.out.println("Setting off alarm\n");
                             aout.write("ALERT!".getBytes());
+                            if(osc.isLoggedIn()) {
+					
+				osc.sendMessage("+16138781790", "Alert!");				
+				
+                            }
                             break;
 
                         case 2:
@@ -119,7 +135,7 @@ public class CentralServertoRPi {
         
 
     
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, InterruptedException{
         CentralServertoRPi cs = new CentralServertoRPi();
         cs.serverRun();
     }
