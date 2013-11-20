@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPiSecurityServer;
 
 import java.io.*;
@@ -22,7 +18,7 @@ public class AlarmClient {
         try {
             this.alarmOn = false;
             port = 8080;
-            toServer = new Socket("anearcan", port);
+            toServer = new Socket("192.168.0.11", port);
             OutputStream out = toServer.getOutputStream();
             pw = new PrintWriter(out, true);
             in = toServer.getInputStream();
@@ -37,7 +33,7 @@ public class AlarmClient {
     public void runSocketClient() throws IOException{
         String testMsg;
         //Connect to hostname 
-;
+
         
         while(true){
             while((testMsg = br.readLine())!= null){
@@ -89,3 +85,4 @@ public class AlarmClient {
         client.runSocketClient();
     }
 }
+
