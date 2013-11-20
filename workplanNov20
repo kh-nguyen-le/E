@@ -1,0 +1,10 @@
+ Completed
+- Pi Camera taking pictures automatically within Java client code
+- Message Protocol Table
+- GUI on Java Server partially finished, functions on button/menu are not done.
+
+To DO
+- Achieve video streaming from camera to server.
+-  Analyse video streaming from camera to server with VLC and JMPG.
+- Connect motion detector to Gertboard and program the functionality
+-Write test code
