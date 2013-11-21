@@ -34,7 +34,7 @@ public class CameraClient {
                     try {
                         client.reconnect(60000);
                     } catch (IOException ex) {
-                        //Logger.getLogger(AlarmClient.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                 }
 	}

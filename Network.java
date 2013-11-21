@@ -19,8 +19,10 @@ public class Network {
                 kryo.register(AuthenticationPacket.class);
                 kryo.register(HandshakePacket.class);
                 kryo.register(SettingsPacket.class);
+                kryo.register(MotionDetectedPacket.class);
 	}
 	
+        public static class MotionDetectedPacket{public boolean detected = false;}
 	public static class MessagePacket { public String message; }
 	public static class AlertPacket { }
 	public static class MotorPacket { public boolean direction; }

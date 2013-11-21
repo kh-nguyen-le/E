@@ -1,7 +1,5 @@
 package securitySystem;
 
-
-
 import java.io.IOException;
 import java.awt.event.*;
 
@@ -17,8 +15,10 @@ public class SecurityServer implements ActionListener {
         
 	public SecurityServer() throws IOException {
 		server = new Server();
+                //Registering Packets
 		Network.register(server);
 		server.bind(Network.port, Network.port);
+                //Set up Server listener
 		ServerListener listener = new ServerListener();
 		listener.init(server);
 		server.addListener(listener);
