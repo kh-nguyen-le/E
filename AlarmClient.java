@@ -1,38 +1,52 @@
 package securitySystem;
 
 import java.io.IOException;
-
-
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.minlog.Log;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AlarmClient {
 	private Client client;
 	private static java.net.InetAddress gateway;
 	
-	public AlarmClient() {
+	public AlarmClient()  {
 		client = new Client();
 		Network.register(client);
-		
-		client.addListener(new AlarmListener());
+		AlarmListener listener = new AlarmListener();
+                listener.init(client);
+		client.addListener(listener);
 		
 		do {
 			gateway =client.discoverHost(Network.port, 60000);
-		}while (gateway!=null);
-		
-		client.start();
+		}while (gateway==null);	
+                client.start();
 		
 		try {
-			client.connect(60000, gateway, Network.port, Network.port);
-		} catch (IOException e) {
+                    Log.set(Log.LEVEL_TRACE);
+                    client.connect(60000, gateway, Network.port, Network.port);
+                    client.setTimeout(0);
+                    client.setKeepAliveTCP(0);
+                    client.setKeepAliveUDP(0);
+                     
+		}catch(IOException e){
 			e.printStackTrace();
 			client.stop();
 		}
+                while(!client.isConnected()){
+                    try {
+                        client.reconnect(60000);
+                    } catch (IOException ex) {
+                        //Logger.getLogger(AlarmClient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
 	}
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws InterruptedException  {
 		new AlarmClient();
-		
-	}
+                while(true){
+        		Thread.sleep(999999);
+                }
+         }
 }

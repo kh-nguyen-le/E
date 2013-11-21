@@ -1,25 +1,28 @@
 package securitySystem;
 
+
+
 import java.io.IOException;
 import java.awt.event.*;
 
-import securitySystem.Network.*;
-
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.minlog.Log;
+import java.util.Scanner;
+import securitySystem.Network.*;
 
 public class SecurityServer implements ActionListener {
 
 	private Server server;
-	
+        
 	public SecurityServer() throws IOException {
 		server = new Server();
 		Network.register(server);
-		server.bind(Network.port,Network.port);
+		server.bind(Network.port, Network.port);
 		ServerListener listener = new ServerListener();
 		listener.init(server);
 		server.addListener(listener);
-		server.start();
+                server.start();
 	}
 	
 	
@@ -27,10 +30,11 @@ public class SecurityServer implements ActionListener {
 
 		try {
 			new SecurityServer();
+                        Log.set(Log.LEVEL_TRACE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+                                     
 	}
 
 	//button listener
