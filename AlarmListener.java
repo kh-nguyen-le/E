@@ -5,11 +5,18 @@ import securitySystem.Network.*;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlarmListener extends Listener {
         private Client client;
+        private AlarmThread at;
+        
         public void init(Client client) {
             this.client = client;
+            at = new AlarmThread();
+            at.start();
         }
 	
 	public void connected(Connection c) {
@@ -19,7 +26,7 @@ public class AlarmListener extends Listener {
 		client.sendTCP(request);
 	}
 
-       // public void disconnected(Connection c){ System.out.println("Client disconnected");}        
+        public void disconnected(Connection c){ System.out.println("Client disconnected");}        
         
 	public void received(Connection c, Object o) {
             
@@ -38,7 +45,17 @@ public class AlarmListener extends Listener {
 			}
 		}
 		if (o instanceof AlertPacket) {
-			//sound alarm
+                    AlertPacket ap = (AlertPacket)o;
+                    if(!ap.alarmOn){
+                        ap.alarmOn = true;
+                        AlarmThread.alarmOn = true;
+                       
+                    }else{
+                        ap.alarmOn = false;
+                        AlarmThread.alarmOn = false;
+                    }
+                    
+			
 		}
 		if (o instanceof AudioStreamPacket) {
 			//activate microphone
@@ -49,3 +66,37 @@ public class AlarmListener extends Listener {
 	}
 }
 
+class AlarmThread extends Thread{
+    public static boolean alarmOn;
+    
+    public AlarmThread(){
+        alarmOn = false;
+    }
+    
+    public synchronized void run(){
+        System.out.println("Running alarm thread");
+        while(true){
+            
+            if(alarmOn)   System.out.println("AlarmOn = true");
+            else{
+                try {
+                    System.out.println("AlarmOn = false");
+                    sleep(200);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AlarmThread.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            while(alarmOn){
+                try {
+                    System.out.println("Ring!");
+                    sleep(500);
+
+                } catch (InterruptedException ex) {
+                    System.err.println("Sleep Interrupted");
+                    //ex.printStackTrace();
+                }    
+            }
+        }   
+     }
+}
