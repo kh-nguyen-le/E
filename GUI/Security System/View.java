@@ -3,12 +3,16 @@
  * 
  * @author Yuan Sun
  * @version v1.0
+ * 
+ * issues:
+ * 1. have to activate the cam before running the program otherwise it wont show, can make a seperate thread for that.
  */
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.*;
 
 import uk.co.caprica.vlcj.*;
@@ -39,11 +43,12 @@ public class View
     private EmbeddedMediaPlayer mPlayer3;
     private EmbeddedMediaPlayer mPlayer4;
     
-    private String vlcPath = "C:\\Users\\yuansun\\Desktop\\security system\\vlc-2.1.0";
-    private String mediaPath1 = "1.mkv";
-    private String mediaPath2 = "2.mkv";
-    private String mediaPath3 = "3.mkv";
-    private String mediaPath4 = "4.mkv";
+    private String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
+    private String mediaPath1 = "rtsp://@192.168.0.14:8554/";
+    private String options = ":sout=#standard{mux=ts,access=file,dst=c:\\capture.avi}";
+    private String mediaPath2 = "1.mp4";
+    private String mediaPath3 = "2.mp4";
+    private String mediaPath4 = "blank.bmp";
     
     public View()
     {
@@ -147,13 +152,27 @@ public class View
         contentPane.add(camPanel);
         
         //--------------------date---------------------
-        
         String date = new SimpleDateFormat("hh:mm:ss").format(new Date());
-        JTextField time = new JTextField(date);
+        final JTextField time = new JTextField(date);
         time.setEditable(false);
         time.setFont(new Font("Serif", Font.PLAIN, 50));
         time.setBorder(BorderFactory.createEmptyBorder(0,43,0,0));
         panel.add(time);
+        class time extends Thread {
+            public void run() {
+                while(true) {
+                    String newDate = new SimpleDateFormat("hh:mm:ss").format(new Date());
+                    time.setText(newDate);
+                    try {
+                        sleep(1000);
+                    }catch(Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            }
+        }
+        time t = new time();
+        t.start();
         
         //--------------------control-------------------
         JButton leftButton = new JButton(new ImageIcon("left.png"));
@@ -185,7 +204,6 @@ public class View
         panel.add(Box.createRigidArea(new Dimension(0,10)));
         panel.add(controlPanel);
         
-        
         //----------------------button-------------------
         JButton screenCapture = new JButton("Screen Capture");
         buttonPanel.add(screenCapture);
@@ -211,10 +229,32 @@ public class View
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
-        mPlayer1.playMedia(mediaPath1);
-        mPlayer2.playMedia(mediaPath2);  
+        File dir = new File(System.getProperty("user.home"), "Videos");
+        dir.mkdirs();
+        DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+        
+        System.out.println(fileName);
+        
+        //fileName = "C:/test.mpg";
+        
+        mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+        mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
+        
+        try {
+            Thread.sleep(10000);
+            mPlayer2.playMedia(mediaPath3);
+            mPlayer3.playMedia(mediaPath2);
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        //mPlayer1.stop();
+        //mPlayer1.release();
+        
+        
         //----------------------open directory------------------------
         /*try {
             Desktop.getDesktop().open(new File("C:\\"));
