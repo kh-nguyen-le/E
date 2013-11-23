@@ -30,12 +30,12 @@ public class AlarmListener extends Listener {
         
 	public void received(Connection c, Object o) {
             
-           	if (o instanceof AuthenticationPacket){
+          /* 	if (o instanceof AuthenticationPacket){
 			HandshakePacket handshake = new HandshakePacket();
 			handshake.success = true;
 			c.sendTCP(handshake);
 		}
-            
+            */
             
 		if (o instanceof HandshakePacket) {
 			if (((HandshakePacket) o).success) {

@@ -24,7 +24,7 @@ public class Network {
 	
         public static class MotionDetectedPacket{public boolean detected = false;}
 	public static class MessagePacket { public String message; }
-	public static class AlertPacket { }
+	public static class AlertPacket { public boolean alarmOn  = false; }
 	public static class MotorPacket { public boolean direction; }
 	public static class SnapshotPacket { public Image image; public boolean alert; }
 	public static class VideoStreamPacket { }

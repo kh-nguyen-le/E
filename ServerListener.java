@@ -19,7 +19,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import testing.project.LoadImageApp;
 
 public class ServerListener extends Listener {
 	private Server server;
@@ -87,7 +86,7 @@ public class ServerListener extends Listener {
 			}
 			//code to display image here
                        
-                        JFrame f = new JFrame("Load Image Sample");
+                        JFrame f = new JFrame("Camera Snapshot");
                         f.addWindowListener(new WindowAdapter(){
                                 public void windowClosing(WindowEvent e) {
                                     System.exit(0);

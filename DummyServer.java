@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static junit.framework.Assert.*;
-import securitySystem.ServerListener;
         
 public class DummyServer extends TestCase{
     private static Server server;
