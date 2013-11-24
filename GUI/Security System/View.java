@@ -6,6 +6,8 @@
  * 
  * issues:
  * 1. have to activate the cam before running the program otherwise it wont show, can make a seperate thread for that.
+ * 2. menus are blocked by the big cam, need to be always on top.***
+ * 3. methods of determine whether the streaming is on.
  */
 import java.awt.*;
 import javax.swing.*;
@@ -44,7 +46,7 @@ public class View
     private EmbeddedMediaPlayer mPlayer4;
     
     private String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
-    private String mediaPath1 = "rtsp://@192.168.0.14:8554/";
+    private String mediaPath1 = "rtsp://@192.168.0.12:8554/";
     private String options = ":sout=#standard{mux=ts,access=file,dst=c:\\capture.avi}";
     private String mediaPath2 = "1.mp4";
     private String mediaPath3 = "2.mp4";
@@ -229,7 +231,8 @@ public class View
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
-        File dir = new File(System.getProperty("user.home"), "Videos");
+        //File dir = new File(System.getProperty("user.home"), "GroupE");
+        File dir = new File("C:\\GroupE");
         dir.mkdirs();
         DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
