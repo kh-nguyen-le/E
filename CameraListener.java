@@ -80,7 +80,7 @@ public class CameraListener extends Listener {
                         sp.image = ImageIO.read(new File("snapshot1.png"));
                         //Alert set because the snapshot was required due to intrusion
                         sp.alert = true;
-                        client.sendTCP((SnapshotPacket)o);
+                        client.sendTCP((sp);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
