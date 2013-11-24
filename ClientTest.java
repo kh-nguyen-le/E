@@ -10,7 +10,6 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
-import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,10 +59,6 @@ public class ClientTest extends TestCase{
                     obj = (HandshakePacket)o;
                 }
                 
-                if(o instanceof VideoStreamPacket){
-                    obj = (VideoStreamPacket)o;
-                }
-                
                 if(o instanceof SettingsPacket){
                     obj = (SettingsPacket)o;
                 }
@@ -76,7 +71,7 @@ public class ClientTest extends TestCase{
         server.start();
         CameraClient cc = new CameraClient();
         AlarmClient ac = new AlarmClient();
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         obj = null;
         testHandshake();
         testSnapshot();
@@ -99,6 +94,7 @@ public class ClientTest extends TestCase{
         server.sendToAllTCP(ht);
         Thread.sleep(5000);
         assertTrue(obj instanceof MessagePacket);
+        assertTrue(((MessagePacket)obj).message.contains("Alarm")||((MessagePacket)obj).message.contains("Camera"));       
         obj = null;
     }
 
@@ -117,11 +113,8 @@ public class ClientTest extends TestCase{
         }
         Thread.sleep(5000);
         assertTrue(obj instanceof SnapshotPacket);
-        Image image = ((SnapshotPacket)obj).image;
         boolean alert = ((SnapshotPacket)obj).alert;
-        
         assertEquals(alert, false);
-        assertNotNull(image);
         obj = null;
     }
     public static void testAlert() throws InterruptedException{

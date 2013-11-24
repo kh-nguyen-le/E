@@ -57,9 +57,7 @@ public class AlarmListener extends Listener {
                     
 			
 		}
-		if (o instanceof AudioStreamPacket) {
-			//activate microphone
-		}
+
 		if (o instanceof SettingsPacket) {
 			//modify alarm settings
 		}
@@ -76,27 +74,19 @@ class AlarmThread extends Thread{
     public synchronized void run(){
         System.out.println("Running alarm thread");
         while(true){
-            
-            if(alarmOn)   System.out.println("AlarmOn = true");
-            else{
-                try {
-                    System.out.println("AlarmOn = false");
-                    sleep(200);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AlarmThread.class.getName()).log(Level.SEVERE, null, ex);
+           try{ 
+                sleep(200);
+                if(alarmOn){
+                    for (int i=0;i<5;i+=1){   
+                        System.out.println("Ring!");
+                        sleep(500);
+                    }
+                    alarmOn=false;
                 }
-            }
-            
-            while(alarmOn){
-                try {
-                    System.out.println("Ring!");
-                    sleep(500);
+           }catch(InterruptedException ex){
+               ex.printStackTrace();
+           } 
 
-                } catch (InterruptedException ex) {
-                    System.err.println("Sleep Interrupted");
-                    //ex.printStackTrace();
-                }    
-            }
         }   
      }
 }

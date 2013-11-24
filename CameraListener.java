@@ -21,21 +21,24 @@ public class CameraListener extends Listener {
         }
         
 	public void connected(Connection c) {
+            try {
                 System.out.println("Camera Connected");
-		AuthenticationPacket request = new AuthenticationPacket();
-		System.out.println("Sends authentication");
+                 // Video stream from the  PI_CAMERA with the use of command line command
+                 Runtime rt = Runtime.getRuntime();
+                 Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
+                         + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
+                AuthenticationPacket request = new AuthenticationPacket();
+                System.out.println("Sends authentication");
                 client.sendTCP(request);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 	}
         
       //  public void disconnected(Connection c){ System.out.println("Client disconnected");}
 
 	public void received(Connection c, Object o) {
-              	//if (o instanceof AuthenticationPacket){
-		//	HandshakePacket handshake = new HandshakePacket();
-		//	handshake.success = true;
-		//	c.sendTCP(handshake);
-		//}
-		
+            
                 if (o instanceof HandshakePacket) {
 			if (((HandshakePacket) o).success) {
 				MessagePacket name = new MessagePacket();
@@ -46,50 +49,22 @@ public class CameraListener extends Listener {
 		if (o instanceof MotorPacket) {
 			//turn motor
 		}
-		if (o instanceof SnapshotPacket) {
-                    try {
-                        //snapshot request from server; camera sends image with alert off
-                        
+		/*if (o instanceof SnapshotPacket) {
+                    
                         System.out.println("Send image taken to server");
-                        //Taking a picture with the  PI_CAMERA with the use of 'raspistill' command line command
-                        Runtime rt = Runtime.getRuntime();
-                        Process pr = rt.exec("raspistill -v -o snapshot1.png");
+                       
                         //Picture stored
-                        ((SnapshotPacket)o).image = ImageIO.read(new File("snapshot1.png"));
+                        //((SnapshotPacket)o).image = ImageIO.read(new File("snapshot1.png"));
                         //Alert not set because the snapshot was requested by user manually, not due to intrusion
                         ((SnapshotPacket)o).alert = false;
                         client.sendTCP((SnapshotPacket)o);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    //} catch (IOException ex) {
+                        //ex.printStackTrace();
+                    //}
 		}
-                
-                if(o instanceof MotionDetectedPacket){
-                    //Motion detector sends meesage to Camera notifying of intrusion
-                    //Camera takes picture and sets alert on
-                    System.out.println("Motion detected");
-                        try {
-                        //snapshot request from server; camera sends image with alert off
-                        SnapshotPacket sp = new SnapshotPacket();
-                            
-                        System.out.println("Send image taken to server");
-                        //Taking a picture with the  PI_CAMERA with the use of 'raspistill' command line command
-                        Runtime rt = Runtime.getRuntime();
-                        Process pr = rt.exec("raspistill -v -o snapshot1.png");
-                        //Picture stored
-                        sp.image = ImageIO.read(new File("snapshot1.png"));
-                        //Alert set because the snapshot was required due to intrusion
-                        sp.alert = true;
-                        client.sendTCP((sp);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                
-		if (o instanceof VideoStreamPacket) {
-			//stream request from server
-		}
-		if (o instanceof SettingsPacket) {
+                */             
+		
+                if (o instanceof SettingsPacket) {
 			//modify camera settings
 		}
 	}

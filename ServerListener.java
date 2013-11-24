@@ -81,22 +81,9 @@ public class ServerListener extends Listener {
 				Connection[] list = server.getConnections();
 				AlertPacket alert = new AlertPacket();
 				for (int i=0; i<list.length; i++){
-					if (list[i].toString()=="Alarm") list[i].sendTCP(alert);
+					if (list[i].toString().contains("Alarm")) list[i].sendTCP(alert);
 				}
-			}
-			//code to display image here
-                       
-                        JFrame f = new JFrame("Camera Snapshot");
-                        f.addWindowListener(new WindowAdapter(){
-                                public void windowClosing(WindowEvent e) {
-                                    System.exit(0);
-                                }
-                            });
-
-                        f.add(new LoadImage((BufferedImage)((SnapshotPacket)o).image));
-                        f.pack();
-                        f.setVisible(true);
-                        
+			}			
                         //Alert owner of intruder through text
                         if(osc.isLoggedIn()) {
                             try {	
@@ -107,27 +94,6 @@ public class ServerListener extends Listener {
                         }
                         
 		}
-		if (o instanceof VideoStreamPacket){}
-	}
-}
-
-class LoadImage extends Component{
-    private BufferedImage img;
-    
-    public LoadImage(BufferedImage bImage){
-        img = bImage;
-        
-    }
-         public void paint(Graphics g) {
-            g.drawImage(img, 0, 0, null);
         }
-
-        public Dimension getPreferredSize() {
-            if (img == null) {
-                 return new Dimension(100,100);
-            } else {
-               return new Dimension(img.getWidth(null), img.getHeight(null));
-           }
-        } 
-
 }
+
