@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package securitySystem;
 
+import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Server;
 import junit.framework.*;
 
@@ -18,8 +15,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static junit.framework.Assert.*;
+import static securitySystem.ClientTest.testAlert;
+import static securitySystem.ClientTest.testHandshake;
+import static securitySystem.ClientTest.testSnapshot;
         
-public class DummyServer extends TestCase{
+public class ClientTest extends TestCase{
     private static Server server;
     private static Object obj = null;
     
@@ -29,7 +29,7 @@ public class DummyServer extends TestCase{
         try {
             server.bind(Network.port, Network.port);
         } catch (IOException ex) {
-            Logger.getLogger(DummyServer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 	
 	server.addListener(new Listener(){
@@ -74,6 +74,8 @@ public class DummyServer extends TestCase{
             }
         });
         server.start();
+        CameraClient cc = new CameraClient();
+        AlarmClient ac = new AlarmClient();
         Thread.sleep(30000);
         obj = null;
         testHandshake();
@@ -83,10 +85,10 @@ public class DummyServer extends TestCase{
     
     public static void testMessage(){}
     
-    public static void testAuthentication(){
-    }
+    public static void testAuthentication(){}
             
     public static void testHandshake() throws InterruptedException{
+        //Testing server sending HandshakePacket
         HandshakePacket hf = new HandshakePacket();
         HandshakePacket ht = new HandshakePacket();
         hf.success = false;
@@ -102,9 +104,12 @@ public class DummyServer extends TestCase{
 
     public static void testAudioStream(){}
     public static void testVideoStream(){}
-    public static void testMotor(){}
+    public static void testMotor(){
+    //Testing server sending MotorPacket
+    }
     public static void testSettings(){}
     public static void testSnapshot() throws InterruptedException{
+        //Testing server sending SnapshotPacket
         SnapshotPacket snapshot = new SnapshotPacket();
         Connection[] list = server.getConnections();
         for (int i=0; i<list.length; i++){
@@ -120,6 +125,7 @@ public class DummyServer extends TestCase{
         obj = null;
     }
     public static void testAlert() throws InterruptedException{
+        //Testing server sending AlertPacket
         AlertPacket alert = new AlertPacket();
         Connection[] list = server.getConnections();
         for (int i=0; i<list.length; i++){
