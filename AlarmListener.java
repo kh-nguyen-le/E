@@ -81,7 +81,7 @@ class AlarmThread extends Thread{
                         System.out.println("Ring!");
                         sleep(500);
                     }
-                    alarmOn=false;
+                    //alarmOn=false;
                 }
            }catch(InterruptedException ex){
                ex.printStackTrace();

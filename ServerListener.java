@@ -30,10 +30,11 @@ public class ServerListener extends Listener {
         public void init(Server server) {
 		this.server = server;
                 //Initialising parameters for Ozeki SMS Client
-                host = "localhost";
+              /*  host = "localhost";
                 port = 9500;
                 username = "admin";
                 password = "ozekiTeddy";
+                */
 	}
         
          public void paint(Graphics g) {
@@ -49,17 +50,17 @@ public class ServerListener extends Listener {
         } 
          
         public void connected(Connection c){
-            try {
+            //try {
                 c.setTimeout(0);
                 c.setKeepAliveTCP(0);
                 //Connect to Ozeki NG SMS Gateway and logging in.
-                osc = new MyOzSmsClient(host, port);
-                osc.login(username, password);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
+                //osc = new MyOzSmsClient(host, port);
+                //osc.login(username, password);
+            //} catch (IOException ex) {
+              //  ex.printStackTrace();
+            //} catch (InterruptedException ex) {
+              //  ex.printStackTrace();
+            //}
         }
 
 	public void received(Connection c, Object o) {
@@ -84,13 +85,13 @@ public class ServerListener extends Listener {
 				}
 			}			
                         //Alert owner of intruder through text
-                        if(osc.isLoggedIn()) {
+              /*          if(osc.isLoggedIn()) {
                             try {	
                                 osc.sendMessage("+16138781790", "Alert!");
                             } catch (UnsupportedEncodingException ex) {
                                 ex.printStackTrace();
                             }
-                        }
+                        }*/
                         
 		}
         }

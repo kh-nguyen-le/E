@@ -75,8 +75,8 @@ public class ClientTest extends TestCase{
         Thread.sleep(10000);
         obj = null;
         testHandshake();
-//        testSnapshot();
         testAlert();
+        
     }
     
     public static void testMessage(){}
@@ -97,6 +97,7 @@ public class ClientTest extends TestCase{
         assertTrue(obj instanceof MessagePacket);
         assertTrue(((MessagePacket)obj).message.contains("Alarm")||((MessagePacket)obj).message.contains("Camera"));       
         obj = null;
+        
     }
 
     public static void testAudioStream(){}
@@ -125,6 +126,7 @@ public class ClientTest extends TestCase{
     public static void testAlert() throws InterruptedException{
         //Testing server sending AlertPacket
         AlertPacket alert = new AlertPacket();
+        alert.alarmOn = true;
         Connection[] list = server.getConnections();
         for (int i=0; i<list.length; i++){
                 if (list[i].toString().contains("Alarm")) list[i].sendTCP(alert);
@@ -132,6 +134,11 @@ public class ClientTest extends TestCase{
         Thread.sleep(5000);
         assertNull(obj);
         obj = null;
+        
+        alert.alarmOn = false;
+        for (int i=0; i<list.length; i++){
+                if (list[i].toString().contains("Alarm")) list[i].sendTCP(alert);
+        }
         
     }
 

@@ -93,7 +93,9 @@ public class ServerTest extends TestCase{
         testAuthentication();
         testMessage();
         testAlert();
-//        testSnapshot();
+        cc.stop();
+        ac.stop();
+        
     }
     
     public static void testAuthentication() throws InterruptedException{
@@ -122,6 +124,7 @@ public class ServerTest extends TestCase{
     }
     
     public static void testAlert() throws IOException, InterruptedException{
+
        AlertPacket ap = new AlertPacket();
         ap.alarmOn = false;
         cc.sendTCP(ap);
