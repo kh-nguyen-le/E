@@ -3,8 +3,7 @@
 //BUF1 is connected to the output of the PIR module
 //A strap should be placed on the B1 input pins so that BUF1 is treated as an input
 //The power source of the pir module is the 5 V pin on the J24 header, and the GND of the pir Module goes to the GND allocated to its buffer pin (the pin adjacent to BUF1)
-//compile with javac -classpath .:classes:/opt/pi4j/lib/'*' pirtest.java
-//run with sudo java -classpath .:classes:/opt/pi4j/lib/'*' pirtest
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
@@ -14,22 +13,21 @@ import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class pirtest {
-   
-   public pirtest(){     
+    public pirtest(){     
 	
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
 
         // provision gpio pin #06 as an input pin with its internal pull down resistor enabled
-        final GpioPinDigitalInput myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
+        final GpioPinDigitalInput pir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
 
         // create and register gpio pin listener
-        myButton.addListener(new GpioPinListenerDigital() {
+        pir.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                 // if pin has changed to high then motion has been detected
-				if (event.getState().equals("High"){
-					 System.out.println("Motion Detected")
+				if (event.getState().equals("HIGH")){
+					 System.out.println("Motion Detected");
 				}
                 //System.out.println(" Pin #: " + event.getPin() + " Pin State: " + event.getState());
             }
