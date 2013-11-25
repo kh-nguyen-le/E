@@ -74,14 +74,13 @@ public class ServerListener extends Listener {
 			//if (name=="Camera") name + cameraid //for multiple cameras
 			c.setName(name);
 		}
-		if (o instanceof SnapshotPacket) {
-                    //This is what happens when the server receives the snapshot image
-			if (((SnapshotPacket) o).alert) {
+		if (o instanceof AlertPacket) {
+                        //This is what happens when the server receives the snapshot image
+			if (((AlertPacket) o).alarmOn) {
 				//sets off alarm on alarm client
 				Connection[] list = server.getConnections();
-				AlertPacket alert = new AlertPacket();
 				for (int i=0; i<list.length; i++){
-					if (list[i].toString().contains("Alarm")) list[i].sendTCP(alert);
+					if (list[i].toString().contains("Alarm")) list[i].sendTCP(o);
 				}
 			}			
                         //Alert owner of intruder through text

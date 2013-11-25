@@ -39,12 +39,7 @@ public class ServerTest extends TestCase{
                 if(o instanceof AlertPacket){
                     aObj = (AlertPacket)o;
                 }                   
-
-                if(o instanceof SnapshotPacket){
-                    aObj = (SnapshotPacket)o;
-                    
-                }
-                                
+                               
                 if(o instanceof MotorPacket){
                     aObj = (MotorPacket)o;
                 }      
@@ -60,12 +55,7 @@ public class ServerTest extends TestCase{
                 if(o instanceof HandshakePacket){
                     cObj = (HandshakePacket)o;
                 }
-                
-                if(o instanceof SnapshotPacket){
-                    cObj = (SnapshotPacket)o;
-                    
-                }
-                                
+                                                
                 if(o instanceof MotorPacket){
                     cObj = (MotorPacket)o;
                 }
@@ -102,7 +92,8 @@ public class ServerTest extends TestCase{
         
         testAuthentication();
         testMessage();
-        testSnapshot();
+        testAlert();
+//        testSnapshot();
     }
     
     public static void testAuthentication() throws InterruptedException{
@@ -130,18 +121,19 @@ public class ServerTest extends TestCase{
         cObj = null;
     }
     
-    public static void testSnapshot() throws IOException, InterruptedException{
-        SnapshotPacket sp = new SnapshotPacket();
-        sp.alert = false;
-        cc.sendTCP(sp);
+    public static void testAlert() throws IOException, InterruptedException{
+       AlertPacket ap = new AlertPacket();
+        ap.alarmOn = false;
+        cc.sendTCP(ap);
         Thread.sleep(5000);
         assertNull(aObj);
         assertNull(cObj);
         
-        sp.alert = true;
-        cc.sendTCP(sp);
+        ap.alarmOn = true;
+        cc.sendTCP(ap);
         Thread.sleep(5000);
         assertNull(cObj);
         assertTrue(aObj instanceof AlertPacket);
      }
+    
 }

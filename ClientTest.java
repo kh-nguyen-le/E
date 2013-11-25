@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static junit.framework.Assert.*;
-import static securitySystem.ClientTest.testAlert;
-import static securitySystem.ClientTest.testHandshake;
-import static securitySystem.ClientTest.testSnapshot;
         
 public class ClientTest extends TestCase{
     private static Server server;
@@ -42,6 +39,13 @@ public class ClientTest extends TestCase{
                 
                 if(o instanceof AlertPacket){
                     obj = (AlertPacket)o;
+                    if (((AlertPacket) o).alarmOn) {
+				//sets off alarm on alarm client
+				Connection[] list = server.getConnections();
+				for (int i=0; i<list.length; i++){
+					if (list[i].toString().contains("Alarm")) list[i].sendTCP(o);
+				}
+			}	
                 }
                 
                 if(o instanceof MotorPacket){
@@ -63,9 +67,6 @@ public class ClientTest extends TestCase{
                     obj = (SettingsPacket)o;
                 }
                 
-                if(o instanceof SnapshotPacket){
-                    obj = (SnapshotPacket)o;
-                }
             }
         });
         server.start();
@@ -74,7 +75,7 @@ public class ClientTest extends TestCase{
         Thread.sleep(10000);
         obj = null;
         testHandshake();
-        testSnapshot();
+//        testSnapshot();
         testAlert();
     }
     
@@ -104,6 +105,7 @@ public class ClientTest extends TestCase{
     //Testing server sending MotorPacket
     }
     public static void testSettings(){}
+  /*
     public static void testSnapshot() throws InterruptedException{
         //Testing server sending SnapshotPacket
         SnapshotPacket snapshot = new SnapshotPacket();
@@ -117,6 +119,9 @@ public class ClientTest extends TestCase{
         assertEquals(alert, false);
         obj = null;
     }
+    * 
+    * 
+   */
     public static void testAlert() throws InterruptedException{
         //Testing server sending AlertPacket
         AlertPacket alert = new AlertPacket();

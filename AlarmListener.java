@@ -46,7 +46,7 @@ public class AlarmListener extends Listener {
 		}
 		if (o instanceof AlertPacket) {
                     AlertPacket ap = (AlertPacket)o;
-                    if(!ap.alarmOn){
+                    if(ap.alarmOn){
                         ap.alarmOn = true;
                         AlarmThread.alarmOn = true;
                        
