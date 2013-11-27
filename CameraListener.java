@@ -11,16 +11,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+import com.pi4j.io.gpio.GpioController;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.PinPullResistance;
+import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.io.gpio.event.GpioPinListenerDigital;
+
+
+
 public class CameraListener extends Listener {
     
         private Client client;
+		private final GpioController gpio;
         
         
-        public void init(Client client) {
+        public void init(Client client, GpioController gpio) {
             this.client = client;
+			this.gpio = gpio;
         }
         
-	public void connected(Connection c) {
+        public void connected(Connection c) {
         //    try {
                 System.out.println("Camera Connected");
                  // Video stream from the  PI_CAMERA with the use of command line command
@@ -33,23 +45,23 @@ public class CameraListener extends Listener {
 //            } catch (IOException ex) {
    //             ex.printStackTrace();
      //       }
-	}
+        }
         
       //  public void disconnected(Connection c){ System.out.println("Client disconnected");}
 
-	public void received(Connection c, Object o) {
+        public void received(Connection c, Object o) {
             
                 if (o instanceof HandshakePacket) {
-			if (((HandshakePacket) o).success) {
-				MessagePacket name = new MessagePacket();
-				name.message = "Camera";
-				client.sendTCP(name);
-			}
-		}
-		if (o instanceof MotorPacket) {
-			//turn motor
-		}
-		/*if (o instanceof SnapshotPacket) {
+                        if (((HandshakePacket) o).success) {
+                                MessagePacket name = new MessagePacket();
+                                name.message = "Camera";
+                                client.sendTCP(name);
+                        }
+                }
+                if (o instanceof MotorPacket) {
+                        //turn motor
+                }
+                /*if (o instanceof SnapshotPacket) {
                     
                         System.out.println("Send image taken to server");
                        
@@ -61,12 +73,12 @@ public class CameraListener extends Listener {
                     //} catch (IOException ex) {
                         //ex.printStackTrace();
                     //}
-		}
+                }
                 */             
-		
+                
                 if (o instanceof SettingsPacket) {
-			//modify camera settings
-		}
-	}
+                        //modify camera settings
+                }
+        }
 
 }
