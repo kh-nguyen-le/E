@@ -47,49 +47,5 @@ public class MotorListener extends Listener {
 
 }
 
-/**
- * Getting sound out the 3.5mm analog audio jack on the RPI thanks to 
- * http://www.raspberrypi-spy.co.uk/2013/06/raspberry-pi-command-line-audio/
- * 
-The first thing to do is run :
 
-lsmod | grep snd_bcm2835
-and check snd_bcm2835 is listed. If it isn’t then run the following command :
-
-sudo modprobe snd_bcm2835  
-
-If the module isn’t loaded automatically when you boot then you can force it to load by using the following process :
-
-cd /etc
-sudo nano modules
-
-Then add ‘snd-bcm2835′ so it looks like this :
-
-# /etc/modules: kernel modules to load at boot time.
-#
-# This file contains the names of kernel modules that should be
-# loaded at boot time, one per line. Lines beginning with "#" are
-# ignored. Parameters can be specified after the module name.
- 
-snd-bcm2835
-
-
-By default the output is set to automatically select the default audio interface 
-(HDMI if available otherwise analog). You can force it to use a specific interface using :
-
-amixer cset numid=3 n
-Where <n> is the required interface : 0=auto, 1=analog, 2=hdmi. To force the Raspberry Pi to use the analog output :
-
-amixer cset numid=3 1
-
-Do this if I boot the Pi with an HDMI cable plugged in. Otherwise it defaults to the 3.5mm jack automatically.
-
-
-Playing A WAV File Using aplay
-
-To play wav files :
-
-aplay filename.wav
-
-**/
 
