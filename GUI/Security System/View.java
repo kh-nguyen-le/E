@@ -29,13 +29,8 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
 
-public class View
+public class View implements java.util.Observer
 {
-    
-    private EmbeddedMediaPlayerComponent usr1;
-    private EmbeddedMediaPlayerComponent usr2;
-    private EmbeddedMediaPlayerComponent usr3;
-    private EmbeddedMediaPlayerComponent usr4;
     private Canvas canvas1;
     private Canvas canvas2;
     private Canvas canvas3;
@@ -45,12 +40,14 @@ public class View
     private EmbeddedMediaPlayer mPlayer3;
     private EmbeddedMediaPlayer mPlayer4;
     
-    private String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
+    private String vlcPath = "M:\\SYSC 3010\\termProject\\vlc-2.1.1";
     private String mediaPath1 = "rtsp://@192.168.0.12:8554/";
-    private String options = ":sout=#standard{mux=ts,access=file,dst=c:\\capture.avi}";
     private String mediaPath2 = "1.mp4";
     private String mediaPath3 = "2.mp4";
     private String mediaPath4 = "blank.bmp";
+	
+	private JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmOn,alarmOff,addCamera,removeCamera;
+	
     
     public View()
     {
@@ -116,29 +113,25 @@ public class View
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcPath);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
-        usr1 = new EmbeddedMediaPlayerComponent();
         canvas1 = new Canvas();
         canvas1.setPreferredSize(new Dimension(450, 300));
         MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
         CanvasVideoSurface videoSurface = mediaPlayerFactory.newVideoSurface(canvas1);
         mPlayer1 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer1.setVideoSurface(videoSurface);
-        
-        usr2 = new EmbeddedMediaPlayerComponent();
+
         canvas2 = new Canvas();
         canvas2.setPreferredSize(new Dimension(147, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas2);
         mPlayer2 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer2.setVideoSurface(videoSurface);
         
-        usr3 = new EmbeddedMediaPlayerComponent();
         canvas3 = new Canvas();
         canvas3.setPreferredSize(new Dimension(146, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas3);
         mPlayer3 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer3.setVideoSurface(videoSurface);
         
-        usr4 = new EmbeddedMediaPlayerComponent();
         canvas4 = new Canvas();
         canvas4.setPreferredSize(new Dimension(147, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas4);
@@ -177,28 +170,28 @@ public class View
         t.start();
         
         //--------------------control-------------------
-        JButton leftButton = new JButton(new ImageIcon("left.png"));
+        leftButton = new JButton("1",new ImageIcon("left.png"));
         leftButton.setPreferredSize(new Dimension(50,50));
         c.insets = new Insets(10,10,10,10);
         c.gridx = 2;
         c.gridy = 1;
         controlPanel.add(leftButton,c);
-        JButton rightButton = new JButton(new ImageIcon("right.png"));
+        rightButton = new JButton("2",new ImageIcon("right.png"));
         rightButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 0;
         c.gridy = 1;
         controlPanel.add(rightButton,c);
-        JButton zoomInButton = new JButton(new ImageIcon("zoomin.png"));
+        zoomInButton = new JButton("3",new ImageIcon("zoomin.png"));
         zoomInButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 0;
         controlPanel.add(zoomInButton,c);
-        JButton zoomOutButton = new JButton(new ImageIcon("zoomout.png"));
+        zoomOutButton = new JButton("4",new ImageIcon("zoomout.png"));
         zoomOutButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 2;
         controlPanel.add(zoomOutButton,c);
-        JButton recordButton = new JButton(new ImageIcon("record.png"));
+        recordButton = new JButton("5",new ImageIcon("record.png"));
         recordButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 1;
@@ -207,17 +200,17 @@ public class View
         panel.add(controlPanel);
         
         //----------------------button-------------------
-        JButton screenCapture = new JButton("Screen Capture");
+        screenCapture = new JButton("Screen Capture");
         buttonPanel.add(screenCapture);
-        JButton switchCam = new JButton("Switch Camera");
+        switchCam = new JButton("Switch Camera");
         buttonPanel.add(switchCam);
-        JButton alarmOn = new JButton("Alarm On");
+        alarmOn = new JButton("Alarm On");
         buttonPanel.add(alarmOn);
-        JButton alarmOff = new JButton("Alarm Off");
+        alarmOff = new JButton("Alarm Off");
         buttonPanel.add(alarmOff);
-        JButton addCamera = new JButton("Add Camera");
+        addCamera = new JButton("Add Camera");
         buttonPanel.add(addCamera);
-        JButton removeCamera = new JButton("Remove Camera");
+        removeCamera = new JButton("Remove Camera");
         buttonPanel.add(removeCamera);
         panel.add(Box.createRigidArea(new Dimension(0,25)));
         panel.add(buttonPanel);
@@ -231,39 +224,51 @@ public class View
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
-        //File dir = new File(System.getProperty("user.home"), "GroupE");
-        File dir = new File("C:\\GroupE");
+        File dir = new File(System.getProperty("user.home"), "Video Records");
+        //File dir = new File("C:\\GroupE");
         dir.mkdirs();
         DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
         
-        System.out.println(fileName);
-        
-        //fileName = "C:/test.mpg";
         
         mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
         mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
         
-        try {
-            Thread.sleep(10000);
-            mPlayer2.playMedia(mediaPath3);
-            mPlayer3.playMedia(mediaPath2);
-        }catch(Exception e) {
-            System.out.println(e);
-        }
-        
-        //mPlayer1.stop();
-        //mPlayer1.release();
-        
         
         //----------------------open directory------------------------
         /*try {
-            Desktop.getDesktop().open(new File("C:\\"));
+            Desktop.getDesktop().open(dir);
         } catch(Exception e) {
             System.out.println(e);
         }*/
     }
     
+    public void addController(Controller controller)
+    {
+        leftButton.addActionListener(controller);
+        rightButton.addActionListener(controller);
+        zoomInButton.addActionListener(controller);
+        zoomOutButton.addActionListener(controller);
+        recordButton.addActionListener(controller);
+        screenCapture.addActionListener(controller);
+        switchCam.addActionListener(controller);
+        alarmOn.addActionListener(controller);
+        alarmOff.addActionListener(controller);
+        addCamera.addActionListener(controller);
+        removeCamera.addActionListener(controller);
+    }
+    
+    public void update(Observable obs, Object obj)
+    {
+    }
+    
+    public void switchCam()
+    {
+        mPlayer1.playMedia(mediaPath4);
+        mPlayer2.playMedia(mediaPath3);
+        mPlayer3.playMedia(mediaPath2);
+        mPlayer4.playMedia(mediaPath1);
+    }
 }
