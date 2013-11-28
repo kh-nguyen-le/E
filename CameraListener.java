@@ -24,7 +24,7 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class CameraListener extends Listener {
     
         private Client client;
-		private final GpioController gpio;
+		private GpioController gpio;
         
         
         public void init(Client client, GpioController gpio) {
