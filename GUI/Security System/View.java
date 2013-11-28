@@ -29,7 +29,7 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
 
-public class View implements java.util.Observer
+public class View
 {
     private Canvas canvas1;
     private Canvas canvas2;
@@ -45,9 +45,14 @@ public class View implements java.util.Observer
     private String mediaPath2 = "1.mp4";
     private String mediaPath3 = "2.mp4";
     private String mediaPath4 = "blank.bmp";
-	
-	private JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmOn,alarmOff,addCamera,removeCamera;
-	
+    
+    private JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmOn,alarmOff,addCamera,removeCamera;
+    
+    private int switchCount = 1;
+    private int recordCount = 0;
+    
+    private String fileName;
+    
     
     public View()
     {
@@ -170,7 +175,7 @@ public class View implements java.util.Observer
         t.start();
         
         //--------------------control-------------------
-        leftButton = new JButton("1",new ImageIcon("left.png"));
+        leftButton = new JButton("left",new ImageIcon("left.png"));
         leftButton.setPreferredSize(new Dimension(50,50));
         c.insets = new Insets(10,10,10,10);
         c.gridx = 2;
@@ -228,10 +233,10 @@ public class View implements java.util.Observer
         //File dir = new File("C:\\GroupE");
         dir.mkdirs();
         DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
-        String fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+        fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
         
         
-        mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+        mPlayer1.playMedia(mediaPath1);
         mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
@@ -260,15 +265,77 @@ public class View implements java.util.Observer
         removeCamera.addActionListener(controller);
     }
     
-    public void update(Observable obs, Object obj)
+    public void record()
     {
+        if(recordCount == 0) {
+            if(switchCount == 0) {
+                mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                recordCount = 1;
+            }
+            else if(switchCount == 1) {
+                mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                recordCount = 1;
+            }
+            else if(switchCount == 2) {
+                mPlayer1.playMedia(mediaPath3,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                recordCount = 1;
+            }
+            else if(switchCount == 3) {
+                mPlayer1.playMedia(mediaPath2,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                recordCount = 1;
+            }
+        }
+        else {
+            if(switchCount == 0) {
+                mPlayer1.playMedia(mediaPath1);
+                recordCount = 0;
+            }
+            else if(switchCount == 1) {
+                mPlayer1.playMedia(mediaPath4);
+                recordCount = 0;
+            }
+            else if(switchCount == 2) {
+                mPlayer1.playMedia(mediaPath3);
+                recordCount = 0;
+            }
+            else if(switchCount == 3) {
+                mPlayer1.playMedia(mediaPath2);
+                recordCount = 0;
+            }
+        }
+        
+        
     }
     
     public void switchCam()
     {
-        mPlayer1.playMedia(mediaPath4);
-        mPlayer2.playMedia(mediaPath3);
-        mPlayer3.playMedia(mediaPath2);
-        mPlayer4.playMedia(mediaPath1);
+        if(switchCount == 0) {
+            mPlayer1.playMedia(mediaPath4);
+            mPlayer2.playMedia(mediaPath1);
+            mPlayer3.playMedia(mediaPath2);
+            mPlayer4.playMedia(mediaPath3);
+            switchCount = 1;
+        }
+        else if(switchCount == 1) {
+            mPlayer1.playMedia(mediaPath3);
+            mPlayer2.playMedia(mediaPath4);
+            mPlayer3.playMedia(mediaPath1);
+            mPlayer4.playMedia(mediaPath2);
+            switchCount = 2;
+        }
+        else if(switchCount == 2) {
+            mPlayer1.playMedia(mediaPath2);
+            mPlayer2.playMedia(mediaPath3);
+            mPlayer3.playMedia(mediaPath4);
+            mPlayer4.playMedia(mediaPath1);
+            switchCount = 3;
+        }
+        else if(switchCount == 3) {
+            mPlayer1.playMedia(mediaPath1);
+            mPlayer2.playMedia(mediaPath2);
+            mPlayer3.playMedia(mediaPath3);
+            mPlayer4.playMedia(mediaPath4);
+            switchCount = 0;
+        }
     }
 }
