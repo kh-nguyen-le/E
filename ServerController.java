@@ -6,7 +6,7 @@ import securitySystem.Network.*;
 
 class ServerController implements java.awt.event.ActionListener
 {
-    private ServerView view;
+    public ServerView view;
     private Server server;
     public boolean alarm;
     
@@ -23,12 +23,12 @@ class ServerController implements java.awt.event.ActionListener
         
         if(o instanceof JButton) {
             JButton button = (JButton)o;
-            String label = button.getToolTipText();
+            String label = button.getActionCommand();
             if(label.equals("Toggle Left")|| label.equals("Toggle Right")) {
                 Network.MotorPacket motor = new Network.MotorPacket();
                 String camera = "Camera";
                 //code to get camera name here
-                if (label.equals("left")) motor.direction = false; else motor.direction = true;
+                if (label.equals("Toggle Left")) motor.direction = false; else motor.direction = true;
                 Connection[] list = server.getConnections();
                 for (int i=0; i<list.length; i++){
                         if (list[i].toString().equals(camera)) list[i].sendTCP(motor);
@@ -40,7 +40,7 @@ class ServerController implements java.awt.event.ActionListener
             else if(label.equals("Zoom Out")) {
                 System.out.println("zoomout");
             }
-            else if(label.equals("Record")) {
+            else if(label.equals("rec")) {
                 view.record();
             }
             else if(label.equals("Screen Capture")) {
@@ -74,9 +74,34 @@ class ServerController implements java.awt.event.ActionListener
                 System.out.println("Help");
             } 
         }
-	}
-	
-	public void init(Server server, boolean alarm){
+    }
+    
+    public void setPath1(String ip){
+        view.setMediaPath1(ip);
+        view.updateMedia();
+    }
+    
+    public void setPath2(String ip){
+        view.setMediaPath2(ip);
+        view.updateMedia();
+    }
+
+    public void setPath3(String ip){
+        view.setMediaPath3(ip);
+        view.updateMedia();
+    }
+
+    public void setPath4(String ip){
+        view.setMediaPath4(ip);
+        view.updateMedia();
+    }
+    
+    public void setBlank(int pathNo){
+        view.setBlank(pathNo);
+    }
+
+    
+    public void init(Server server, boolean alarm){
 		this.server = server;
                 this.alarm = alarm;
 	}

@@ -6,6 +6,7 @@
  * 
  * issues:
  * 1. have to activate the cam before running the program otherwise it wont show, can make a seperate thread for that.
+ * 2. menus are blocked by the big cam, need to be always on top.***
  * 3. methods of determine whether the streaming is on.
  */
 package securitySystem;
@@ -66,8 +67,8 @@ public class ServerView// implements java.util.Observer
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JPanel controlPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
-		//Setting up the menu bars
+      
+        //Setting up the menu bars
         JPopupMenu.setDefaultLightWeightPopupEnabled(false);
         JMenuBar menu = new JMenuBar();
         frame.setJMenuBar(menu);
@@ -77,8 +78,8 @@ public class ServerView// implements java.util.Observer
         menu.add(history);
         JMenu admin = new JMenu("Admin");
         menu.add(admin);
-        JMenu help = new JMenu("Help");
-        menu.add(help);
+        JMenu helpMenu = new JMenu("Help");
+        menu.add(helpMenu);
         //Setting up the menu items in control bar
         JMenuItem left = new JMenuItem("Toggle Left");
         control.add(left);
@@ -108,13 +109,13 @@ public class ServerView// implements java.util.Observer
         admin.add(addCam);
         //Setting up the menu items in help bar
         JMenuItem update = new JMenuItem("Update");
-        help.add(update);
+        helpMenu.add(update);
         JMenuItem doc = new JMenuItem("Help");
-        help.add(doc);
+        helpMenu.add(doc);
         JMenuItem about = new JMenuItem("About");
-        help.add(about);
+        helpMenu.add(about);
+        
         //------------------------------------------------------------
-		
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcPath);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
@@ -176,14 +177,14 @@ public class ServerView// implements java.util.Observer
         
         //--------------------control-------------------
         leftButton = new JButton(new ImageIcon("left.png"));
-        leftButton.setToolTipText("Toggle Left");
+        leftButton.setToolTipText("Toggle Right");
         leftButton.setPreferredSize(new Dimension(50,50));
         c.insets = new Insets(10,10,10,10);
         c.gridx = 2;
         c.gridy = 1;
         controlPanel.add(leftButton,c);
         rightButton = new JButton(new ImageIcon("right.png"));
-        rightButton.setToolTipText("Toggle Right");
+        rightButton.setToolTipText("Toggle Left");
         rightButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 0;
         c.gridy = 1;
@@ -301,6 +302,30 @@ public class ServerView// implements java.util.Observer
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
         
+    }
+    
+    public void setBlank(int number){
+        //Sets media path to a blank image
+        switch(number){
+                case 1:
+                    mediaPath1 = "blank.bmp"; 
+                    break;
+                 
+                case 2:
+                    mediaPath2 = "blank.bmp";
+                    break;
+                    
+                case 3:
+                    mediaPath3 = "blank.bmp";
+                    break;
+                  
+                case 4:
+                    mediaPath4 = "blank.bmp";
+                    break;
+                    
+        }
+                
+    
     }
         
     public void record(){	

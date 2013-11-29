@@ -26,8 +26,11 @@ public class ServerListener extends Listener {
         private String host, username, password;
         private int port;
         private MyOzSmsClient osc;
-	//private ServerController controller;
+	private ServerController controller;
         private boolean alarm;
+        private int cameraID = 0;
+        private String cameraIP;
+        
         
         public void init(Server server, boolean alarm) {
 		this.server = server;
@@ -58,7 +61,45 @@ public class ServerListener extends Listener {
         }
 
         public void disconnected(Connection c){
-            if(c.toString().contains("Camera")){}
+            String name = c.toString();
+            
+            if(name.contains("Camera")){
+                //Extracting the disconnected camera's ID and setting media player blank
+                String[] stringArray = name.split(" ");   
+                int id = Integer.parseInt(stringArray[1]);
+                if(cameraID != id){
+                    Connection[] list = server.getConnections();
+                    
+                    switch(id){
+                        case 3:
+                            for (int i=0; i<list.length; i++){
+                                if (list[i].toString().contains("4")) {
+                                    list[i].setName("Camera 3");
+                                    controller.setPath3(list[i].getRemoteAddressTCP().getHostName());
+                                }
+                            }
+                        case 2:
+                            for (int i=0; i<list.length; i++){
+                                if (list[i].toString().contains("3")) {
+                                    list[i].setName("Camera 2");
+                                    controller.setPath2(list[i].getRemoteAddressTCP().getHostName());
+                                }
+                            }
+                        case 1:
+                            for (int i=0; i<list.length; i++){
+                                if (list[i].toString().contains("2")) {
+                                    list[i].setName("Camera 1");
+                                    controller.setPath1(list[i].getRemoteAddressTCP().getHostName());
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                controller.setBlank(cameraID);
+                cameraID--;
+            }
         }
 
         
@@ -71,9 +112,36 @@ public class ServerListener extends Listener {
 		if (o instanceof MessagePacket) {
 			//sets the name of each client connection on first connect
 			String name = ((MessagePacket) o).message;
-			//if (name=="Camera") name + cameraid //for multiple cameras
-			c.setName(name);
+			if (name.equals("Camera")){
+                            cameraID++;
+                            name = name +" " +Integer.toString(cameraID); //for multiple cameras  
+                            cameraIP = c.getRemoteAddressTCP().getHostName();
+                            switch(cameraID){
+                                case 1:
+                                    controller.setPath1(cameraIP);
+                                    break;
+                                    
+                                case 2:
+                                    controller.setPath2(cameraIP);
+                                    break;
+                                    
+                                case 3:
+                                    controller.setPath3(cameraIP);
+                                    break;
+                                    
+                                case 4:
+                                    controller.setPath4(cameraIP);
+                                    break;
+                                    
+                                default:
+                                    System.out.println("4 cameras already connected");
+                                    break;
+                            }
+                                   
+                        }
+                        c.setName(name);
 		}
+                
 		if (o instanceof AlertPacket) {
                         //This is what happens when the server receives the snapshot image
 			if (((AlertPacket) o).alarmOn) {
