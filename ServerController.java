@@ -23,8 +23,8 @@ class ServerController implements java.awt.event.ActionListener
         
         if(o instanceof JButton) {
             JButton button = (JButton)o;
-            String label = button.getActionCommand();
-            if(label.equals("left")|| label.equals("right")) {
+            String label = button.getToolTipText();
+            if(label.equals("Toggle Left")|| label.equals("Toggle Right")) {
                 Network.MotorPacket motor = new Network.MotorPacket();
                 String camera = "Camera";
                 //code to get camera name here
@@ -33,14 +33,14 @@ class ServerController implements java.awt.event.ActionListener
                 for (int i=0; i<list.length; i++){
                         if (list[i].toString().equals(camera)) list[i].sendTCP(motor);
                 }
-            }else if(label.equals("zoom+")) {
+            }else if(label.equals("Zoom In")) {
                 System.out.println("zoomin");
                 
             }
-            else if(label.equals("zoom-")) {
+            else if(label.equals("Zoom Out")) {
                 System.out.println("zoomout");
             }
-            else if(label.equals("rec")) {
+            else if(label.equals("Record")) {
                 view.record();
             }
             else if(label.equals("Screen Capture")) {
