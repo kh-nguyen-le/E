@@ -5,22 +5,19 @@
  * @version v1.0
  * 
  * issues:
- * 1. have to activate the cam before running the program otherwise it wont show, can make a seperate thread for that.
- * 2. menus are blocked by the big cam, need to be always on top.***
- * 3. methods of determine whether the streaming is on.
+ * 1. have to activate the cam before running the program otherwise it wont show, can make a separate thread for that.
+ * 2. for updateMedia, do we need the swithCount and recordCount to determine which media path to play?
+ * 3. checkBlank still has problems.
+ * 4. setMediaPath, can they using switch instead of making one for each media path?
  */
 package securitySystem;
 
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
-import java.net.*;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.*;
-
-import uk.co.caprica.vlcj.*;
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
@@ -30,32 +27,25 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
-
-public class ServerView// implements java.util.Observer
+public class ServerView
 {
-    private Canvas canvas1;
-    private Canvas canvas2;
-    private Canvas canvas3;
-    private Canvas canvas4;
-    private EmbeddedMediaPlayer mPlayer1;
-    private EmbeddedMediaPlayer mPlayer2;
-    private EmbeddedMediaPlayer mPlayer3;
-    private EmbeddedMediaPlayer mPlayer4;
+    private final EmbeddedMediaPlayer mPlayer1,mPlayer2,mPlayer3,mPlayer4,hiddenMPlayer;
+    private final JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmToggle,settings,storage,help;
+    private final JMenuItem left,right,zoomIn,zoomOut,capture,record,close,video,pic,setting,update,doc,about;
+    private final File dir,picDir,videoDir;
     
-    private String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
-    private String mediaPath1 = "C:\\Users\\Teddy\\Pictures\\images1.png";//"rtsp://@192.168.0.12:8554/";
-    private String mediaPath2 = "C:\\Users\\Teddy\\Pictures\\image.png";
-    private String mediaPath3 = "C:\\Users\\Teddy\\Pictures\\images2.png";
-    private String mediaPath4 = "C:\\Users\\Teddy\\Pictures\\images3.png";
+    private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
+    private String mediaPath1 = "rtsp://@192.168.0.13:8554/";
+    private String mediaPath2 = "1.mp4";
+    private String mediaPath3 = "2.mp4";
+    private String mediaPath4 = "3.mp4";
     private String fileName;
     private int switchCount = 0;
     private int recordCount = 0;
-
-    private JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmToggle,settings,storage, help;
     
     public ServerView()
     {
-        JFrame frame = new JFrame("Home Security System");
+        JFrame frame = new JFrame("Home Security System 1.0");
         Container contentPane = frame.getContentPane();
         contentPane.setLayout(new FlowLayout());
         JPanel largeCamPanel = new JPanel();
@@ -81,64 +71,60 @@ public class ServerView// implements java.util.Observer
         JMenu helpMenu = new JMenu("Help");
         menu.add(helpMenu);
         //Setting up the menu items in control bar
-        JMenuItem left = new JMenuItem("Toggle Left");
+        left = new JMenuItem("Toggle Left");
         control.add(left);
-        JMenuItem right = new JMenuItem("Toggle Right");
+        right = new JMenuItem("Toggle Right");
         control.add(right);
-        JMenuItem zoomIn = new JMenuItem("Zoom In");
+        zoomIn = new JMenuItem("Zoom In");
         control.add(zoomIn);
-        JMenuItem zoomOut = new JMenuItem("Zoom Out");
+        zoomOut = new JMenuItem("Zoom Out");
         control.add(zoomOut);
-        JMenuItem capture = new JMenuItem("Screen Capture");
+        capture = new JMenuItem("Screen Capture");
         control.add(capture);
-        JMenuItem record = new JMenuItem("Record Video");
+        record = new JMenuItem("Record Video");
         control.add(record);
-        JMenuItem close = new JMenuItem("Close");
+        close = new JMenuItem("Close");
         control.add(close);
         //Setting up the menu items in history bar
-        JMenuItem video = new JMenuItem("Video Recorded");
+        video = new JMenuItem("Video Recorded");
         history.add(video);
-        JMenuItem pic = new JMenuItem("Picture Captured");
+        pic = new JMenuItem("Picture Captured");
         history.add(pic);
         //Setting up the menu items in admin bar
-        JMenuItem setContact = new JMenuItem("Set Contact Info");
-        admin.add(setContact);
-        JMenuItem setPW = new JMenuItem("Set Password");
-        admin.add(setPW);
-        JMenuItem addCam = new JMenuItem("Add Camera");
-        admin.add(addCam);
+        setting = new JMenuItem("Settings");
+        admin.add(setting);
         //Setting up the menu items in help bar
-        JMenuItem update = new JMenuItem("Update");
+        update = new JMenuItem("Update");
         helpMenu.add(update);
-        JMenuItem doc = new JMenuItem("Help");
+        doc = new JMenuItem("Help");
         helpMenu.add(doc);
-        JMenuItem about = new JMenuItem("About");
+        about = new JMenuItem("About");
         helpMenu.add(about);
         
         //------------------------------------------------------------
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcPath);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
-        canvas1 = new Canvas();
+        Canvas canvas1 = new Canvas();
         canvas1.setPreferredSize(new Dimension(450, 300));
         MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
         CanvasVideoSurface videoSurface = mediaPlayerFactory.newVideoSurface(canvas1);
         mPlayer1 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer1.setVideoSurface(videoSurface);
 
-        canvas2 = new Canvas();
+        Canvas canvas2 = new Canvas();
         canvas2.setPreferredSize(new Dimension(147, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas2);
         mPlayer2 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer2.setVideoSurface(videoSurface);
         
-        canvas3 = new Canvas();
+        Canvas canvas3 = new Canvas();
         canvas3.setPreferredSize(new Dimension(146, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas3);
         mPlayer3 = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mPlayer3.setVideoSurface(videoSurface);
         
-        canvas4 = new Canvas();
+        Canvas canvas4 = new Canvas();
         canvas4.setPreferredSize(new Dimension(147, 100));
         videoSurface = mediaPlayerFactory.newVideoSurface(canvas4);
         mPlayer4 = mediaPlayerFactory.newEmbeddedMediaPlayer();
@@ -151,6 +137,18 @@ public class ServerView// implements java.util.Observer
         camPanel.add(largeCamPanel);
         camPanel.add(smallCamPanel);
         contentPane.add(camPanel);
+        
+        //------------------hidden vlc players---------
+        Canvas hiddenCanvas = new Canvas();
+        hiddenCanvas.setPreferredSize(new Dimension(450, 300));
+        videoSurface = mediaPlayerFactory.newVideoSurface(hiddenCanvas);
+        hiddenMPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+        hiddenMPlayer.setVideoSurface(videoSurface);
+        
+        JPanel hiddenPanel = new JPanel();
+        hiddenPanel.add(hiddenCanvas);
+        //hiddenPanel.setVisible(false);
+        contentPane.add(hiddenPanel);
         
         //--------------------date---------------------
         String date = new SimpleDateFormat("hh:mm:ss").format(new Date());
@@ -177,16 +175,16 @@ public class ServerView// implements java.util.Observer
         
         //--------------------control-------------------
         leftButton = new JButton(new ImageIcon("left.png"));
-        leftButton.setToolTipText("Toggle Right");
+        leftButton.setToolTipText("Toggle Left");
         leftButton.setPreferredSize(new Dimension(50,50));
         c.insets = new Insets(10,10,10,10);
-        c.gridx = 2;
+        c.gridx = 0;
         c.gridy = 1;
         controlPanel.add(leftButton,c);
         rightButton = new JButton(new ImageIcon("right.png"));
-        rightButton.setToolTipText("Toggle Left");
+        rightButton.setToolTipText("Toggle Right");
         rightButton.setPreferredSize(new Dimension(50,50));
-        c.gridx = 0;
+        c.gridx = 2;
         c.gridy = 1;
         controlPanel.add(rightButton,c);
         zoomInButton = new JButton(new ImageIcon("zoomin.png"));
@@ -231,35 +229,28 @@ public class ServerView// implements java.util.Observer
         buttonPanel.add(help);
         panel.add(Box.createRigidArea(new Dimension(0,25)));
         panel.add(buttonPanel);
-        
         contentPane.add(panel);
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(750,480);
+        //frame.setSize(750,480);
+        frame.setSize(2000,2000);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
-        File dir = new File(System.getProperty("user.home"), "Video Records");
-        //File dir = new File("C:\\GroupE");
-        dir.mkdirs();
-        DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
-        fileName = dir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+        dir = new File(System.getProperty("user.home"), "Storage");
+        dir.mkdir();
+        videoDir = new File(dir, "Video Recorded");
+        videoDir.mkdir();
+        picDir = new File(dir, "Screen Captured");
+        picDir.mkdir();
         
-        
+        hiddenMPlayer.playMedia(mediaPath1);
         mPlayer1.playMedia(mediaPath1);
         mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
-        
-        
-        //----------------------open directory------------------------
-        /*try {
-            Desktop.getDesktop().open(dir);
-        } catch(Exception e) {
-            System.out.println(e);
-        }*/
     }
     
     public void setMediaPath1(String ip){
@@ -280,6 +271,7 @@ public class ServerView// implements java.util.Observer
     
     public void addController(ServerController controller)
     {
+        //buttons
         leftButton.addActionListener(controller);
         rightButton.addActionListener(controller);
         zoomInButton.addActionListener(controller);
@@ -291,134 +283,211 @@ public class ServerView// implements java.util.Observer
         settings.addActionListener(controller);
         storage.addActionListener(controller);
         help.addActionListener(controller);
+        //menu items
+        left.addActionListener(controller);
+        right.addActionListener(controller);
+        zoomIn.addActionListener(controller);
+        zoomOut.addActionListener(controller);
+        capture.addActionListener(controller);
+        record.addActionListener(controller);
+        close.addActionListener(controller);
+        video.addActionListener(controller);
+        pic.addActionListener(controller);
+        setting.addActionListener(controller);
+        update.addActionListener(controller);
+        doc.addActionListener(controller);
+        about.addActionListener(controller);
     }
     
-    //public void update(Observable obs, Object obj)
-    //{ }
-    
     public void updateMedia(){
+        hiddenMPlayer.playMedia(mediaPath4);
         mPlayer1.playMedia(mediaPath1); 
         mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
-        
+    }
+    
+    public void checkBlank()
+    {
+        if(!mPlayer1.isPlaying()) {
+            setBlank(1);
+            mPlayer1.playMedia(mediaPath1);
+        }
+        if(!mPlayer2.isPlaying()) {
+            setBlank(2);
+            mPlayer2.playMedia(mediaPath2);
+        }
+        if(!mPlayer1.isPlaying()) {
+            setBlank(3);
+            mPlayer3.playMedia(mediaPath3);
+        }
+        if(!mPlayer4.isPlaying()) {
+            setBlank(4);
+            mPlayer4.playMedia(mediaPath4);
+        }
     }
     
     public void setBlank(int number){
-        //Sets media path to a blank image
         switch(number){
-                case 1:
-                    mediaPath1 = "blank.bmp"; 
-                    break;
-                 
-                case 2:
-                    mediaPath2 = "blank.bmp";
-                    break;
-                    
-                case 3:
-                    mediaPath3 = "blank.bmp";
-                    break;
-                  
-                case 4:
-                    mediaPath4 = "blank.bmp";
-                    break;
+            case 1:
+                mediaPath1 = "blank.bmp"; 
+                break;
+            case 2:
+                mediaPath2 = "blank.bmp";
+                break;
+            case 3:
+                mediaPath3 = "blank.bmp";
+                break;
+            case 4:
+                mediaPath4 = "blank.bmp";
+                break;
                     
         }
-                
-    
     }
         
-    public void record(){	
+    public void record(){
+        generateFileName();
         if(recordCount == 0) {
             switch(switchCount){
-				case 0:
-					mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
-					recordCount = 1;
-					break;
-				
-				case 1:
-					mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
-					recordCount = 1;
-					break;
-					
-				case 2:
-					mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
-					recordCount = 1;
-					break;
-				
-				case 3:
-					mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
-					recordCount = 1;
-					break;
-				
-				default:
-					break;
-			}			
-        }else {
-            switch(switchCount){
-				case 0:
-					mPlayer1.playMedia(mediaPath1);
-					recordCount = 0;
-					break;
-				
-				case 1:
-					mPlayer1.playMedia(mediaPath4);
-					recordCount = 0;
-					break;
-					
-				case 2:
-					mPlayer1.playMedia(mediaPath3);
-					recordCount = 0;
-					break;
-				
-				case 3:
-					mPlayer1.playMedia(mediaPath2);
-					recordCount = 0;
-					break;
-				
-				default:
-					break;
-
-            }		
+		case 0:
+                    mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                    hiddenMPlayer.playMedia(mediaPath1);
+                    recordCount = 1;
+                    break;			
+		case 1:
+                    mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                    hiddenMPlayer.playMedia(mediaPath4);
+                    recordCount = 1;
+                    break;				
+		case 2:
+                    mPlayer1.playMedia(mediaPath3,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                    hiddenMPlayer.playMedia(mediaPath3);
+                    recordCount = 1;
+                    break;				
+		case 3:
+                    mPlayer1.playMedia(mediaPath2,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
+                    hiddenMPlayer.playMedia(mediaPath2);
+                    recordCount = 1;
+                    break;		
+		default:
+                    break;
+                }			
+            }else {
+                switch(switchCount){
+                    case 0:
+			mPlayer1.playMedia(mediaPath1);
+                        hiddenMPlayer.playMedia(mediaPath1);
+			recordCount = 0;
+			break;
+                    case 1:
+			mPlayer1.playMedia(mediaPath4);
+                        hiddenMPlayer.playMedia(mediaPath4);
+			recordCount = 0;
+			break;
+                    case 2:
+			mPlayer1.playMedia(mediaPath3);
+                        hiddenMPlayer.playMedia(mediaPath3);
+			recordCount = 0;
+			break;
+                    case 3:
+			mPlayer1.playMedia(mediaPath2);
+                        hiddenMPlayer.playMedia(mediaPath2);
+			recordCount = 0;
+			break;
+                    default:
+                        break;
+                }
         }
     }
     
     public void switchCam(){
-		switch(switchCount) {
-			case 0:
-				mPlayer1.playMedia(mediaPath4);
-				mPlayer2.playMedia(mediaPath1);
-				mPlayer3.playMedia(mediaPath2);
-				mPlayer4.playMedia(mediaPath3);
-				switchCount = 1;
-				break;
-			
-			case 1: 
-				mPlayer1.playMedia(mediaPath3);
-				mPlayer2.playMedia(mediaPath4);
-				mPlayer3.playMedia(mediaPath1);
-				mPlayer4.playMedia(mediaPath2);
-				switchCount = 2;
-				break;
-				
-			case 2:
-				mPlayer1.playMedia(mediaPath2);
-				mPlayer2.playMedia(mediaPath3);
-				mPlayer3.playMedia(mediaPath4);
-				mPlayer4.playMedia(mediaPath1);
-				switchCount = 3;
-				break;
-				
-			case 3:
-				mPlayer1.playMedia(mediaPath1);
-				mPlayer2.playMedia(mediaPath2);
-				mPlayer3.playMedia(mediaPath3);
-				mPlayer4.playMedia(mediaPath4);
-				switchCount = 0;
-				break;
-				
-			default:
-				break;
-		}	
+        recordCount = 0;
+	switch(switchCount) {
+            case 0:
+                hiddenMPlayer.playMedia(mediaPath4);
+                mPlayer1.playMedia(mediaPath4);
+		mPlayer2.playMedia(mediaPath1);
+		mPlayer3.playMedia(mediaPath2);
+		mPlayer4.playMedia(mediaPath3);
+		switchCount = 1;
+		break;
+            case 1: 
+                hiddenMPlayer.playMedia(mediaPath3);
+		mPlayer1.playMedia(mediaPath3);
+		mPlayer2.playMedia(mediaPath4);
+		mPlayer3.playMedia(mediaPath1);
+		mPlayer4.playMedia(mediaPath2);
+		switchCount = 2;
+		break;
+            case 2:
+                hiddenMPlayer.playMedia(mediaPath2);
+		mPlayer1.playMedia(mediaPath2);
+		mPlayer2.playMedia(mediaPath3);
+		mPlayer3.playMedia(mediaPath4);
+		mPlayer4.playMedia(mediaPath1);
+		switchCount = 3;
+		break;
+            case 3:
+                hiddenMPlayer.playMedia(mediaPath1);
+		mPlayer1.playMedia(mediaPath1);
+		mPlayer2.playMedia(mediaPath2);
+		mPlayer3.playMedia(mediaPath3);
+		mPlayer4.playMedia(mediaPath4);
+		switchCount = 0;
+		break;
+            default:
+		break;
+	}
+    }
+    
+    public void generateFileName()
+    {
+        DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        fileName = videoDir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+    }
+    
+    public void snapshot()
+    {
+        if(recordCount == 0) {
+            mPlayer1.getSnapshot();
+            mPlayer1.saveSnapshot(picDir);
         }
+        else {
+            hiddenMPlayer.getSnapshot();
+            hiddenMPlayer.saveSnapshot(picDir);
+        }
+    }
+    
+    public void openDir(int choice)
+    {
+        File temp = dir;
+        switch(choice) {
+            case 0:
+                temp = this.dir;
+                break;
+            case 1:
+                temp = picDir;
+                break;
+            case 2:
+                temp = videoDir;
+                break;
+            default:
+                break;
+        }
+        try {
+            Desktop.getDesktop().open(temp);
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void openHelp()
+    {
+        try {
+            File myFile = new File("pdf.pdf");
+            Desktop.getDesktop().open(myFile);
+        }catch(IOException e) {
+            System.out.println(e);
+        }
+    }
 }
