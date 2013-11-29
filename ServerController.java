@@ -15,6 +15,9 @@ class ServerController implements java.awt.event.ActionListener
         view.addController(this);
     }
     
+    public UserInformation getInfo(){
+        return view.getInfo();
+    }
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         String label;
@@ -143,6 +146,10 @@ class ServerController implements java.awt.event.ActionListener
     
     public void setBlank(int pathNo){
         view.setBlank(pathNo);
+    }
+    
+    public String getSnapshotPath(){
+        return view.getSnapshotStoragePath();
     }
     
     public void init(Server server, boolean alarm){

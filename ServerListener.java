@@ -16,8 +16,23 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.JFrame;
 
 public class ServerListener extends Listener {
@@ -30,34 +45,50 @@ public class ServerListener extends Listener {
         private boolean alarm;
         private int cameraID = 0;
         private String cameraIP;
+        private Session session;
         
         
         public void init(Server server, boolean alarm) {
 		this.server = server;
-              //  this.controller = controller;
                 this.alarm = alarm;
                 //Initialising parameters for Ozeki SMS Client
-              /*  host = "localhost";
+                host = "localhost";
                 port = 9500;
                 username = "admin";
-                password = "ozekiTeddy";
-                */
+                password = "ozekiTeddy";                
 	}
                 
         public void connected(Connection c){
-            //try {
+            try {
         
                 c.setTimeout(0);
                 c.setKeepAliveTCP(0);
                 
                 //Connect to Ozeki NG SMS Gateway and logging in.
-                //osc = new MyOzSmsClient(host, port);
-                //osc.login(username, password);
-            //} catch (IOException ex) {
-              //  ex.printStackTrace();
-            //} catch (InterruptedException ex) {
-              //  ex.printStackTrace();
-            //}
+                osc = new MyOzSmsClient(host, port);
+                osc.login(username, password);
+         
+                //Setting up SMTP server and email 
+                Properties props = new Properties();
+                props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+                props.put("mail.smtp.socketFactory.port", "465");
+                props.put("mail.smtp.socketFactory.class",
+                                "javax.net.ssl.SSLSocketFactory");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.port", "465");
+
+                session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                    return new PasswordAuthentication("aeakai@yahoo.com","yahooTeddy91");
+                            }
+                    });
+            
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (InterruptedException ex) {
+               ex.printStackTrace();
+            }
         }
 
         public void disconnected(Connection c){
@@ -153,14 +184,41 @@ public class ServerListener extends Listener {
                                 alarm = true;
                         }		
                         
-                        //Alert owner of intruder through text
-              /*          if(osc.isLoggedIn()) {
+                        //Alert owner of intruder through SMS message and picture sent to email
+                        if(osc.isLoggedIn()) {
                             try {	
-                                osc.sendMessage("+16138781790", "Alert!");
+                                //Send text to predefined number
+                                osc.sendMessage(controller.getInfo().getphoneNumber(), "Check E-mail for snapshot");
+                                
+                                //Define and send email with attachment
+                                BodyPart msgBodyPart = new MimeBodyPart();
+                                Message message = new MimeMessage(session);
+                                message.setFrom(new InternetAddress("aeakai@yahoo.com"));
+                                message.setRecipients(Message.RecipientType.TO,
+                                                InternetAddress.parse(controller.getInfo().getemail()));
+                                message.setSubject("Intruder Alert!");
+                                
+                                msgBodyPart.setText("You have an unexpected visitor\n");
+
+                                Multipart mp = new MimeMultipart();
+                                mp.addBodyPart(msgBodyPart);
+                                msgBodyPart = new MimeBodyPart();                                
+                                String filename = controller.getSnapshotPath();
+                                DataSource source = new FileDataSource(filename);
+                                msgBodyPart.setDataHandler(new DataHandler(source));
+                                msgBodyPart.setFileName(filename);
+                                mp.addBodyPart(msgBodyPart);
+                                message.setContent(mp);
+
+                                Transport.send(message);
+
+                                System.out.println("Done");
                             } catch (UnsupportedEncodingException ex) {
                                 ex.printStackTrace();
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }*/
+                        }
                         
 		}
         }

@@ -42,6 +42,7 @@ public class ServerView
     private String fileName;
     private int switchCount = 0;
     private int recordCount = 0;
+    private UserInformation user;
     
     public ServerView()
     {
@@ -251,6 +252,10 @@ public class ServerView
         mPlayer2.playMedia(mediaPath2);
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
+    }
+    
+    public UserInformation getInfo(){
+        return user;
     }
     
     public void setMediaPath1(String ip){
@@ -489,5 +494,9 @@ public class ServerView
         }catch(IOException e) {
             System.out.println(e);
         }
+    }
+    
+    public String getSnapshotStoragePath(){
+        return picDir.getAbsolutePath();
     }
 }

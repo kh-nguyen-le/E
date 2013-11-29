@@ -33,18 +33,18 @@ public class CameraListener extends Listener {
         }
         
         public void connected(Connection c) {
-        //    try {
+            try {
                 System.out.println("Camera Connected");
                  // Video stream from the  PI_CAMERA with the use of command line command
-             //    Runtime rt = Runtime.getRuntime();
-               //  Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
-                 //        + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
+                 Runtime rt = Runtime.getRuntime();
+                 Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
+                         + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
                 client.sendTCP(request);
-//            } catch (IOException ex) {
-   //             ex.printStackTrace();
-     //       }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
         
       //  public void disconnected(Connection c){ System.out.println("Client disconnected");}
@@ -60,21 +60,7 @@ public class CameraListener extends Listener {
                 }
                 if (o instanceof MotorPacket) {
                         //turn motor
-                }
-                /*if (o instanceof SnapshotPacket) {
-                    
-                        System.out.println("Send image taken to server");
-                       
-                        //Picture stored
-                        //((SnapshotPacket)o).image = ImageIO.read(new File("snapshot1.png"));
-                        //Alert not set because the snapshot was requested by user manually, not due to intrusion
-                        ((SnapshotPacket)o).alert = false;
-                        client.sendTCP((SnapshotPacket)o);
-                    //} catch (IOException ex) {
-                        //ex.printStackTrace();
-                    //}
-                }
-                */             
+                }        
                 
                 if (o instanceof SettingsPacket) {
                         //modify camera settings
