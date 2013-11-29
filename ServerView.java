@@ -36,9 +36,9 @@ public class ServerView
     
     private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
     private String mediaPath1 = "rtsp://@192.168.0.13:8554/";
-    private String mediaPath2 = "1.mp4";
-    private String mediaPath3 = "2.mp4";
-    private String mediaPath4 = "3.mp4";
+    private String mediaPath2 = "blank.bmp";//"1.mp4";
+    private String mediaPath3 = "blank.bmp";//"2.mp4";
+    private String mediaPath4 = "blank.bmp";//"3.mp4";
     private String fileName;
     private int switchCount = 0;
     private int recordCount = 0;
@@ -226,7 +226,7 @@ public class ServerView
 		storage.setToolTipText("Storage");
         buttonPanel.add(storage);
         help = new JButton("Help");
-		help.setToolTipText("Help");
+	help.setToolTipText("Help");
         buttonPanel.add(help);
         panel.add(Box.createRigidArea(new Dimension(0,25)));
         panel.add(buttonPanel);
@@ -253,11 +253,14 @@ public class ServerView
         mPlayer3.playMedia(mediaPath3);
         mPlayer4.playMedia(mediaPath4);
     }
-    
+
+    //Returns the user information
     public UserInformation getInfo(){
         return user;
     }
-    
+ 
+    //Store the IP for the camera connected, would eventually be assigned
+    //to a media player.     
     public void setMediaPath1(String ip){
         mediaPath1 = "rtsp://@" + ip +":8554/";
     }
@@ -273,6 +276,7 @@ public class ServerView
     public void setMediaPath4(String ip){
         mediaPath4 = "rtsp://@" + ip +":8554/";
     }
+    
     
     public void addController(ServerController controller)
     {
@@ -304,6 +308,8 @@ public class ServerView
         about.addActionListener(controller);
     }
     
+    //In the case of any changes in the media path, the media player is 
+    //updated
     public void updateMedia(){
         hiddenMPlayer.playMedia(mediaPath4);
         mPlayer1.playMedia(mediaPath1); 
@@ -312,6 +318,7 @@ public class ServerView
         mPlayer4.playMedia(mediaPath4);
     }
     
+    //This checks the status of the media player, i.e. whether it is playing or not
     public void checkBlank()
     {
         if(!mPlayer1.isPlaying()) {
@@ -332,6 +339,8 @@ public class ServerView
         }
     }
     
+    //Stops the defined media player(int number) from displaying video stream 
+    //and blanks the screen
     public void setBlank(int number){
         switch(number){
             case 1:
@@ -349,7 +358,8 @@ public class ServerView
                     
         }
     }
-        
+          
+    //Records the video stream in the main player
     public void record(){
         generateFileName();
         if(recordCount == 0) {
@@ -405,6 +415,7 @@ public class ServerView
         }
     }
     
+    
     public void switchCam(){
         recordCount = 0;
 	switch(switchCount) {
@@ -445,12 +456,14 @@ public class ServerView
 	}
     }
     
+    
     public void generateFileName()
     {
         DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
         fileName = videoDir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
     }
     
+    //Takes a snapshot image of the main camera. 
     public void snapshot()
     {
         if(recordCount == 0) {
@@ -486,8 +499,9 @@ public class ServerView
         }
     }
     
+    //Open README.pdf which shows the instructions for running the program
     public void openHelp()
-    {
+    {        
         try {
             File myFile = new File("pdf.pdf");
             Desktop.getDesktop().open(myFile);
