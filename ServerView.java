@@ -6,7 +6,6 @@
  * 
  * issues:
  * 1. have to activate the cam before running the program otherwise it wont show, can make a seperate thread for that.
- * 2. menus are blocked by the big cam, need to be always on top.***
  * 3. methods of determine whether the streaming is on.
  */
 package securitySystem;
@@ -68,7 +67,54 @@ public class ServerView// implements java.util.Observer
         JPanel controlPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
+		//Setting up the menu bars
+        JPopupMenu.setDefaultLightWeightPopupEnabled(false);
+        JMenuBar menu = new JMenuBar();
+        frame.setJMenuBar(menu);
+        JMenu control = new JMenu("Control");
+        menu.add(control);
+        JMenu history = new JMenu("History");
+        menu.add(history);
+        JMenu admin = new JMenu("Admin");
+        menu.add(admin);
+        JMenu help = new JMenu("Help");
+        menu.add(help);
+        //Setting up the menu items in control bar
+        JMenuItem left = new JMenuItem("Toggle Left");
+        control.add(left);
+        JMenuItem right = new JMenuItem("Toggle Right");
+        control.add(right);
+        JMenuItem zoomIn = new JMenuItem("Zoom In");
+        control.add(zoomIn);
+        JMenuItem zoomOut = new JMenuItem("Zoom Out");
+        control.add(zoomOut);
+        JMenuItem capture = new JMenuItem("Screen Capture");
+        control.add(capture);
+        JMenuItem record = new JMenuItem("Record Video");
+        control.add(record);
+        JMenuItem close = new JMenuItem("Close");
+        control.add(close);
+        //Setting up the menu items in history bar
+        JMenuItem video = new JMenuItem("Video Recorded");
+        history.add(video);
+        JMenuItem pic = new JMenuItem("Picture Captured");
+        history.add(pic);
+        //Setting up the menu items in admin bar
+        JMenuItem setContact = new JMenuItem("Set Contact Info");
+        admin.add(setContact);
+        JMenuItem setPW = new JMenuItem("Set Password");
+        admin.add(setPW);
+        JMenuItem addCam = new JMenuItem("Add Camera");
+        admin.add(addCam);
+        //Setting up the menu items in help bar
+        JMenuItem update = new JMenuItem("Update");
+        help.add(update);
+        JMenuItem doc = new JMenuItem("Help");
+        help.add(doc);
+        JMenuItem about = new JMenuItem("About");
+        help.add(about);
         //------------------------------------------------------------
+		
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcPath);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
@@ -129,28 +175,33 @@ public class ServerView// implements java.util.Observer
         t.start();
         
         //--------------------control-------------------
-        leftButton = new JButton("left",new ImageIcon("left.png"));
+        leftButton = new JButton(new ImageIcon("left.png"));
+        leftButton.setToolTipText("Toggle Left");
         leftButton.setPreferredSize(new Dimension(50,50));
         c.insets = new Insets(10,10,10,10);
         c.gridx = 2;
         c.gridy = 1;
         controlPanel.add(leftButton,c);
-        rightButton = new JButton("right",new ImageIcon("right.png"));
+        rightButton = new JButton(new ImageIcon("right.png"));
+        rightButton.setToolTipText("Toggle Right");
         rightButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 0;
         c.gridy = 1;
         controlPanel.add(rightButton,c);
-        zoomInButton = new JButton("zoom+",new ImageIcon("zoomin.png"));
+        zoomInButton = new JButton(new ImageIcon("zoomin.png"));
+        zoomInButton.setToolTipText("Zoom In");
         zoomInButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 0;
         controlPanel.add(zoomInButton,c);
-        zoomOutButton = new JButton("zoom-",new ImageIcon("zoomout.png"));
+        zoomOutButton = new JButton(new ImageIcon("zoomout.png"));
+        zoomOutButton.setToolTipText("Zoom Out");
         zoomOutButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 2;
         controlPanel.add(zoomOutButton,c);
-        recordButton = new JButton("rec",new ImageIcon("record.png"));
+        recordButton = new JButton(new ImageIcon("record.png"));
+        recordButton.setToolTipText("Record");
         recordButton.setPreferredSize(new Dimension(50,50));
         c.gridx = 1;
         c.gridy = 1;
@@ -160,16 +211,22 @@ public class ServerView// implements java.util.Observer
         
         //----------------------button-------------------
         screenCapture = new JButton("Screen Capture");
+		screenCapture.setToolTipText("Screen Capture");
         buttonPanel.add(screenCapture);
         switchCam = new JButton("Switch Camera");
+		switchCam.setToolTipText("Switch Camera");
         buttonPanel.add(switchCam);
         alarmToggle = new JButton("Alarm Toggle");
+		alarmToggle.setToolTipText("Alarm Toggle");
         buttonPanel.add(alarmToggle);
         settings = new JButton("Settings");
+		settings.setToolTipText("Settings");
         buttonPanel.add(settings);
         storage = new JButton("Storage");
+		storage.setToolTipText("Storage");
         buttonPanel.add(storage);
         help = new JButton("Help");
+		help.setToolTipText("Help");
         buttonPanel.add(help);
         panel.add(Box.createRigidArea(new Dimension(0,25)));
         panel.add(buttonPanel);
