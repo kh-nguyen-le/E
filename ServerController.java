@@ -6,7 +6,7 @@ import securitySystem.Network.*;
 
 class ServerController implements java.awt.event.ActionListener
 {
-    public ServerView view;
+    private ServerView view;
     private Server server;
     public boolean alarm;
     
@@ -40,7 +40,7 @@ class ServerController implements java.awt.event.ActionListener
             else if(label.equals("Zoom Out")) {
                 System.out.println("zoomout");
             }
-            else if(label.equals("rec")) {
+            else if(label.equals("Record")) {
                 view.record();
             }
             else if(label.equals("Screen Capture")) {
