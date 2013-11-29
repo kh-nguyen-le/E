@@ -9,20 +9,23 @@ import com.esotericsoftware.minlog.Log;
 import java.util.Scanner;
 import securitySystem.Network.*;
 
-public class SecurityServer implements ActionListener {
+public class SecurityServer {//implements ActionListener {
 
 	private Server server;
-        
+        private boolean alarm = false;
 	public SecurityServer() throws IOException {
+                
 		server = new Server();
                 //Registering Packets
 		Network.register(server);
 		server.bind(Network.port, Network.port);
                 //Set up Server listener
-		ServerListener listener = new ServerListener();
-		listener.init(server);
+                ServerController sc = new ServerController();		
+                ServerListener listener = new ServerListener();
+		listener.init(server, alarm);
 		server.addListener(listener);
                 server.start();
+                sc.init(server, alarm);
 	}
 	
 	
@@ -36,20 +39,4 @@ public class SecurityServer implements ActionListener {
 		}
                                      
 	}
-
-	//button listener
-	public void actionPerformed(ActionEvent e) {
-		String action = e.getActionCommand();
-		if ("left".equals(action) | "right".equals(action)) {
-			MotorPacket motor = new MotorPacket();
-			String camera = "Camera";
-			//code to get camera name here
-			if (action=="left") motor.direction = false; else motor.direction = true;
-			Connection[] list = server.getConnections();
-			for (int i=0; i<list.length; i++){
-				if (list[i].toString()==camera) list[i].sendTCP(motor);
-			}
-		}	
-	}
-
 }

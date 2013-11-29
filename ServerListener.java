@@ -26,9 +26,13 @@ public class ServerListener extends Listener {
         private String host, username, password;
         private int port;
         private MyOzSmsClient osc;
-	
-        public void init(Server server) {
+	//private ServerController controller;
+        private boolean alarm;
+        
+        public void init(Server server, boolean alarm) {
 		this.server = server;
+              //  this.controller = controller;
+                this.alarm = alarm;
                 //Initialising parameters for Ozeki SMS Client
               /*  host = "localhost";
                 port = 9500;
@@ -36,23 +40,13 @@ public class ServerListener extends Listener {
                 password = "ozekiTeddy";
                 */
 	}
-        
-         public void paint(Graphics g) {
-            g.drawImage(img, 0, 0, null);
-        }
-
-        public Dimension getPreferredSize() {
-            if (img == null) {
-                 return new Dimension(100,100);
-            } else {
-               return new Dimension(img.getWidth(null), img.getHeight(null));
-           }
-        } 
-         
+                
         public void connected(Connection c){
             //try {
+        
                 c.setTimeout(0);
                 c.setKeepAliveTCP(0);
+                
                 //Connect to Ozeki NG SMS Gateway and logging in.
                 //osc = new MyOzSmsClient(host, port);
                 //osc.login(username, password);
@@ -63,6 +57,11 @@ public class ServerListener extends Listener {
             //}
         }
 
+        public void disconnected(Connection c){
+            if(c.toString().contains("Camera")){}
+        }
+
+        
 	public void received(Connection c, Object o) {
 		if (o instanceof AuthenticationPacket){
 			HandshakePacket handshake = new HandshakePacket();
@@ -83,7 +82,9 @@ public class ServerListener extends Listener {
 				for (int i=0; i<list.length; i++){
 					if (list[i].toString().contains("Alarm")) list[i].sendTCP(o);
 				}
-			}			
+                                alarm = true;
+                        }		
+                        
                         //Alert owner of intruder through text
               /*          if(osc.isLoggedIn()) {
                             try {	
