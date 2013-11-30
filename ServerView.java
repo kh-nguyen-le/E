@@ -35,8 +35,8 @@ public class ServerView
     private final File dir,picDir,videoDir;
     
     private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
-    private String mediaPath1 = "rtsp://@192.168.0.13:8554/";
-    private String mediaPath2 = "blank.bmp";//"1.mp4";
+    private String mediaPath1 = "rtsp://@10.0.0.54:8554/"; //"blank.bmp";
+    private String mediaPath2 = "rtsp://@10.0.0.51:8554/";//"blank.bmp";//"1.mp4";
     private String mediaPath3 = "blank.bmp";//"2.mp4";
     private String mediaPath4 = "blank.bmp";//"3.mp4";
     private String fileName;
@@ -46,6 +46,7 @@ public class ServerView
     
     public ServerView()
     {
+        
         JFrame frame = new JFrame("Home Security System 1.0");
         Container contentPane = frame.getContentPane();
         contentPane.setLayout(new FlowLayout());
@@ -148,7 +149,7 @@ public class ServerView
         
         JPanel hiddenPanel = new JPanel();
         hiddenPanel.add(hiddenCanvas);
-        //hiddenPanel.setVisible(false);
+        hiddenPanel.setVisible(false);
         contentPane.add(hiddenPanel);
         
         //--------------------date---------------------
@@ -234,8 +235,7 @@ public class ServerView
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        //frame.setSize(750,480);
-        frame.setSize(2000,2000);
+        frame.setSize(750,480);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -257,6 +257,10 @@ public class ServerView
     //Returns the user information
     public UserInformation getInfo(){
         return user;
+    }
+    
+    public void setUser(UserInformation ui){
+        user = ui;
     }
  
     //Store the IP for the camera connected, would eventually be assigned

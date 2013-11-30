@@ -7,12 +7,15 @@ import securitySystem.Network.*;
 class ServerController implements java.awt.event.ActionListener
 {
     private ServerView view;
+    private LoginView login;
     private Server server;
     public boolean alarm;
     
     ServerController(){
-        view = new ServerView();
-        view.addController(this);
+        login = new LoginView();
+        login.addListener(this);
+        //view = new ServerView();
+        //view.addController(this);
     }
     
     public UserInformation getInfo(){
@@ -73,9 +76,16 @@ class ServerController implements java.awt.event.ActionListener
             }
             else if(label.equals("Help")) {
                 view.openHelp();
+            }else if(label.equals("Login")){
+                System.out.println("Logged in");
+                view = new ServerView();
+                view.setUser(login.getUser());
+                view.addController(this);
+                login.setVisible(false);
+            }else if(label.equals("Cancel")){
+                System.out.println("Close program");
             } 
-        }
-        else {
+      }else {
             JMenuItem item = (JMenuItem)o;
             label = item.getText();
             if(label.equals("Toggle Left")|| label.equals("Toggle Right")) {
