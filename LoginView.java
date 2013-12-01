@@ -16,8 +16,9 @@ public class LoginView extends JFrame
          
          
     public LoginView(){
-        JFrame frame = new JFrame("Welcome to Login Page");
-        Container contentPane = frame.getContentPane();
+        //JFrame frame = new JFrame("Welcome to Login Page");
+        Container contentPane = this.getContentPane();
+        contentPane.setName("Welcome to Login Page");
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         JPanel usernamePanel = new JPanel();
         JPanel passwordPanel = new JPanel();
@@ -49,12 +50,12 @@ public class LoginView extends JFrame
         contentPane.add(passwordPanel);
         contentPane.add(buttonPanel);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setSize(280,150);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.pack();
+        this.setSize(280,150);
+        this.setResizable(false);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
     
     public void addListener(ServerController controller){
@@ -62,9 +63,10 @@ public class LoginView extends JFrame
         cancelButton.addActionListener(controller);
     }
     
+    
     public UserInformation getUser(){
         user = new UserInformation();
-        user.setemail(usernameText.getText());
+        user.setname(usernameText.getText());
         user.setpassword(passwordText.getText());
         return user;
     }

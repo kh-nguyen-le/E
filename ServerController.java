@@ -9,10 +9,12 @@ class ServerController implements java.awt.event.ActionListener
     private ServerView view;
     private LoginView login;
     private Server server;
+    private UserInformation user  = new UserInformation();
     public boolean alarm;
     
     ServerController(){
         login = new LoginView();
+        //UserInformation user = new UserInformation();
         login.addListener(this);
         //view = new ServerView();
         //view.addController(this);
@@ -77,13 +79,15 @@ class ServerController implements java.awt.event.ActionListener
             else if(label.equals("Help")) {
                 view.openHelp();
             }else if(label.equals("Login")){
-                System.out.println("Logged in");
-                view = new ServerView();
-                view.setUser(login.getUser());
-                view.addController(this);
-                login.setVisible(false);
+                if(login.getUser().getname().equals(user.getname())&&login.getUser().getpassword().equals(user.getpassword())) {
+                    view = new ServerView();
+                    view.addController(this);
+                    login.setVisible(false);
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"The username or password you entered is incorrect.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             }else if(label.equals("Cancel")){
-                System.out.println("Close program");
+                System.exit(0);
             } 
       }else {
             JMenuItem item = (JMenuItem)o;

@@ -11,10 +11,10 @@ public class UserInformation {
     private String name, phoneNumber, email, password;
     
     public UserInformation(){
-        name = "";
+        name = "admin";
         phoneNumber = "";
         email = "";
-        password = "";
+        password = "admin";
     }
 
     public UserInformation(String name, String phoneNumber, String email, String password){
