@@ -48,7 +48,7 @@ public class CameraClient {
 							
 						{
 							AlertPacket alert = new AlertPacket();
-							alert.alarmOn = true.
+							alert.alarmOn = true;
 							client.sendTCP(alert);
 							System.out.println("Motion Detected");
 							//send a motion detected packet or some shit to server here
