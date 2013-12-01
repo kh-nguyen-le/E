@@ -28,12 +28,12 @@ public class CameraClient {
               try{
                  System.out.println("Begin stream");
                  java.lang.Runtime rt = Runtime.getRuntime();
-                 java.lang.Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
-                         + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
-				// create gpio controller
+                 java.lang.Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
+				
               }catch(IOException e){
               	e.printStackTrace();
               }
+               // create gpio controller
 		gpio = GpioFactory.getInstance();
                 Network.register(client);
                 CameraListener listener = new CameraListener();
