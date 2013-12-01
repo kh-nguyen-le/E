@@ -33,15 +33,13 @@ public class CameraListener extends Listener {
         }
         
         public void connected(Connection c) {
-            try {
+            
                 System.out.println("Camera Connected");
                  
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
                 client.sendTCP(request);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            
         }
         
       //  public void disconnected(Connection c){ System.out.println("Client disconnected");}
