@@ -24,6 +24,7 @@ public class CameraClient {
         
         public CameraClient() {
                 client = new Client();
+<<<<<<< HEAD
                 // Video stream from the  PI_CAMERA with the use of command line command
               try{
                  System.out.println("Begin stream");
@@ -34,6 +35,9 @@ public class CameraClient {
               }catch(IOException e){
               	e.printStackTrace();
               }
+=======
+               // create gpio controller
+>>>>>>> 40e78d977c2f268c37b6b0971083056d50a3761f
 		gpio = GpioFactory.getInstance();
                 Network.register(client);
                 CameraListener listener = new CameraListener();
