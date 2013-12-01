@@ -24,20 +24,6 @@ public class CameraClient {
         
         public CameraClient() {
                 client = new Client();
-<<<<<<< HEAD
-                // Video stream from the  PI_CAMERA with the use of command line command
-              try{
-                 System.out.println("Begin stream");
-                 java.lang.Runtime rt = Runtime.getRuntime();
-                 java.lang.Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
-                         + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
-				// create gpio controller
-              }catch(IOException e){
-              	e.printStackTrace();
-              }
-=======
-               // create gpio controller
->>>>>>> 40e78d977c2f268c37b6b0971083056d50a3761f
 		gpio = GpioFactory.getInstance();
                 Network.register(client);
                 CameraListener listener = new CameraListener();
