@@ -51,7 +51,7 @@ public class CameraClient {
 					public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) 
 					{
 					// if pin has changed to high then motion has been detected
-						if (event.getState().equals("HIGH"))
+						if (event.isHigh())
 							
 							
 						{
