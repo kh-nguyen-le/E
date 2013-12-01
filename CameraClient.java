@@ -42,7 +42,12 @@ public class CameraClient {
 					{
 					// if pin has changed to high then motion has been detected
 						if (event.getState().equals("HIGH"))
+							
+							
 						{
+							AlertPacket alert = new AlertPacket();
+							alert.alarmOn = true.
+							client.sendTCP(alert);
 							System.out.println("Motion Detected");
 							//send a motion detected packet or some shit to server here
 						}
