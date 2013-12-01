@@ -18,39 +18,44 @@ public class LoginView extends JFrame
          
          
     public LoginView(){
-         //new JFrame("Home Security System 1.0");
-         Container contentPane = this.getContentPane();
-         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-         JPanel usernamePanel = new JPanel();
-         JPanel passwordPanel = new JPanel();
-         JPanel buttonPanel = new JPanel();
-         
-         usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
-         passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-         
-         usernameLabel = new JLabel("Username: ");
-         usernameText = new JTextField();
-         passwordLabel = new JLabel("Password: ");
-         passwordText = new JPasswordField();
-         loginButton = new JButton("Login");loginButton.setToolTipText("Login");
-         cancelButton = new JButton("Cancel");cancelButton.setToolTipText("Cancel");
+        
+        JFrame frame = new JFrame("Home Security System 1.0");
+        Container contentPane = frame.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        JPanel usernamePanel = new JPanel();
+        JPanel passwordPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
 
-         usernamePanel.add(usernameLabel);
-         usernamePanel.add(usernameText);
-         passwordPanel.add(passwordLabel);
-         passwordPanel.add(passwordText);
-         buttonPanel.add(loginButton);
-         buttonPanel.add(cancelButton);
-         
-         contentPane.add(usernamePanel, BorderLayout.NORTH);
-         contentPane.add(passwordPanel, BorderLayout.NORTH);
-         contentPane.add(buttonPanel, BorderLayout.SOUTH);
-         
-         
-         this.pack();
-         this.setVisible(true);
-         
+        usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+
+        usernameLabel = new JLabel("Username: ");
+        usernameText = new JTextField();
+        passwordLabel = new JLabel("Password: ");
+        passwordText = new JPasswordField();
+        loginButton = new JButton("Login");
+        loginButton.setToolTipText("Login");
+        cancelButton = new JButton("Cancel");
+        cancelButton.setToolTipText("Cancel");
+
+        usernamePanel.add(usernameLabel);
+        usernamePanel.add(usernameText);
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(passwordText);
+        buttonPanel.add(loginButton);
+        buttonPanel.add(cancelButton);
+
+        contentPane.add(usernamePanel, BorderLayout.CENTER);
+        contentPane.add(passwordPanel, BorderLayout.CENTER);
+        contentPane.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setSize(300,200);
+        frame.setResizable(false);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
     
     public void addListener(ServerController controller){
