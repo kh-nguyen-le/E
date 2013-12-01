@@ -1,8 +1,6 @@
 package securitySystem;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -18,22 +16,23 @@ public class LoginView extends JFrame
          
          
     public LoginView(){
-        
-        JFrame frame = new JFrame("Home Security System 1.0");
+        JFrame frame = new JFrame("Welcome to Login Page");
         Container contentPane = frame.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         JPanel usernamePanel = new JPanel();
         JPanel passwordPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
 
-        usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
-        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        usernamePanel.setLayout(new FlowLayout());
+        passwordPanel.setLayout(new FlowLayout());
+        buttonPanel.setLayout(new FlowLayout());
 
-        usernameLabel = new JLabel("Username: ");
-        usernameText = new JTextField();
-        passwordLabel = new JLabel("Password: ");
-        passwordText = new JPasswordField();
+        usernameLabel = new JLabel("Username:");
+        usernameText = new JTextField(10);
+        usernameText.setFont(new Font("Serif", Font.PLAIN, 20));
+        passwordLabel = new JLabel("Password:");
+        passwordText = new JPasswordField(10);
+        passwordText.setFont(new Font("Serif", Font.PLAIN, 20));
         loginButton = new JButton("Login");
         loginButton.setToolTipText("Login");
         cancelButton = new JButton("Cancel");
@@ -46,13 +45,13 @@ public class LoginView extends JFrame
         buttonPanel.add(loginButton);
         buttonPanel.add(cancelButton);
 
-        contentPane.add(usernamePanel, BorderLayout.CENTER);
-        contentPane.add(passwordPanel, BorderLayout.CENTER);
-        contentPane.add(buttonPanel, BorderLayout.SOUTH);
+        contentPane.add(usernamePanel);
+        contentPane.add(passwordPanel);
+        contentPane.add(buttonPanel);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(300,200);
+        frame.setSize(280,150);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
