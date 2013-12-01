@@ -35,10 +35,7 @@ public class CameraListener extends Listener {
         public void connected(Connection c) {
             try {
                 System.out.println("Camera Connected");
-                 // Video stream from the  PI_CAMERA with the use of command line command
-                 Runtime rt = Runtime.getRuntime();
-                 Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 "
-                         + "|cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
+                 
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
                 client.sendTCP(request);
