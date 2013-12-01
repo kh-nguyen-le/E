@@ -48,9 +48,10 @@ public class ServerListener extends Listener {
         private Session session;
         
         
-        public void init(Server server, boolean alarm) {
+        public void init(Server server, ServerController sc, boolean alarm) {
 		this.server = server;
                 this.alarm = alarm;
+                controller = sc;
                 //Initialising parameters for Ozeki SMS Client
                 host = "localhost";
                 port = 9500;
