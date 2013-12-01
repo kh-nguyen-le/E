@@ -78,15 +78,12 @@ class AlarmThread extends Thread{
         while(true){
            try{ 
                 sleep(200);
-                if(alarmOn){
-                    for (int i=0;i<5;i+=1){   
-                        //System.out.println("Ring!");
-                        try {
-                        	java.lang.Process p = rt.exec("aplay alarm.wav"); //play alarm.wav sound
-                        	sleep(500);
-                        }catch (IOException e) {
-                        	e.printStackTrace();
-                        }
+                if(alarmOn){  
+                	try {
+                        java.lang.Process p = rt.exec("aplay alarm.wav"); //play alarm.wav sound
+                        sleep(1000);
+                    }catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
            }catch(InterruptedException ex){
