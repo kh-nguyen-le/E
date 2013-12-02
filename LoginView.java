@@ -18,6 +18,7 @@ public class LoginView extends JFrame
     public LoginView(){
         //JFrame frame = new JFrame("Welcome to Login Page");
         Container contentPane = this.getContentPane();
+        contentPane.setName("Welcome to Login Page");
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         JPanel usernamePanel = new JPanel();
         JPanel passwordPanel = new JPanel();
@@ -53,7 +54,7 @@ public class LoginView extends JFrame
         this.pack();
         this.setSize(280,150);
         this.setResizable(false);
-        this.getRootPane().setDefaultButton(loginButton);
+		this.getRootPane().setDefaultButton(loginButton);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }

@@ -8,7 +8,6 @@ class ServerController implements java.awt.event.ActionListener
 {
     private ServerView view;
     private LoginView login;
-    private SettingsView setting;
     private Server server;
     private UserInformation user  = new UserInformation();
     public boolean alarm;
@@ -71,14 +70,8 @@ class ServerController implements java.awt.event.ActionListener
                         if (list[i].toString().contains("Alarm")) list[i].sendTCP(ap);
                 }
             }
-            else if(label.equals("Settings")) {                
-                user = new UserInformation(new ParseXML().getXMLUser());
-               System.out.println(user.getemail()+" "+ user.getphoneNumber());
-                setting = new SettingsView(user);       
-                setting.addListener(this);
-            }else if(label.equals("Save")) {
-                new ToXML(setting.getUser());
-                setting.setVisible(false);
+            else if(label.equals("Settings")) {
+                System.out.println("settings");
             }
             else if(label.equals("Storage")) {
                 view.openDir(0);
@@ -131,9 +124,7 @@ class ServerController implements java.awt.event.ActionListener
                 view.openDir(1);
             }
             else if(label.equals("Settings")) {
-                user = new UserInformation(new ParseXML().getXMLUser());
-               System.out.println(user.getemail()+" "+user.getphoneNumber());
-                setting = new SettingsView(user);
+                System.out.println("settings");
             }
             else if(label.equals("Update")) {
                 System.out.println("updating...");
