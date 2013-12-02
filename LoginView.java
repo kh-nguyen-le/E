@@ -54,6 +54,7 @@ public class LoginView extends JFrame
         this.pack();
         this.setSize(280,150);
         this.setResizable(false);
+		this.getRootPane().setDefaultButton(loginButton);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
