@@ -23,6 +23,16 @@ public class CameraClient {
 		private final GpioPinDigitalInput pir;
         
         public CameraClient() {
+                  // Video stream from the  PI_CAMERA with the use of command line command
+                try{
+                    
+                    //System.out.println("Begin stream");
+                    java.lang.Runtime rt = Runtime.getRuntime();
+                    java.lang.Process pr = rt.exec("python stream.py");
+				
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
                 client = new Client();
 		gpio = GpioFactory.getInstance();
                 Network.register(client);

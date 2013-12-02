@@ -33,8 +33,6 @@ public class CameraListener extends Listener {
         }
         
         public void connected(Connection c) {
-            
-                System.out.println("Camera Connected");
                 // Video stream from the  PI_CAMERA with the use of command line command
                 //try{
                     //System.out.println("Begin stream");
@@ -44,6 +42,8 @@ public class CameraListener extends Listener {
                 //}catch(IOException e){
                   //  e.printStackTrace();
                 //}
+                System.out.println("Camera Connected");
+              
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
                 client.sendTCP(request);
