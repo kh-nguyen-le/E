@@ -27,16 +27,10 @@ public class AlarmListener extends Listener {
 		client.sendTCP(request);
 	}
 
-        public void disconnected(Connection c){ System.out.println("Client disconnected");}        
+        public void disconnected(Connection c){ System.out.println("Client disconnected"); System.exit(0);}
         
 	public void received(Connection c, Object o) {
             
-          /* 	if (o instanceof AuthenticationPacket){
-			HandshakePacket handshake = new HandshakePacket();
-			handshake.success = true;
-			c.sendTCP(handshake);
-		}
-            */
             
 		if (o instanceof HandshakePacket) {
 			if (((HandshakePacket) o).success) {
