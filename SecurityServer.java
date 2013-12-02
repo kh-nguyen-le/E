@@ -22,7 +22,7 @@ public class SecurityServer {//implements ActionListener {
                 //Set up Server listener
                 ServerController sc = new ServerController();		
                 ServerListener listener = new ServerListener();
-		listener.init(server,sc,alarm);
+		listener.init(server, alarm);
 		server.addListener(listener);
                 server.start();
                 sc.init(server, alarm);

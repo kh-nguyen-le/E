@@ -35,8 +35,8 @@ public class ServerView
     private final File dir,picDir,videoDir;
     
     private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
-    private String mediaPath1 = "rtsp://@10.0.0.54:8554/"; //"blank.bmp";
-    private String mediaPath2 = "rtsp://@10.0.0.51:8554/";//"blank.bmp";//"1.mp4";
+    private String mediaPath1 = "rtsp://@10.0.0.52:8554/"; //"blank.bmp";
+    private String mediaPath2 = "rtsp://@10.0.0.52:8554/";//"blank.bmp";//"1.mp4";
     private String mediaPath3 = "blank.bmp";//"2.mp4";
     private String mediaPath4 = "blank.bmp";//"3.mp4";
     private String fileName;
