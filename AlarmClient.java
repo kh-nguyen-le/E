@@ -19,7 +19,7 @@ public class AlarmClient {
 		client.addListener(listener);
 		
 		do {
-                    gateway =client.discoverHost(Network.port, 60000);
+                    gateway =client.discoverHost(Network.port, 5000);
 		}while (gateway==null);	
                     client.start();
 		

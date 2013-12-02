@@ -42,6 +42,16 @@ public class CameraListener extends Listener {
                 //}catch(IOException e){
                   //  e.printStackTrace();
                 //}
+                  // Video stream from the  PI_CAMERA with the use of command line command
+                try{
+                    
+                    //System.out.println("Begin stream");
+                    java.lang.Runtime rt = Runtime.getRuntime();
+                    java.lang.Process pr = rt.exec("python stream.py");
+				
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
                 System.out.println("Camera Connected");
               
                 AuthenticationPacket request = new AuthenticationPacket();
