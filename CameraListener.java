@@ -24,8 +24,8 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class CameraListener extends Listener {
     
         private Client client;
-		private GpioController gpio;
-        
+	private GpioController gpio;
+        private StreamingThread st;
         
         public void init(Client client, GpioController gpio) {
             this.client = client;
@@ -43,15 +43,8 @@ public class CameraListener extends Listener {
                   //  e.printStackTrace();
                 //}
                   // Video stream from the  PI_CAMERA with the use of command line command
-                try{
-                    
-                    //System.out.println("Begin stream");
-                    java.lang.Runtime rt = Runtime.getRuntime();
-                    java.lang.Process pr = rt.exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
-				
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
+                st = new StreamingThread();
+                st.start();
                 System.out.println("Camera Connected");
               
                 AuthenticationPacket request = new AuthenticationPacket();
@@ -60,7 +53,7 @@ public class CameraListener extends Listener {
             
         }
         
-        public void disconnected(Connection c){ System.out.println("Client disconnected"); System.exit(0);}
+        public void disconnected(Connection c){ System.out.println("Client disconnected"); st.interrupt(); System.exit(0);}
 
         public void received(Connection c, Object o) {
             
@@ -80,4 +73,20 @@ public class CameraListener extends Listener {
                 }
         }
 
+}
+
+class StreamingThread extends Thread
+{
+    public StreamingThread(){}
+    
+    public void run(){
+                try{
+                    //System.out.println("Begin stream");
+                    java.lang.Runtime rt = Runtime.getRuntime();
+                    java.lang.Process pr = rt.exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
+				
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+    }
 }
