@@ -19,6 +19,7 @@ public class SettingsView extends JFrame{
          
     public SettingsView(UserInformation ui){
          //new JFrame("Home Security System 1.0");
+        
          Container contentPane = this.getContentPane();
          contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
          JPanel emailPanel = new JPanel();
@@ -29,6 +30,7 @@ public class SettingsView extends JFrame{
          phonePanel.setLayout(new BoxLayout(phonePanel, BoxLayout.X_AXIS));
          buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
          
+         user = ui;
          emailLabel = new JLabel("Email: ");
          emailText = new JTextField();
          emailText.setText(ui.getemail());
@@ -61,7 +63,6 @@ public class SettingsView extends JFrame{
     }
     
     public UserInformation getUser(){
-        user = new UserInformation();
         user.setemail(emailText.getText());
         user.setphoneNumber(phoneText.getText());
         return user;

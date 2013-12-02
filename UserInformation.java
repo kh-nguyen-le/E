@@ -21,7 +21,14 @@ public class UserInformation {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.password = password;
+        this.password = password;   
+    }
+    
+    public UserInformation(UserInformation ui){
+        name = ui.getname();
+        phoneNumber = ui.getphoneNumber();
+        email = ui.getemail();
+        password = ui.getpassword();
     }
     
     public void setname(String name){this.name = name;} 
@@ -41,4 +48,5 @@ public class UserInformation {
     
     public String getpassword(){return password;}    
 
+    public String toString(){return "name: "+name;}
 }
