@@ -1,0 +1,955 @@
+
+<!-- saved from url=(0042)http://www.ozekisms.com/index.php?owpn=133 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<title> SMS Gateway - User Guide, Quick Start Guide </title>
+<script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/cb=gapi.loaded_1" async=""></script><script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/cb=gapi.loaded_0" async=""></script><script id="twitter-wjs" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/widgets.js"></script><script type="text/javascript" async="" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9311166-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<link href="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/style.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+*{
+	margin:0px;
+}
+
+.contact-datas{
+	padding:0px 0px 0px 0px; 
+	font-size:15px; 
+	font-weight:bold;
+	cursor:default;
+	text-align:right;
+	text-decoration:none;
+	margin-right:0px;
+}
+
+
+.clickTocallButton-En{
+	background-image:url('attachments/1/call_button_new_60x60px_std.png');
+	background-repeat:no-repeat;
+	width:60px;
+	height:60px;
+	float:right;
+	margin-right:0px;
+	margin-top:0px;
+	margin-left:10px;
+}
+
+.clickTocallButton-En:hover {
+	background-image:url('attachments/1/call_button_std_new_60x60px_active.png');
+	background-repeat:no-repeat;
+	width:60px;
+	height:60px;
+	float:right;
+	cursor:pointer;
+	margin-right:0px;
+	margin-top:0px;
+	margin-left:10px;
+}
+.search-input{
+    width: 245px;
+    height: 28px;
+    padding: 0px 60px 0px 10px;
+    color: #939598;
+    font-size: 16px;
+    border: 1px solid #c0bfbe;
+	position:relative;
+	left:30px;
+}
+
+
+.search-submit{
+    width: 25px;
+	height: 26px;
+	border: none;
+	cursor: pointer;
+	/*margin: 6px 0px 2px 2px;*/
+	background: white url('attachments/1/magnifier.png')no-repeat;
+	background-position: center;
+	position:relative;
+	top:-27px;
+	left:25px;
+
+}
+
+
+
+
+
+</style>
+
+<script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/nonSecureAnonymousFramework"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_reset > div{overflow:hidden}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+.fbpluginrecommendationsbarleft{left:10px}
+.fbpluginrecommendationsbarright{right:10px}</style><style type="text/css">* html #li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link{height:1% !important;}#li_ui_li_gen_1386084358377_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link:link, #li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link:visited, #li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link:hover, #li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1386084358377_0 a#li_ui_li_gen_1386084358377_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-logo{background:url(http://s.c.lnkd.licdn.com/scds/common/u/img/sprite/sprite_connect_v13.png) 0px -276px no-repeat !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;}#li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-logo, #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-logo{background-position:-40px -276px !important;}.IN-shadowed #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-logo{}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title{color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-webkit-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#ECECEC !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#ECECEC)) !important; background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title{border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDEDED), color-stop(100%,#DEDEDE)) !important; background-image: -webkit-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title, #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#E3E3E3), color-stop(100%,#EDEDED)) !important; background-image: -webkit-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.IN-shadowed #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title{}.IN-shadowed #li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title{}.IN-shadowed #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title, .IN-shadowed #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title{}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text, #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text *{color:#333 !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title-text, #li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title-text *{color:#000 !important;}#li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title-text, #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title-text, #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title-text *, #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title-text *{color:#666 !important;}#li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title #li_ui_li_gen_1386084358377_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title{color:#333 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;background-color:#ECECEC !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#ECECEC)) !important; background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}.success #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text, .success #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title-text *{color:#333 !important;}.IN-shadowed .success #li_ui_li_gen_1386084358377_0 #li_ui_li_gen_1386084358377_0-title{}.success #li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title{color:#000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;background-color:#EDEDED !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDEDED), color-stop(100%,#DEDEDE)) !important; background-image: -webkit-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}.success #li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title-text, .success #li_ui_li_gen_1386084358377_0.hovered #li_ui_li_gen_1386084358377_0-title-text *{color:#000 !important;}.success #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title, .success #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title{color:#666 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;background-color:#DEDEDE !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#E3E3E3), color-stop(100%,#EDEDED)) !important; background-image: -webkit-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.success #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title-text, .success #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title-text, .success #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title-text *, .success #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title-text *{color:#666 !important;}.IN-shadowed .success #li_ui_li_gen_1386084358377_0.clicked #li_ui_li_gen_1386084358377_0-title, .IN-shadowed .success #li_ui_li_gen_1386084358377_0.down #li_ui_li_gen_1386084358377_0-title{}</style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body bgcolor="#DAF3FD" leftmargin="0" topmargin="5" marginwidth="0" marginheight="0" data-twttr-rendered="true"><center>
+<table bgcolor="#DAF3FD" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/leftbg.gif" valign="top"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/leftbg2.gif" border="0"></td>
+<td>
+<table width="980" border="0" cellpadding="0" cellspacing="0" background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/new-sms-gateway-header.png">
+      <tbody><tr>
+            <td><a href="http://www.ozekisms.com/" style="text-decoration:none;">
+				<div style="height:63px; width:620px;">
+					<div style="float:left;position:relative;top:3px;"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/ozeki_symbol_60x60px.png" border="0px" width="60px"></div>
+						<div style="margin-left:10px;font-size:40px;float:left;font-weight:bold; color:red;position:relative;top:-3px;font-family:arial,sans serif,helvetica;">OZEKI</div>
+						 <div style="margin-left:20px;font-size:40px; font-weight:bold; color:black;position:relative;left:15px;top:-3px;font-family:arial,sans serif,helvetica;">NG SMS Gateway</div>
+						 <span style="margin-left:10px;font-size:15px; color:black;position:absolute;top:43px;font-family:arial,sans serif,helvetica;">"The World's most reliable SMS gateway software!"</span>
+				</div>
+				</a>
+            </td>
+            <td valign="mid" align="right">
+            <!--Website updated on:
+            Tuesday, December 3, 2013&nbsp;                          </b></FONT> -->
+
+<style>
+INPUT.inputbox { BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-WEIGHT: normal; FONT-FAMILY: Arial }
+</style>
+
+<div style="width:365px;height:65px;float:right;position:relative;padding-top:5px;padding-bottom:5px;">
+
+	
+	<div class="contact-datas" style="float:left;">
+		<div style="position:relative;left:30px;"><a href="mailto:info@ozekisms.com" style="color:black;text-decoration:none;">info@ozekisms.com</a><br><span>Tel.: 00 36 52 532 731</span></div>
+		
+		
+				<form id="search" method="post" action="http://www.ozekisms.com/index.php">
+				<div style="width:245px;height:28px;position:relative;top:5px;">
+		            <input class="search-input left" type="text" name="q" value="" placeholder="Search the manual...">
+		            <input class="search-submit" type="submit" value="">
+		        </div>
+		            <input type="hidden" name="owpn" value="94">
+		    	</form>
+	</div>
+	
+	<div style="width:1px;height:60px;background-color:#005605;float:left;margin-left:0px;position:relative;left:43px;"></div>
+	
+	<div style="float:right;">
+		<a href="http://www.ozekisms.com/index.php?owpn=857"><div class="clickTocallButton-En" title="Call us FREE with Webphone"></div></a>
+	</div>		
+</div>
+            </td>
+      </tr>
+      <tr>
+            <td colspan="2">
+            <table border="0" cellpadding="0" cellspacing="0" width="980" style="text-align:center; text-decoration:none">
+<tbody><tr>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif" style="vertical-align:middle"><a href="http://www.ozekisms.com/" style="text-decoration:none; font-weight:bold; color:black;  font-size:14px; font-family:arial">Overview</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/How to install Ozeki SMS Gateway - User Guide, Quick Start Guide.htm" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Quick start</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=112" style="text-decoration:none; font-weight:bold; color:red; font-size:14px; font-family:arial">Download</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=159" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Manual</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=27" style="text-decoration:none; font-weight:bold; color:blue; font-size:14px; font-family:arial">How to buy</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=367" style="text-decoration:none; font-weight:bold;  font-size:15px;color:black; font-family:arial">FAQ</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_01t.gif" border="0"></td>
+<td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=41" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Contact Us</a></td>
+<td width="4"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/doboz_04t.gif" border="0"></td>
+</tr>
+</tbody></table>
+            </td>
+      </tr>
+</tbody></table>
+
+<table cellpadding="1" cellspacing="0" border="0"><tbody><tr><td bgcolor="#8B9CCD">
+<table cellpadding="1" cellspacing="0" border="0" width="980"><tbody><tr><td bgcolor="white">
+<table width="100%" cellpadding="10"><tbody><tr><td>
+<!--H1><FONT color=red>DOCUMENTATION</FONT> OZEKI NG - SMS Gateway</H1-->
+<table width="100%" cellpadding="0"><tbody><tr>
+<td><b style="FONT-WEIGHT: bold; FONT-SIZE: 18px"><font color="red" style="FONT-WEIGHT: bold" ;="">
+OZEKI NG SMS Gateway</font> - Product Guide</b></td>
+<td align="right"><p align="right">
+<table><tbody><tr>  <td><a href="http://www.ozekisms.com/index.php?owpn=132&sms_gateway=User_Guide"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/left.gif" border="0" alt="User Guide"></a></td>  <td><a href="http://www.ozekisms.com/index.php?owpn=10&sms_gateway=smpp">Contents</a> | <a href="http://www.ozekisms.com/index.php?owpn=94&mms_gateway=server">Search</a></td><td><a href="http://www.ozekisms.com/index.php?owpn=325&sms_gateway=First_SMS"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/right.gif" border="0" alt="First SMS"></a></td></tr></tbody></table>
+
+
+</p></td></tr>
+<tr><td colspan="2">
+<a href="http://www.ozekisms.com/index.php?owpn=10&sms_gateway=sms_server">Home</a> <font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=159&sms_gateway=sms_Product_Manual">Product Manual</a><font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=132&sms_gateway=sms_User_Guide">User Guide</a><font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=133&sms_gateway=sms_Quick_Start_Guide">Quick Start Guide</a></td></tr>
+</tbody></table>
+<hr>
+
+<table border="0" cellpadding="10" width="100%">
+<tbody><tr>
+<td width="200" valign="top">
+<table border="0" cellpadding="1">
+  <tbody><tr>
+  <td><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/jobb.gif" border="0"></td>
+  <td><a href="http://www.ozekisms.com/"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/home.gif" border="0" alt="SMS Gateway"></a></td>
+  <td><a href="http://www.ozekisms.com/">SMS Gateway Home</a></td>
+  </tr>
+</tbody></table>
+<br>
+<b style="font-size:14px">Step 1:</b>
+<br><br>
+Download and configure your SMS system according to
+the information provided in the quick start guide!
+(read the article on the right)
+<br><br>
+
+<b style="font-size:14px">Step 2:</b>
+<br><br>
+Purchase a GSM modem from Ozeki:
+You can purchase a suitable GSM modem
+directly from Ozeki. You just need to
+fill the order form.<br>
+
+<table>
+<tbody><tr>
+<td>
+<a href="http://www.ozekisms.com/index.php?owpn=769">
+<img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/AirLink_FXTseries_Fastrack_Xtend_EDGE.jpg" border="0" width="80"></a></td><td>
+<a href="http://www.ozekisms.com/index.php?owpn=769">Visit the "Ozeki GSM Modem order" page</a></td></tr></tbody></table>
+
+<br>
+
+<b style="font-size:14px">Step 3:</b>
+<br><br>
+After you have downloaded and
+configured the SMS Gateway,
+you can setup automated SMS
+notifications by applying one
+of the following configurations:
+<br><br>
+<a href="http://www.ozekisms.com/index.php?owpn=372&info=http_to_sms">SMS through <b>HTTP requests</b></a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=405&info=e-mail-to-sms-alerts">SMS from <b>E-mail</b></a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=467&info=cmd-sms-command-line">SMS from the <b>command line</b></a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=192&info=sms_from_text_files">SMS using <b>txt files</b></a><br>
+<br><br>
+If you are a software developer
+you can proceed to adding SMS
+functionality to your source code
+by clicking on one of the following links:
+<br><br>
+<a href="http://www.ozekisms.com/index.php?owpn=204&info=php-sms-example"><b>PHP</b> SMS example</a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=309&info=c_sharp_sms_example"><b>C#</b> SMS example</a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=400&info=asp_sms_example"><b>ASP</b> SMS example</a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=164&info=SQL_sms_example"><b>SQL</b> SMS example</a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=453&info=delphi_sms_example"><b>Delphi</b> SMS example</a><br>
+<br>
+If you would like to send
+and receive SMS messages from
+MS Office applications, please
+check out the following links:
+<br><br>
+<a href="http://www.ozekisms.com/index.php?owpn=466&info=Excel+sms+addon">Send SMS from <b>MS Excel</b></a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=383&info=Outlook+sms+addon">Send SMS from <b>MS Outlook</b></a><br>
+<a href="http://www.ozekisms.com/index.php?owpn=384&info=Send+sms+from+email+client">Check out <b>Ozeki SMS Client</b></a><br>
+<br>
+&nbsp;
+<br><br>
+<!-- contact us start -->
+<br>
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Automated phone calls?</b></td></tr></tbody></table>
+
+<div style="padding: 4px">
+<span style="font-size:12px">
+<a href="http://www.ozekiphone.com/">Ozeki Phone System XE VoIP PBX software</a>
+is an advanced PBX built for automated voice calls and 2 way SMS messaging. It
+has outstanding APIs for software developers. It can be used for:
+<br><br>
+<a href="http://www.ozekiphone.com/voip-appointment-reminder-1123.html">Phone calls from SQL</a><br>
+<a href="http://www.ozekiphone.com/voip-ivr-with-ozml-extension-1122.html">Phone calls from HTTP</a><br>
+<a href="http://www.ozekiphone.com/voip-send-sms-messages-839.html">Voice and SMS applications</a>
+</span>
+</div>
+
+<br>
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Callcenter developers</b></td></tr></tbody></table>
+
+<table width="244" cellpadding="4"><tbody><tr><td>
+If you are working on telephone solutions, please check
+out the <a href="http://www.voip-sip-sdk.com/">Ozeki VoIP SIP SDK</a>.<br>
+It can be used to create VoIP client and server software.</td></tr></tbody></table>
+
+<br>
+
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Contact Us!</b></td></tr></tbody></table>
+
+<table cellpadding="5"><tbody><tr><td style="font-size:12px">
+If you wish to get further information, do not hesitate
+to contact us!<br><br>
+E-mail: <a href="mailto:info@ozekisms.com">info@ozekisms.com</a>
+<br><br>
+If you have a technical question, please
+<a href="http://www.ozekisms.com/index.php?owpn=80">submit a support request on-line</a>.
+</td></tr></tbody></table>
+<br>
+</td>
+<td valign="top">
+
+<h1>Quick Start Guide</h1>
+<!-- social media icons template -->
+
+
+
+                
+<!--  stylesheet -->
+                
+                <style>
+                        .social-media-bar{
+                                background-image: url('attachments/159/socialiconbg.png');
+                                background-repeat: repeat-x;
+                                height: 26px;
+                                padding-top: 4px;
+                                padding-left: 5px;
+                                border-top: 1px solid #ddd;
+                                border-bottom: 1px solid #ddd;
+                                color: #ddd;
+                                width: 100%;
+                        }
+                        
+                        .social-media-bar td{
+                                color: #ddd;
+                        }
+                        
+                        .social-media-bar .toppad{
+                                padding-top: 2px;
+                        
+                </style>
+
+<!-- sharethis buttons -->
+<table valign="center" class="social-media-bar">
+        <tbody><tr>
+                <td>
+                        <table>
+                                <tbody><tr>
+                                		<td class="toppad">
+                                             <!-- Facebook share -->
+                                             <div class="fb-share-button fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fwww.ozekisms.com%2Findex.php%3Fowpn%3D133&amp;locale=en_US&amp;sdk=joey"><span style="vertical-align: bottom; width: 48px; height: 14px;"><iframe name="f5629cf28" width="1000px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:share_button Facebook Social Plugin" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/share_button.htm" style="border: none; visibility: visible; width: 48px; height: 14px;" class=""></iframe></span></div>
+                                        </td>
+                                        <td>|</td>
+                                        <td width="30px">
+                                                <!-- Google +1 -->
+                                                <!-- annotation=none, annotation=inline, or blank for bubble -->
+                                                <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background-color: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px; background-position: initial initial; background-repeat: initial initial;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1386084358237" name="I0_1386084358237" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/fastbutton.htm" data-gapiattached="true" title="+1"></iframe></div>
+                                        </td>
+                                        <td>|</td>
+                                        
+                                        <td>
+                                                <!-- Twitter -->
+                                                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/tweet_button.1384994725.htm" class="twitter-share-button twitter-tweet-button twitter-count-none" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 59px; height: 20px;"></iframe>
+                                        </td>
+                                                <td>|</td>
+                                        <td width="60px">
+                                                <!-- LinkedIn -->
+                                                <script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/in.js" type="text/javascript"></script>
+                                                <span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1386084358377_0"><a id="li_ui_li_gen_1386084358377_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1386084358377_0-logo">in</span><span id="li_ui_li_gen_1386084358377_0-title"><span id="li_ui_li_gen_1386084358377_0-mark"></span><span id="li_ui_li_gen_1386084358377_0-title-text">Share</span></span></a></span></span></span><script type="IN/Share+init"></script>
+                                        </td>
+                                </tr><tr>
+                        </tr></tbody></table>
+                </td>
+        </tr>
+</tbody></table><br>
+
+                <!-- javascripts -->
+                
+                <!-- google +1 -->
+                <script type="text/javascript">
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                  </script>
+                  
+                  <!-- Facebook share -->
+                  <script src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/FB.Share" type="text/javascript">
+                  </script>
+                                
+                <!-- Twitter tweet -->
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<p align="justify"><b>This QuickStart guide explains how to setup your SMS gateway
+quickly to evaluate it's functionality, and how to send your first SMS. The
+information provided here will help you start using the software as
+soon as you have downloaded and installed it. You can learn how to login,
+how to configure connectivity to the mobile network, and how to compose and
+send SMS messages.</b></p>
+
+<table>
+    <tbody><tr>
+      <td>Video tutorial:</td>
+      <td><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/video_icon.gif" border="0"></td>
+      <td><a href="http://www.ozekisms.com/video/video-modem-configuration/Wavecom-modem-send-sms-text-message-computer/Wavecom-modem-send-sms-text-message-computer.html">
+       How to send SMS using a GSM modem from a computer.
+      </a></td>
+    </tr>
+</tbody></table>
+
+<h1>Prerequisites</h1>
+To setup your system, you need a mobile phone subscription, that comes with a
+SIM card. (You can get such a subscription and a SIM card at any GSM shop).
+In addition to the SIM card you need <a href="http://www.ozekisms.com/gsm-modems-for-sms/rs232-usb-sms-modem-for-sending-sms/index.php?owpn=148">a mobile phone or a GSM modem that can
+be used to send and receive SMS messages from a PC</a>. You also need a data
+cable that can be used to connect your modem to your computer. To the computer
+you need to <a href="http://www.ozekisms.com/index.php?owpn=112">Download and Install Ozeki NG SMS
+Gateway</a>.
+<br><br>
+<img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/sms_for_modem.gif" border="0"><br><br>
+Your checklist:
+<br><br>
+<li> <b>SIM card</b>: it provides the telephone number. SIM cards are tied to a particular 
+service provider and can only be used with a service plan from that provider. You can buy
+a SIM card at the shop of the service provider. You can find these shops at
+any shopping mall. Just ask the shop assistant for a "SIM only" subscription  
+</li><li> <b>GSM Modem</b>: it is a specialized type of modem that accepts the SIM card. You can connect
+it to the PC with a data cable for sending/receiving SMS messages. You can purchase
+GSM modems directly from Ozeki Informatics Ltd 
+</li><li> <b>Data cable</b>: Data cable is provided for each GSM modem that has been
+ordered from Ozeki Informatics Ltd. Ozeki provides data cables both for USB and RS232 connection types
+</li><li> <b>PC + Windows</b> XP, 2003, 2008, or Vista or Windows 7 operating system
+</li><li> <b>Ozeki NG SMS Gateway</b> (<a href="http://www.ozekisms.com/index.php?owpn=112">Download from
+http://www.ozekisms.com/index.php?owpn=112</a>)
+
+<br><br>
+<table border="0">
+<tbody><tr><td><a href="http://www.ozekisms.com/index.php?owpn=112"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/download.gif" border="0"></a></td><td>Ozeki NG SMS Gateway can be obtained by <br>
+opening the download page:<br>
+<a href="http://www.ozekisms.com/index.php?owpn=112"><b>Download Ozeki NG SMS Gateway!</b></a></td></tr>
+</tbody></table>
+
+<h1>Logging in</h1>
+
+<p align="justify">After you have downloaded and installed Ozeki NG - SMS Gateway,
+the first thing you will do is login to the user interface (the management
+console). You can login using Internet Explorer or Mozilla Firefox, by
+opening the login window.
+The login window can be accessed at the http://127.0.0.1:9501 URL, but in most
+cases it will show up right after the installation of the program,
+along with the <b>Installation Complete</b> dialog box. You can also open the
+login window by clicking the <b>Manage Ozeki NG</b> program icon in
+<b>Start / All Programs / Ozeki NG</b> (Figure 1).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/NG_startmenu_nyitas_v3.gif" border="0">
+<br>Figure 1 - Opening the program</p>
+
+<p align="justify">If the login window does not show up, you can try to open it
+by entering its URL in the browser: <b>http://127.0.0.1:9501/</b>. </p>
+
+<p align="justify">If it still won't show up, you should consult
+the <a href="http://www.ozekisms.com/index.php?ow_page_number=144">Login problems</a> page. You are
+very likely to find some advice there to solve this problem.</p>
+
+<p align="justify">In the login window, enter your username and password in the
+respective fields.
+The default username is <b>admin</b>, and the default password is <b>abc123</b>.
+For security reasons, remember to change your password (Figure 2).
+It should be a combination of letters and digits (at least one or two of the
+latter), and it should consist of at least 6 characters.
+You can change the password in the Authentication tab of a Standard user.
+(The admin user is a standard user.) See Figure 9 below. (See also the
+<a href="http://www.ozekisms.com/index.php?ow_page_number=190">Standard User</a> page.)
+
+</p><p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/NG_change_login_v3.gif" border="0">
+<br>Figure 2 - Reminder to change the password</p>
+
+<br>If you misspell your password, the login window will show up
+with a blank username and password field again.<p></p>
+
+
+
+<h1>Basic Configuration Steps</h1>
+
+<p align="justify">Once you have passed the login screen, you will see
+an interface called <b>Management Console</b>. One of the components of this
+interface is <b>the Management Console</b> tab. If you click it, you will get
+back to this starting screen. On the right of the title bar, you can see the
+name of the logged-in user and a link to log out (Figure 3).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/add_gsm_modem_for_sms.gif" border="0">
+<br>Figure 3 - Management Console</p>
+
+<p align="justify">Any messages composed and sent (or not sent) will belong to
+the user account of the logged-in user (see the Sending SMS messages section
+below).</p>
+
+<p align="justify">To be able to send SMS messages, you need to install and
+configure a service provider connection. <br>You can do it by clicking the
+<b>Add service provider</b> link or the <b>Add</b> button
+in the top right-hand corner of the <b>Service providers</b> panel on the
+left of the interface.</p>
+
+<p align="justify">You can also add a service provider connection by clicking the
+<b>Add service provider </b>item in the <b>Service providers</b> menu.</p>
+
+<p align="justify">After you have clicked one of these, the <b>Add service
+provider</b> panel will show up on the right of the interface. The panel
+contains a list of service provider connection options you can install
+and use for communication with the SMS network.</p>
+
+<p align="justify">To send and receive SMS messages using a
+<a href="http://www.ozekisms.com/index.php?ow_page_number=159">GSM modem</a>,
+you need
+to <a href="http://www.ozekisms.com/index.php?ow_page_number=201">attach a GSM Modem for SMS messaging
+to your computer with a datacable</a>
+or you need to setup an IP SMS connection over the Internet. In this example
+we will setup a GSM modem. To install a GSM modem, click the <b>Install</b>
+link in the respective entry in the list (Figure 4).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/sms_modem_install.gif" border="0">
+<br>Figure 4 - Installing a service provider connection</p>
+
+<p align="justify">To send and receive SMS messages using a GSM device (modem or
+phone), you need to select and install the <b>GSM Modem</b> in the list.</p>
+
+<p align="justify">When you have installed the <b>GSM Modem connection</b>,
+a configuration panel will show up on the right of the interface. On this
+form you need to select the port your device is connected to and you
+need to click Autodetect. The Autodetect feature is going to
+recognize the GSM phone or GSM modem you have attached to your computer. </p>
+
+<p align="center">
+<img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/autodetect_sms_modem_on_com_port.gif" border="0"><br>
+Figure 5 - Click Autodetect to configure your modem.
+</p>
+
+<p align="justify">After the modem has been detected, specify the telephone
+number assigned to your GSM modem and the service provider connection name. (
+You can pick any name you want to identify the connection.)</p>
+
+<p align="justify">Enter the
+information in the respective edit boxes. Remember to enter the phone number
+in international format: starting with "+". Note that the phone number to be
+specified in the <b>Telephone
+number</b> edit box is a mandatory value. If you leave the edit box blank,
+and if the outgoing SMS message does not carry a sender phone number either,
+the sending will be unsuccessful.</p>
+
+<p align="justify">Once you have configured the service provider connection,
+you can get back to the <b>Management Console</b> interface by clicking the
+<b>Management Console</b> tab in the top right hand corner.</p>
+
+<p align="justify">After your connection is configured, you can send and receive
+messages.
+</p>
+
+<h1>Sending the first SMS message</h1>
+
+<p align="justify">To compose and send an SMS message, click the <b>Compose</b>
+button in the toolbar, which is in the header of the <b>Management Console</b>.
+<br>After clicking it, the <b>Compose a text message</b> panel will show up.
+Here, select the message type and the service provider connection in the
+respective dropdown menus.
+<br>Then, enter the recipient phone number in international format
+(starting with +) in the <b>To (phone number)</b> edit box.
+<br>Compose the message in the <b>Message text</b> edit box.
+<br>Click <b>OK</b> when you are finished (Figure 6).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/compose_message.gif" border="0">
+<br>
+Figure 6 - How to send the first SMS message.
+</p>
+
+<h1>Setting up users and applications</h1>
+
+<p align="justify">
+If you want to have multiple users, you might want to create a user account.
+To create an SMS user account, you need to install and configure a user. You
+can start to install and configure a user on the <b>Management Console</b>
+interface.</p>
+
+
+
+<p align="justify">To add a user, click the <b>Add</b> button in the top right-hand
+corner of the <b>Users and Applications</b> panel on the right of the
+<b>Management Console</b>
+(Figure 7).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/Quick_start_add_user.gif" border="0">
+<br>Figure 7 - Adding a user</p>
+
+<p align="justify">This will bring up an interface consisting of two panels.
+<br>The panel on the left contains a list of users that have been installed.
+In the bar at the bottom of the panel you can read how many users have been
+installed.
+<br>The panel on the right contains a list of users that can be installed.
+<br>Each user in the left-hand panel is listed with a unique name
+(and the user type stated in brackets).
+<br>Each user in the right-hand panel is listed with the name of
+its type and a brief description of what it can be used for.</p>
+
+<p>A standard user can use the HTTP user interface to login to the program.
+To add a standard user or any other type of user, click the <b>Install</b> link
+in the respective entry in the list (Figure 8).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/Quick_start_add_stand_user.gif" border="0">
+<br>Figure 8 - Installing a standard user</p>
+
+<p align="justify">When installing a user (type), you need to
+give it a unique username. Clicking the <b>Install</b> link will
+bring up the <b>Standard user installation</b> panel.
+Here, you need to enter a unique username in the <b>Username</b> field.</p>
+
+<p align="justify">This will take you to the <b>Configuration</b> panel with
+the <b>Authentication</b> tab.
+<br>The <b>Username</b> field contains the unique username you have
+provided in the previous panel.
+<br>The <b>Password</b> field contains a password offered by the program.
+You can and should change it. Your password should be a combination of letters
+and digits (at least one or two of the latter). From now on, the username and
+password you have provided can be used to login to the program (Figure 9).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/new_user_password.gif" border="0">
+<br>Figure 9 - User authentication</p>
+
+<p align="justify">To modify the configuration or to view server events related to
+an installed user, open the panel of the user's account. To do this, click the
+name of the user in the <b>Users and Applications</b> panel of the
+<b>Management Console.</b> In the panel of the user's account, click the link of
+the task you wish to perform (Figure 10).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/Quick_start_user_events.gif" border="0">
+<br>Figure 10 - Clicking a user-related task link</p>
+
+<p align="justify">To uninstall the user, click the <b>Uninstall</b> link.</p>
+
+
+
+<h1>Routing</h1>
+
+<p align="justify">To send and receive SMS messages you need to configure the
+routing.
+<br>For incoming SMS messages, you need to configure the inbound routing.
+The configuration of the inbound routing allows the program to decide which
+user(s) to deliver an SMS message to.
+<br>For outgoing SMS messages you need to configure the outbound routing.
+The configuration of the outbound routing allows the program to decide
+which SMS service provider connection to use to send out an SMS message.</p>
+
+<p align="justify">To find out more about routing, check out the
+<a href="http://www.ozekisms.com/index.php?ow_page_number=138">Inbound Routing</a> and
+the <a href="http://www.ozekisms.com/index.php?ow_page_number=139">Outbound Routing</a> page.
+<br>To learn more about the importance and convenience of configuring outbound
+routing, check out the <a href="http://www.ozekisms.com/index.php?ow_page_number=158">Least Cost
+Routing</a> page.</p>
+
+<h5>Inbound Routing</h5>
+
+<p align="justify">An incoming message can be destined to one or more users.
+To define which of the users should receive a copy of an incoming SMS message,
+you have to set inbound routing rules.</p>
+
+<p align="justify">A routing rule is a set of directives. The routing rules make
+up a routing table. A routing table can contain any number of rules. Each
+routing rule is a row in the table.</p>
+
+<p align="justify">The program goes through the routing rules from top to
+bottom. It checks if the properties of a message match the directives of a
+routing rule. If a rule does not apply to the message, the program will go
+on to the next rule.</p>
+
+<p align="justify">If there is a match, the message will be delivered to the
+user specified in the rule.
+The position and the mode of this rule defines whether the program will
+compare other rules with a message and deliver it to another user (if there
+is a match).</p> If the rule is in the last row, there are no other rules to
+match, and the routing will finish.<p></p>
+
+<p align="justify">If a rule matches a message, but it is in move mode, the
+routing will finish, and the subsequent rules will be ignored.</p>
+
+<p align="justify">If there is a match, but the rule is in copy mode, the
+routing will continue. If there is another match, the message will be
+delivered to another user as well.</p>
+
+<p align="justify">If a message with certain properties is destined
+to more than one user, a separate rule needs to be set for each user.</p>
+
+<p align="justify">The order of the rules in the table matters only if the mode
+directive of a rule is move. It should only be move in the last of the rules
+intended to apply to a message with certain properties.</p>
+
+<p align="justify">To set a rule in the inbound routing table, take the
+following steps:</p>
+
+<p align="justify">Click the <b>Edit</b> button in the top right-hand corner of
+the <b>Inbound routing</b> panel. This panel can be found in the client area
+(the middle section) of the <b>Management Console</b> (Figure 11).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/Quick_start_inbound_edit.gif" border="0">
+<br>Figure 11 - The Inbound routing panel</p>
+
+<p align="justify">This will bring up a panel where you can choose to add,
+edit or delete a routing rule. These tasks have respective buttons. Click
+the <b>Add</b> button.</p>
+
+<p align="justify">Next, fill in the edit boxes and select the respective items
+from the dropdown menus. Give a rule any name you like in the <b>Route
+name</b> edit box.</p>
+
+<p align="justify">Select the GSM service provider connection in the <b>Source
+(Service provider)</b> menu. Which service provider the message comes from is
+one of the properties of the message.</p>
+
+<p align="justify">Next, enter the conditions in their respective edit boxes:
+the sender's phone number, the recipient's phone number and the keyword. The
+keyword is the first word of the SMS message. If you do not wish to specify
+one or any of these conditions, enter "ANY" in the edit box next to the
+condition.</p>
+
+<p align="justify">Select the destination from the dropdown menu. The destination
+is the user that a message is destined to. If you select ANY, all the
+installed users will receive the message the rule applies to.</p>
+
+<p align="justify">Select the mode in the <b>Mode</b> menu. If you select
+<b>move</b> (Figure 12), the routing will stop (if the rule matches a message).
+The user specified in this rule will be the last to receive the message. In
+this case, no other users specified in subsequent
+rules will receive a copy of the message, even if those rules match the
+message as well.
+<br>To make the program match subsequent rules with the message, select
+<b>copy</b> .</p>
+
+<p align="justify">Click <b>OK</b> when you have finished editing the rule.</p>
+
+<p align="justify">Then the rule will be included in the inbound routing
+table.</p>
+
+<p align="justify">You can change the position of a rule in the routing table.
+<br>To move a rule one position higher, click the green arrow beside it.
+<br>To move a rule one position lower, click the red arrow beside it.</p>
+
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/intbound_message_bear_setup.gif" border="0">
+<br>Figure 12 - Setting an inbound routing rule</p>
+
+<h1>Outbound routing</h1>
+
+<p align="justify">An outgoing message can be sent out using one of the GSM
+service providers you are connected to.
+You can configure the outbound routing for the program to decide which service
+provider connection to use to send out a message.</p>
+
+<p align="justify">To define which of the GSM service provider connections to use
+to send out an SMS message, you have to set outbound routing rules.</p>
+<p align="justify">The outbound routing rules make up an outbound routing table.
+Each row in the table is a rule. Each rule consists of directives, which the
+program compares with the properties of the SMS message.</p>
+
+<p align="justify">The engine goes through the routing rules from top to
+bottom. It checks if the properties of a message match the directives of a
+routing rule. If there is a match, the routing will be performed, and the
+message will be sent out using
+the GSM service provider connection specified in the rule.</p>
+
+<p align="justify">The message will be sent out according to the first rule that
+applies to a message. Consequently, all subsequent rules will be ignored. Unlike
+with inbound routing, outbound routing does not allow a message to be delivered
+(or sent) in multiple copies.</p>
+
+<p align="justify">To set a rule in the outbound routing table, take the
+following steps:</p>
+
+<p align="justify">Click the <b>Edit</b> button in the top right-hand corner of
+the <b>Outbound routing</b> panel. This panel can be found in the client area
+(the middle section) of the <b>Management Console</b>.</p>
+
+
+
+<p align="justify">This will bring up a panel where you can choose to add,
+edit or delete a routing rule. These tasks have respective buttons. Click
+the <b>Add</b> button (Figure 13).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/add_outbound_routing.gif" border="0">
+<br>Figure 13 - The Outbound routing panel</p>
+
+
+
+<p align="justify">Next, fill in the edit boxes and select the respective items
+from the dropdown menus. Give a rule any name you like in the <b>Route name</b>
+edit box.</p>
+
+<p align="justify">Specify the user in the <b>Source (User)</b> dropdown menu.</p>
+
+<p align="justify">Specify the conditions in the respective edit boxes.
+Enter the sender phone number, the recipient phone number and the keyword.
+The keyword is the first word of the SMS message.</p>
+
+<p align="justify">Finally, specify the GSM service provider connection to send
+out the SMS message by selecting it in the <b>Destination (Service provider)</b>
+dropdown menu.</p>
+
+<p align="justify">Click <b>OK</b> when you have finished editing the rule.</p>
+
+<p align="justify">Then the rule will be included in the outbound routing table
+(Figure 14).</p>
+
+<p align="center"><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/Quick_start_outbound_messag.gif" border="0">
+<br>Figure 14 - Setting an outbound routing rule</p>
+
+<p align="justify">You can change the position of a rule in the routing table.
+<br>To move a rule one position higher, click the green arrow in its row.
+<br>To move a rule one position lower, click the red arrow in its row.</p>
+
+
+
+
+
+<p align="justify"><b>Dig deeper!<br>
+People who read this also read...</b><br>
+
+</p><ul>
+<li><a href="http://www.ozekisms.com/index.php?ow_page_number=325">First SMS</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=138">Inbound Routing</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=139">Outbound Routing</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=158">Least Cost Routing</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=134">User interface</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=172">Configuration</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=173">Service provider connections</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=174">Users and applications</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=156">Appendix</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=617">Feature list</a>
+</li><li><a href="http://www.ozekisms.com/index.php?ow_page_number=367">FAQ</a>
+
+</li></ul>
+
+<p></p>
+
+<br>
+<br>
+<img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/kekkocka.gif">
+<br>
+<br>
+Next page:
+<a href="http://www.ozekisms.com/index.php?owpn=325&sms_api=First_SMS">First SMS</a><br>
+</li></td></tr></tbody></table>
+</td></tr></tbody></table>
+
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+</td><td background="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/rightbg.gif" valign="top">
+</td></tr></tbody></table>
+
+<table border="0" width="980">
+<tbody><tr>
+<td>
+Copyright © 2000 - 2013 Ozeki Informatics Ltd.<br>
+All rights reserved
+</td>
+<td align="right" valing="top"><p align="right">
+
+<a href="http://www.ozekiphone.com/">Software PBX for Windows</a> |
+<a href="http://www.voip-sip-sdk.com/">VoIP SDK</a>
+
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?owpn=451" "="">Legal information</a>
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?ow_page_number=449">Privacy policy</a>
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?ow_page_number=450">Terms of use</a>
+<br>
+Please, address your inquiries to <a href="mailto:info@ozekisms.com">info@ozekisms.com</a>
+</p></td></tr>
+</tbody></table><br>
+<center><img src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/index.php"></center></center><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/xd_arbiter.htm" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/xd_arbiter(1).htm" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+
+<iframe name="oauth2relay1701169908" id="oauth2relay1701169908" src="./How to install Ozeki SMS Gateway - User Guide, Quick Start Guide_files/postmessageRelay.htm" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

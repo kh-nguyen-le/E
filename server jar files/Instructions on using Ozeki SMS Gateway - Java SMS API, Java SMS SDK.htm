@@ -1,0 +1,790 @@
+
+<!-- saved from url=(0077)http://www.ozekisms.com/index.php?owpn=584&infoe=java-sms-sdk-sms-over-tcp-ip -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<title> SMS Gateway - Java SMS API, Java SMS SDK </title>
+<script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/cb=gapi.loaded_1" async=""></script><script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/cb=gapi.loaded_0" async=""></script><script id="twitter-wjs" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/widgets.js"></script><script type="text/javascript" async="" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9311166-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<link href="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/style.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+*{
+	margin:0px;
+}
+
+.contact-datas{
+	padding:0px 0px 0px 0px; 
+	font-size:15px; 
+	font-weight:bold;
+	cursor:default;
+	text-align:right;
+	text-decoration:none;
+	margin-right:0px;
+}
+
+
+.clickTocallButton-En{
+	background-image:url('attachments/1/call_button_new_60x60px_std.png');
+	background-repeat:no-repeat;
+	width:60px;
+	height:60px;
+	float:right;
+	margin-right:0px;
+	margin-top:0px;
+	margin-left:10px;
+}
+
+.clickTocallButton-En:hover {
+	background-image:url('attachments/1/call_button_std_new_60x60px_active.png');
+	background-repeat:no-repeat;
+	width:60px;
+	height:60px;
+	float:right;
+	cursor:pointer;
+	margin-right:0px;
+	margin-top:0px;
+	margin-left:10px;
+}
+.search-input{
+    width: 245px;
+    height: 28px;
+    padding: 0px 60px 0px 10px;
+    color: #939598;
+    font-size: 16px;
+    border: 1px solid #c0bfbe;
+	position:relative;
+	left:30px;
+}
+
+
+.search-submit{
+    width: 25px;
+	height: 26px;
+	border: none;
+	cursor: pointer;
+	/*margin: 6px 0px 2px 2px;*/
+	background: white url('attachments/1/magnifier.png')no-repeat;
+	background-position: center;
+	position:relative;
+	top:-27px;
+	left:25px;
+
+}
+
+
+
+
+
+</style>
+
+<script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/nonSecureAnonymousFramework"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_reset > div{overflow:hidden}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+.fbpluginrecommendationsbarleft{left:10px}
+.fbpluginrecommendationsbarright{right:10px}</style><style type="text/css">* html #li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link{height:1% !important;}#li_ui_li_gen_1386084264915_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link:link, #li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link:visited, #li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link:hover, #li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1386084264915_0 a#li_ui_li_gen_1386084264915_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-logo{background:url(http://s.c.lnkd.licdn.com/scds/common/u/img/sprite/sprite_connect_v13.png) 0px -276px no-repeat !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;}#li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-logo, #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-logo{background-position:-40px -276px !important;}.IN-shadowed #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-logo{}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title{color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-webkit-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#ECECEC !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#ECECEC)) !important; background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title{border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDEDED), color-stop(100%,#DEDEDE)) !important; background-image: -webkit-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title, #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#E3E3E3), color-stop(100%,#EDEDED)) !important; background-image: -webkit-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.IN-shadowed #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title{}.IN-shadowed #li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title{}.IN-shadowed #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title, .IN-shadowed #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title{}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text, #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text *{color:#333 !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title-text, #li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title-text *{color:#000 !important;}#li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title-text, #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title-text, #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title-text *, #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title-text *{color:#666 !important;}#li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title #li_ui_li_gen_1386084264915_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title{color:#333 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;background-color:#ECECEC !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#ECECEC)) !important; background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}.success #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text, .success #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title-text *{color:#333 !important;}.IN-shadowed .success #li_ui_li_gen_1386084264915_0 #li_ui_li_gen_1386084264915_0-title{}.success #li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title{color:#000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;background-color:#EDEDED !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDEDED), color-stop(100%,#DEDEDE)) !important; background-image: -webkit-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}.success #li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title-text, .success #li_ui_li_gen_1386084264915_0.hovered #li_ui_li_gen_1386084264915_0-title-text *{color:#000 !important;}.success #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title, .success #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title{color:#666 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;background-color:#DEDEDE !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#E3E3E3), color-stop(100%,#EDEDED)) !important; background-image: -webkit-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.success #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title-text, .success #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title-text, .success #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title-text *, .success #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title-text *{color:#666 !important;}.IN-shadowed .success #li_ui_li_gen_1386084264915_0.clicked #li_ui_li_gen_1386084264915_0-title, .IN-shadowed .success #li_ui_li_gen_1386084264915_0.down #li_ui_li_gen_1386084264915_0-title{}</style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body bgcolor="#DAF3FD" leftmargin="0" topmargin="5" marginwidth="0" marginheight="0" data-twttr-rendered="true"><center>
+<table bgcolor="#DAF3FD" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/leftbg.gif" valign="top"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/leftbg2.gif" border="0"></td>
+<td>
+<table width="980" border="0" cellpadding="0" cellspacing="0" background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/new-sms-gateway-header.png">
+      <tbody><tr>
+            <td><a href="http://www.ozekisms.com/" style="text-decoration:none;">
+				<div style="height:63px; width:620px;">
+					<div style="float:left;position:relative;top:3px;"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/ozeki_symbol_60x60px.png" border="0px" width="60px"></div>
+						<div style="margin-left:10px;font-size:40px;float:left;font-weight:bold; color:red;position:relative;top:-3px;font-family:arial,sans serif,helvetica;">OZEKI</div>
+						 <div style="margin-left:20px;font-size:40px; font-weight:bold; color:black;position:relative;left:15px;top:-3px;font-family:arial,sans serif,helvetica;">NG SMS Gateway</div>
+						 <span style="margin-left:10px;font-size:15px; color:black;position:absolute;top:43px;font-family:arial,sans serif,helvetica;">"The World's most reliable SMS gateway software!"</span>
+				</div>
+				</a>
+            </td>
+            <td valign="mid" align="right">
+            <!--Website updated on:
+            Tuesday, December 3, 2013&nbsp;                          </b></FONT> -->
+
+<style>
+INPUT.inputbox { BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-WEIGHT: normal; FONT-FAMILY: Arial }
+</style>
+
+<div style="width:365px;height:65px;float:right;position:relative;padding-top:5px;padding-bottom:5px;">
+
+	
+	<div class="contact-datas" style="float:left;">
+		<div style="position:relative;left:30px;"><a href="mailto:info@ozekisms.com" style="color:black;text-decoration:none;">info@ozekisms.com</a><br><span>Tel.: 00 36 52 532 731</span></div>
+		
+		
+				<form id="search" method="post" action="http://www.ozekisms.com/index.php">
+				<div style="width:245px;height:28px;position:relative;top:5px;">
+		            <input class="search-input left" type="text" name="q" value="" placeholder="Search the manual...">
+		            <input class="search-submit" type="submit" value="">
+		        </div>
+		            <input type="hidden" name="owpn" value="94">
+		    	</form>
+	</div>
+	
+	<div style="width:1px;height:60px;background-color:#005605;float:left;margin-left:0px;position:relative;left:43px;"></div>
+	
+	<div style="float:right;">
+		<a href="http://www.ozekisms.com/index.php?owpn=857"><div class="clickTocallButton-En" title="Call us FREE with Webphone"></div></a>
+	</div>		
+</div>
+            </td>
+      </tr>
+      <tr>
+            <td colspan="2">
+            <table border="0" cellpadding="0" cellspacing="0" width="980" style="text-align:center; text-decoration:none">
+<tbody><tr>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif" style="vertical-align:middle"><a href="http://www.ozekisms.com/" style="text-decoration:none; font-weight:bold; color:black;  font-size:14px; font-family:arial">Overview</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=133" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Quick start</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=112" style="text-decoration:none; font-weight:bold; color:red; font-size:14px; font-family:arial">Download</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=159" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Manual</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=27" style="text-decoration:none; font-weight:bold; color:blue; font-size:14px; font-family:arial">How to buy</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=367" style="text-decoration:none; font-weight:bold;  font-size:15px;color:black; font-family:arial">FAQ</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_01t.gif" border="0"></td>
+<td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_02t.gif"><a href="http://www.ozekisms.com/index.php?owpn=41" style="text-decoration:none; font-weight:bold; color:black; font-size:14px; font-family:arial">Contact Us</a></td>
+<td width="4"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/doboz_04t.gif" border="0"></td>
+</tr>
+</tbody></table>
+            </td>
+      </tr>
+</tbody></table>
+
+<table cellpadding="1" cellspacing="0" border="0"><tbody><tr><td bgcolor="#8B9CCD">
+<table cellpadding="1" cellspacing="0" border="0" width="980"><tbody><tr><td bgcolor="white">
+<table width="100%" cellpadding="10"><tbody><tr><td>
+<!--H1><FONT color=red>DOCUMENTATION</FONT> OZEKI NG - SMS Gateway</H1-->
+<table width="100%" cellpadding="0"><tbody><tr>
+<td><b style="FONT-WEIGHT: bold; FONT-SIZE: 18px"><font color="red" style="FONT-WEIGHT: bold" ;="">
+OZEKI NG SMS Gateway</font> - Product Guide</b></td>
+<td align="right"><p align="right">
+<table><tbody><tr>  <td><a href="http://www.ozekisms.com/index.php?owpn=583&sms_gateway=Java_HTTP_sms_example"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/left.gif" border="0" alt="Java HTTP sms example"></a></td>  <td><a href="http://www.ozekisms.com/index.php?owpn=10&sms_gateway=smpp">Contents</a> | <a href="http://www.ozekisms.com/index.php?owpn=94&mms_gateway=server">Search</a></td><td><a href="http://www.ozekisms.com/index.php?owpn=585&sms_gateway=VB.NET_SMS_API"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/right.gif" border="0" alt="VB.NET SMS API"></a></td></tr></tbody></table>
+
+
+</p></td></tr>
+<tr><td colspan="2">
+<a href="http://www.ozekisms.com/index.php?owpn=10&sms_gateway=sms_server">Home</a> <font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=159&sms_gateway=sms_Product_Manual">Product Manual</a><font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=95&sms_gateway=sms_Developers_Guide">Developers Guide</a><font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=581&sms_gateway=sms_Java_SMS_API">Java SMS API</a><font face="arial" size="-2" color="black"> &gt; </font> <a href="http://www.ozekisms.com/index.php?owpn=584&sms_gateway=sms_Java_SMS_SDK">Java SMS SDK</a></td></tr>
+</tbody></table>
+<hr>
+
+<table border="0" cellpadding="10" width="100%">
+<tbody><tr>
+<td width="200" valign="top">
+<table border="0" cellpadding="1">
+  <tbody><tr>
+  <td><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0"></td>
+  <td><a href="http://www.ozekisms.com/"><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/home.gif" border="0" alt="SMS Gateway"></a></td>
+  <td><a href="http://www.ozekisms.com/">SMS Gateway Home</a></td>
+  </tr>
+</tbody></table>
+<br>
+<style>
+.sm1:link,.sm1:visited { font-family:arial,sans-serif; color:#303060;text-decoration:none;font-size:14px;font-weight=bold}
+.sm1:hover{ font-family:arial,sans-serif; color:#505080;text-decoration:underline;font-size:14px;font-weight=bold}
+.sm2:link,.sm2:visited  { font-family:arial,sans-serif; color:#303060;text-decoration:none;font-size:13px;}
+.sm2:hover{ font-family:arial,sans-serif; color:#505080;text-decoration:underline;font-size:13px;}
+.sm3:link,.sm3:visited  { font-family:arial,sans-serif; color:#257C8C;text-decoration:none;font-size:12px;}
+.sm3:hover{ font-family:arial,sans-serif; color:#257C8C;text-decoration:underline;font-size:12px;}
+.sm4:link,.sm4:visited  { font-family:arial,sans-serif; color:#303060;text-decoration:none;font-size:11px;}
+.sm4:hover{ font-family:arial,sans-serif; color:#505080;text-decoration:underline;font-size:11px;}
+.sm5:link,.sm5:visited  { font-family:arial,sans-serif; color:#303060;text-decoration:none;font-size:11px;}
+.sm5:hover{ font-family:arial,sans-serif; color:#505080;text-decoration:underline;font-size:11px;}
+</style>
+<table cellpadding="0" cellspacing="0" border="0" width="200"><tbody><tr><td><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/le.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=159&info=product-manual" target="_parent" class="sm1">Product Manual</a><br><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=78&info=product-manual/introduction" target="_parent" class="sm2">Introduction</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=235&info=product-manual/sms-technology" target="_parent" class="sm2">SMS technology</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=128&info=product-manual/installation-guide" target="_parent" class="sm2">Installation Guide</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=132&info=product-manual/user-guide" target="_parent" class="sm2">User Guide</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/le.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=95&info=product-manual/developers-guide" target="_parent" class="sm2">Developers Guide</a><br><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=34&info=developers-guide/tutorials" target="_parent" class="sm3">Tutorials</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=400&info=developers-guide/asp-sms-api" target="_parent" class="sm3">ASP SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=204&info=developers-guide/php-sms-api" target="_parent" class="sm3">PHP SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=372&info=developers-guide/http-sms-api" target="_parent" class="sm3">HTTP SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=260&info=developers-guide/sql-sms-api" target="_parent" class="sm3">SQL SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=315&info=developers-guide/c-sharp-sms-api" target="_parent" class="sm3">C Sharp SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=246&info=developers-guide/ajax-sms-api" target="_parent" class="sm3">AJAX SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=453&info=developers-guide/delphi-sms-api" target="_parent" class="sm3">Delphi SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=376&info=developers-guide/cpp-sms-api" target="_parent" class="sm3">Cpp SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/le.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=581&info=developers-guide/java-sms-api" target="_parent" class="sm3">Java SMS API</a><br><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=582&info=java-sms-api/java-database-sms-example" target="_parent" class="sm4">Java database sms example</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=583&info=java-sms-api/java-http-sms-example" target="_parent" class="sm4">Java HTTP sms example</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/le.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=584&info=java-sms-api/java-sms-sdk" target="_parent" class="sm4">Java SMS SDK</a><br><table cellpadding="0" cellspacing="0" border="0"></table></td></tr></tbody></table></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=585&info=developers-guide/vb.net-sms-api" target="_parent" class="sm3">VB.NET SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=607&info=developers-guide/python-sms-api" target="_parent" class="sm3">Python SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=608&info=developers-guide/perl-sms-api" target="_parent" class="sm3">Perl SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=609&info=developers-guide/tcltk-sms-api" target="_parent" class="sm3">TCL/TK SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=627&info=developers-guide/coldfusion-sms-api" target="_parent" class="sm3">Coldfusion SMS API</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=667&info=developers-guide/vb-6-sms-api" target="_parent" class="sm3">VB 6 SMS API</a><br></td></tr></tbody></table></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=146&info=product-manual/examples-and-solutions" target="_parent" class="sm2">Examples and Solutions</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=156&info=product-manual/appendix" target="_parent" class="sm2">Appendix</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=367&info=product-manual/faq" target="_parent" class="sm2">FAQ</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=617&info=product-manual/feature-list" target="_parent" class="sm2">Feature list</a><br></td></tr></tbody></table></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=160&info=commercial-information" target="_parent" class="sm1">Commercial Information</a><br></td></tr><tr><td valign="top">&nbsp;<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/jobb.gif" border="0">&nbsp;</td><td valign="top"><a href="http://www.ozekisms.com/index.php?owpn=94&info=search" target="_parent" class="sm1">Search</a><br></td></tr></tbody></table></td></tr></tbody></table>
+
+<!-- ---------sitemap end------------------ -->
+&nbsp;
+<br><br>
+<!-- contact us start -->
+<br>
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Automated phone calls?</b></td></tr></tbody></table>
+
+<div style="padding: 4px">
+<span style="font-size:12px">
+<a href="http://www.ozekiphone.com/">Ozeki Phone System XE VoIP PBX software</a>
+is an advanced PBX built for automated voice calls and 2 way SMS messaging. It
+has outstanding APIs for software developers. It can be used for:
+<br><br>
+<a href="http://www.ozekiphone.com/voip-appointment-reminder-1123.html">Phone calls from SQL</a><br>
+<a href="http://www.ozekiphone.com/voip-ivr-with-ozml-extension-1122.html">Phone calls from HTTP</a><br>
+<a href="http://www.ozekiphone.com/voip-send-sms-messages-839.html">Voice and SMS applications</a>
+</span>
+</div>
+
+<br>
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Callcenter developers</b></td></tr></tbody></table>
+
+<table width="244" cellpadding="4"><tbody><tr><td>
+If you are working on telephone solutions, please check
+out the <a href="http://www.voip-sip-sdk.com/">Ozeki VoIP SIP SDK</a>.<br>
+It can be used to create VoIP client and server software.</td></tr></tbody></table>
+
+<br>
+
+<table width="244" cellpadding="4"><tbody><tr><td style="border-bottom:1px solid #000000">
+<b style="font-size:16px;">Contact Us!</b></td></tr></tbody></table>
+
+<table cellpadding="5"><tbody><tr><td style="font-size:12px">
+If you wish to get further information, do not hesitate
+to contact us!<br><br>
+E-mail: <a href="mailto:info@ozekisms.com">info@ozekisms.com</a>
+<br><br>
+If you have a technical question, please
+<a href="http://www.ozekisms.com/index.php?owpn=80">submit a support request on-line</a>.
+</td></tr></tbody></table>
+<br>
+</td>
+<td valign="top">
+
+<h1>Sending and receiving SMS From Java using the Ozeki Java SMS SDK</h1>
+<!-- social media icons template -->
+
+
+
+                
+<!--  stylesheet -->
+                
+                <style>
+                        .social-media-bar{
+                                background-image: url('attachments/159/socialiconbg.png');
+                                background-repeat: repeat-x;
+                                height: 26px;
+                                padding-top: 4px;
+                                padding-left: 5px;
+                                border-top: 1px solid #ddd;
+                                border-bottom: 1px solid #ddd;
+                                color: #ddd;
+                                width: 100%;
+                        }
+                        
+                        .social-media-bar td{
+                                color: #ddd;
+                        }
+                        
+                        .social-media-bar .toppad{
+                                padding-top: 2px;
+                        
+                </style>
+
+<!-- sharethis buttons -->
+<table valign="center" class="social-media-bar">
+        <tbody><tr>
+                <td>
+                        <table>
+                                <tbody><tr>
+                                		<td class="toppad">
+                                             <!-- Facebook share -->
+                                             <div class="fb-share-button fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fwww.ozekisms.com%2Findex.php%3Fowpn%3D584%26infoe%3Djava-sms-sdk-sms-over-tcp-ip&amp;locale=en_US&amp;sdk=joey"><span style="vertical-align: bottom; width: 48px; height: 14px;"><iframe name="f2af411ddc" width="1000px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:share_button Facebook Social Plugin" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/share_button.htm" style="border: none; visibility: visible; width: 48px; height: 14px;" class=""></iframe></span></div>
+                                        </td>
+                                        <td>|</td>
+                                        <td width="30px">
+                                                <!-- Google +1 -->
+                                                <!-- annotation=none, annotation=inline, or blank for bubble -->
+                                                <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background-color: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px; background-position: initial initial; background-repeat: initial initial;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1386084265025" name="I0_1386084265025" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/fastbutton.htm" data-gapiattached="true" title="+1"></iframe></div>
+                                        </td>
+                                        <td>|</td>
+                                        
+                                        <td>
+                                                <!-- Twitter -->
+                                                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/tweet_button.1384994725.htm" class="twitter-share-button twitter-tweet-button twitter-count-none" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 59px; height: 20px;"></iframe>
+                                        </td>
+                                                <td>|</td>
+                                        <td width="60px">
+                                                <!-- LinkedIn -->
+                                                <script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/in.js" type="text/javascript"></script>
+                                                <span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1386084264915_0"><a id="li_ui_li_gen_1386084264915_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1386084264915_0-logo">in</span><span id="li_ui_li_gen_1386084264915_0-title"><span id="li_ui_li_gen_1386084264915_0-mark"></span><span id="li_ui_li_gen_1386084264915_0-title-text">Share</span></span></a></span></span></span><script type="IN/Share+init"></script>
+                                        </td>
+                                </tr><tr>
+                        </tr></tbody></table>
+                </td>
+        </tr>
+</tbody></table><br>
+
+                <!-- javascripts -->
+                
+                <!-- google +1 -->
+                <script type="text/javascript">
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                  </script>
+                  
+                  <!-- Facebook share -->
+                  <script src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/FB.Share" type="text/javascript">
+                  </script>
+                                
+                <!-- Twitter tweet -->
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<table><tbody><tr><td>
+Download:</td>
+<td>
+<a href="http://www.ozekisms.com/attachments/584/ozeki-java-sms-sdkv4.zip">ozeki-java-sms-sdkv4.zip</a>
+(16 Kb)
+</td></tr>
+<tr><td>
+Download:</td>
+<td>
+<a href="http://www.ozekisms.com/attachments/584/OzekiSmsClientv4.zip">OzekiSmsClientv4.zip</a>
+(10 Kb)</td></tr></tbody></table>
+<br>
+<p align="justify">
+<b>
+The Ozeki JAVA SMS SDK is your best choice if you want to send and receive
+ SMS text messages to cellphones from a JAVA application. It was designed
+ to be used in JAVA applications that have a GUI or that operate as a
+ background service. It is a good choice if you want to send SMS messages,
+ you need to react to incoming SMS messages or you would like to process
+ SMS delivery reports instantly and in a resource efficient way. In case
+ you need to add SMS functionality to a Java webservice, or to a JAVA solution
+where the JAVA process is executed for a very short time, this SDK is not
+your ideal choice. It is very efficient for long-term operations, but for
+short-lived processes other solutions might offer a better solution.
+For short-lived processes, we recommend you to use the
+<a href="http://www.ozekisms.com/index.php?owpn=583">JAVA HTTP SMS example</a> or
+the <a href="http://www.ozekisms.com/index.php?owpn=582">JAVA SQL SMS example</a>.</b>
+
+</p><h1>Introduction</h1>
+<p align="justify">Ozeki has released the Java SMS SDK, because it has
+experienced continuous demand from JAVA developers for a tool, that is
+able to add SMS functionality to JAVA applications in a very efficient way.
+This SDK communicates with the Ozeki NG SMS Gateway, through a TCP/IP socket.
+The socket is always connected, which makes it possible, to receive SMS
+delivery reports and incoming SMS messages instantly. The Ozeki Java SMS
+SDK implements the TCP/IP communication and provides methods
+calls and events you can implement to achieve the desired functionality.
+Using this SDK very fast and efficient SMS solutions can be developed. The
+SDK includes full source code. You are free to use and modify this code
+in your application.
+</p>
+<p><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/2009_08_05_java_pelda_tcp.gif"></p>
+Figure 1 - Ozeki Java SMS SDK, communicates through a TCP/IP socket
+<p align="justify">
+To be able to use this SDK, you need to <a href="http://www.ozekisms.com/index.php?owpn=133">install
+Ozeki NG SMS Gateway into your corporate network</a>.
+Ozeki NG SMS Gateway will be responsible for attaching your system to the mobile
+network. It will receive the TCP/IP connections from the JAVA SMS SDK and it well
+send and receive SMS messages through the configured communication method
+(Figure 1). For example
+you can send/receive SMS messages through a GSM phone attached to your computer
+with a phone to PC data cable, or you can send/receive SMS messages through the
+Internet if you have subscribed for an internet SMS Service.
+</p>
+<h1>Prerequisites</h1>
+<ul>
+<li><a href="http://www.ozekisms.com/index.php?owpn=112">Ozeki NG SMS Gateway</a><br>
+</li><li><a href="http://java.sun.com/javase/downloads/index.jsp">Java SE Development
+Kit</a><br>
+</li><li><a href="http://www.eclipse.org/downloads">Eclipse IDE for Java developers</a>
+<br>
+</li><li><a href="http://www.ozekisms.com/">Ozeki Java API</a><br>
+</li></ul>
+
+<h1>How to use the SDK</h1>
+
+<p align="justify">To use the SDK, you need to have the Java SE Development Kit
+installed on your computer. The SDK was developed and tested in Eclipse, but
+it should operate without a problem on any other JAVA development platform. The
+Ozeki java SMS SDK can be downloaded from the top of this page. It is a zip,
+file, that needs to be extracted
+into your project directory. Once extracted, run Eclipse IDE and add a new
+project.
+<br><br>
+The Ozeki SMS SDK contains a jar file called <b>ozekismsclient.jar</b>. You need
+to add it to the project by clicking on Project/Build Path/Add External Archives.
+<br><br>
+The next step to use it is to create a class which derives from the
+"OzSMSClient" ("MyOsSMSClient" in the following example).</p>
+   
+   <table border="0" bgcolor="#DAF3FD">
+   <tbody><tr>
+   <td><pre>public class MyOzSmsClient extends OzSmsClient</pre></td>
+   </tr>
+   </tbody></table>
+   
+   <p align="justify">Create a constructor which will call "OzSmsClient"'s
+   constructor.</p>
+
+   <table border="0" bgcolor="#DAF3FD">
+   <tbody><tr>
+   <td><pre>public MyOzSmsClient(String host, int port) throws IOException,
+   InterruptedException {
+ super(host, port);
+}</pre></td>
+   </tr>
+   
+   </tbody></table>
+   
+   <p align="justify">Bring the abstract methods of "OzSmsClient" into effect.</p>
+
+   <table border="0" bgcolor="#DAF3FD">
+   <tbody><tr>
+   <td><pre>@Override
+public void doOnMessageAcceptedForDelivery(OzSMSMessage sms) {
+ Date now = new Date();
+ System.out.println(now.toString() + " Message accepted for delivery. ID: " + sms.messageId);
+}</pre></td>
+    </tr>
+    <tr>
+    <td><pre>@Override
+public void doOnMessageDeliveredToHandset(OzSMSMessage sms) {
+ Date now = new Date();
+ System.out.println(now.toString() + " Message delivered to handset. ID: " + sms.messageId);
+}</pre></td>
+    </tr>
+    <tr>
+    <td><pre>@Override
+public void doOnMessageDeliveredToNetwork(OzSMSMessage sms) {
+ Date now = new Date();
+ System.out.println(now.toString() + " Message delivered to network. ID: " + sms.messageId);
+}</pre></td>
+    </tr>
+    <tr>
+    <td><pre>@Override
+public void doOnMessageDeliveryError(OzSMSMessage sms) {
+ Date now = new Date();
+ System.out.println(now.toString() + " Message could not be delivered. ID: " + sms.messageId +
+  " Error message: " + sms.errorMessage + "\r\n");
+}</pre></td>
+    </tr>
+    <tr>
+    <td><pre>@Override
+public void doOnMessageReceived(OzSMSMessage sms) {
+ Date now = new Date();
+ System.out.println(now.toString() + " Message received. Sender
+ address: " + sms.sender + " Message text: " + sms.messageData);
+}</pre></td>
+    </tr>
+    <tr>
+    <td><pre>@Override
+public void doOnClientConnectionError(int errorCode, String errorMessage) {
+        Date now = new Date();
+        System.out.println(now.toString() + " Message code: " + errorCode + ", Message: " + errorMessage);
+}</pre>
+    </td></tr>
+    </tbody></table>
+    
+
+     <p align="justify">Create an other class which we will utilize in practice.</p>
+     <table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>public class TestTcpSms {</pre></td>
+     </tr>
+     </tbody></table>
+     
+     <p align="justify">We set the availability of Ozeki NG.</p>
+     <table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>String host = "localhost";
+int port = 9500;
+String username = "admin";
+String password = "abc123";</pre></td>
+     </tr>
+     </tbody></table>
+     
+     <p align="justify">Now start the connection with the Ozeki NG and log in.</p>
+     <table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>MyOzSmsClient osc = new MyOzSmsClient(host, port);
+osc.login(username, password);</pre></td>
+     </tr>
+     </tbody></table>
+     
+     <p align="justify">Once you are logged in send a message.</p>
+     <table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>if(osc.isLoggedIn()) osc.sendMessage("+001122334455", "Hello
+     World");</pre></td>
+     </tr>
+     </tbody></table>
+     
+     <p align="justify">Finally log off</p>
+     <table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>osc.logout();</pre></td>
+     </tr>
+     </tbody></table>
+
+
+<h1>Example source code</h1>
+
+           <p align="left">Please feel free to edit and use this code in your
+           project!</p>
+
+<div class="code">
+<table border="0" bgcolor="#DAF3FD">
+     <tbody><tr>
+     <td><pre>//MyOzSmsClient.java
+
+package hu.ozekisms;
+
+import java.io.*;
+import java.util.*;
+import hu.ozeki.*;
+
+public class MyOzSmsClient extends OzSmsClient{
+
+        public MyOzSmsClient(String host, int port) throws IOException, InterruptedException {
+                super(host, port);
+                // TODO Auto-generated constructor stub
+        }
+
+
+        @Override
+        public void doOnMessageAcceptedForDelivery(OzSMSMessage sms) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message accepted for delivery. ID: " +
+                sms.messageId);
+        }
+
+        @Override
+        public void doOnMessageDeliveredToHandset(OzSMSMessage sms) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message delivered to handset. ID: " +
+                sms.messageId);
+        }
+
+        @Override
+        public void doOnMessageDeliveredToNetwork(OzSMSMessage sms) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message delivered to network. ID: " +
+                sms.messageId);
+        }
+
+        @Override
+        public void doOnMessageDeliveryError(OzSMSMessage sms) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message could not be delivered. ID: " +
+                sms.messageId + " Error message: " + sms.errorMessage + "\r\n");
+        }
+
+        @Override
+        public void doOnMessageReceived(OzSMSMessage sms) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message received. Sender address: " +
+                sms.sender + " Message text: " + sms.messageData);
+        }
+
+
+        @Override
+        public void doOnClientConnectionError(String errorCode, String errorMessage) {
+                Date now = new Date();
+                System.out.println(now.toString() + " Message code: " + errorCode +
+                ", Message: " + errorMessage);
+        }
+
+
+
+}
+
+
+
+
+//TestTcpSms.java
+
+package hu.ozekisms;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class TestTcpSms {
+
+        /**
+         * @param args
+         */
+        public static void main(String[] args) {
+                try {
+                        String host = "localhost";
+                        int port = 9500;
+                        String username = "admin";
+                        String password = "abc123";
+
+                        MyOzSmsClient osc = new MyOzSmsClient(host, port);
+                        osc.login(username, password);
+
+                        Scanner sc = new Scanner(System.in);
+                        String line = new String();
+
+                        System.out.println("SMS message:");
+
+                        if(osc.isLoggedIn()) {
+                                while((line = sc.nextLine()).length() &gt; 0)
+                                        osc.sendMessage("+001122334455", line);
+
+                                osc.logout();
+                        }
+
+
+                } catch (IOException e) {
+                        System.out.println(e.toString());
+                        e.printStackTrace();
+                } catch (InterruptedException e) {
+                        System.out.println(e.toString());
+                        e.printStackTrace();
+                }
+        }
+}
+</pre></td>
+</tr></tbody></table>
+</div>
+
+ <br><br>
+ <b>Dig deeper!<br>
+People who read this also read...</b><br><br>
+  <div>
+<li><a href="http://www.ozekisms.com/index.php?owpn=367">FAQ</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=582">Java database SMS example</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=583">Java HTTP SMS example</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=581">Java SMS API</a>
+</li><li><a href="http://www.ozekisms.com/index.php?owpn=95">Developers guide</a></li></div>
+
+<br>
+<br>
+<img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/kekkocka.gif">
+<br>
+<br>
+Next page:
+<a href="http://www.ozekisms.com/index.php?owpn=585&sms_api=VB.NET_SMS_API">VB.NET SMS API</a><br>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+</td><td background="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/rightbg.gif" valign="top">
+</td></tr></tbody></table>
+
+<table border="0" width="980">
+<tbody><tr>
+<td>
+Copyright © 2000 - 2013 Ozeki Informatics Ltd.<br>
+All rights reserved
+</td>
+<td align="right" valing="top"><p align="right">
+
+<a href="http://www.ozekiphone.com/">Software PBX for Windows</a> |
+<a href="http://www.voip-sip-sdk.com/">VoIP SDK</a>
+
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?owpn=451" "="">Legal information</a>
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?ow_page_number=449">Privacy policy</a>
+&nbsp;&nbsp;|
+&nbsp;&nbsp;<a href="http://www.ozekisms.com/index.php?ow_page_number=450">Terms of use</a>
+<br>
+Please, address your inquiries to <a href="mailto:info@ozekisms.com">info@ozekisms.com</a>
+</p></td></tr>
+</tbody></table><br>
+<center><img src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/index.php"></center></center>
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/xd_arbiter.htm" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/xd_arbiter(1).htm" style="border: none;"></iframe></div></div></div><iframe name="oauth2relay2146523786" id="oauth2relay2146523786" src="./Instructions on using Ozeki SMS Gateway - Java SMS API, Java SMS SDK_files/postmessageRelay.htm" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
