@@ -89,7 +89,7 @@ public class CameraClient {
         public static void main(String[] args) throws InterruptedException {
             new CameraClient();
             while(true){
-                     Thread.sleep(999999);
+                     //Thread.sleep(999999);
             }
       }
 }
