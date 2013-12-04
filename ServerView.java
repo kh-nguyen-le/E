@@ -35,13 +35,13 @@ public class ServerView
     private final File dir,picDir,videoDir;
     
     private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
-    private String mediaPath1 = "rtsp://@10.0.0.54:8554/"; //"blank.bmp";
-    private String mediaPath2 = "rtsp://@10.0.0.51:8554/";//"blank.bmp";//"1.mp4";
+    private String mediaPath1 = "blank.bmp";
+    private String mediaPath2 = "blank.bmp";//"1.mp4";
     private String mediaPath3 = "blank.bmp";//"2.mp4";
     private String mediaPath4 = "blank.bmp";//"3.mp4";
     private String fileName;
-    private int switchCount = 0;
-    private int recordCount = 0;
+    private int switchCount = 0; //Tracks how many times switch was press; 4 unique positions: wraps to 0 after 3
+    private int recordCount = 0; //recording main camera on/off
     private UserInformation user;
     
     public ServerView()
@@ -227,7 +227,7 @@ public class ServerView
 		storage.setToolTipText("Storage");
         buttonPanel.add(storage);
         help = new JButton("Help");
-	help.setToolTipText("Help");
+        help.setToolTipText("Help");
         buttonPanel.add(help);
         panel.add(Box.createRigidArea(new Dimension(0,25)));
         panel.add(buttonPanel);
@@ -315,11 +315,39 @@ public class ServerView
     //In the case of any changes in the media path, the media player is 
     //updated
     public void updateMedia(){
-        hiddenMPlayer.playMedia(mediaPath4);
-        mPlayer1.playMedia(mediaPath1); 
-        mPlayer2.playMedia(mediaPath2);
-        mPlayer3.playMedia(mediaPath3);
-        mPlayer4.playMedia(mediaPath4);
+    	recordCount = 0;
+    	switch(switchCount) {
+				case 0:
+			        hiddenMPlayer.playMedia(mediaPath1);
+			        mPlayer1.playMedia(mediaPath1);
+			        mPlayer2.playMedia(mediaPath2);
+			        mPlayer3.playMedia(mediaPath3);
+			        mPlayer4.playMedia(mediaPath4);
+			        break;
+                case 1:
+                    hiddenMPlayer.playMedia(mediaPath4);
+                    mPlayer1.playMedia(mediaPath4);
+                    mPlayer2.playMedia(mediaPath1);
+                    mPlayer3.playMedia(mediaPath2);
+                    mPlayer4.playMedia(mediaPath3);
+                    break;
+                case 2: 
+                    hiddenMPlayer.playMedia(mediaPath3);
+                    mPlayer1.playMedia(mediaPath3);
+                    mPlayer2.playMedia(mediaPath4);
+                    mPlayer3.playMedia(mediaPath1);
+                    mPlayer4.playMedia(mediaPath2);
+                    break;
+                case 3:
+                    hiddenMPlayer.playMedia(mediaPath2);
+                    mPlayer1.playMedia(mediaPath2);
+                    mPlayer2.playMedia(mediaPath3);
+                    mPlayer3.playMedia(mediaPath4);
+                    mPlayer4.playMedia(mediaPath1);
+                    break;
+                default:
+                	break;
+    	}
     }
     
     //This checks the status of the media player, i.e. whether it is playing or not
@@ -368,96 +396,96 @@ public class ServerView
         generateFileName();
         if(recordCount == 0) {
             switch(switchCount){
-		case 0:
+            	case 0:
                     mPlayer1.playMedia(mediaPath1,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
                     hiddenMPlayer.playMedia(mediaPath1);
                     recordCount = 1;
                     break;			
-		case 1:
+            	case 1:
                     mPlayer1.playMedia(mediaPath4,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
                     hiddenMPlayer.playMedia(mediaPath4);
                     recordCount = 1;
                     break;				
-		case 2:
+            	case 2:
                     mPlayer1.playMedia(mediaPath3,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
                     hiddenMPlayer.playMedia(mediaPath3);
                     recordCount = 1;
                     break;				
-		case 3:
+            	case 3:
                     mPlayer1.playMedia(mediaPath2,":sout=#transcode{vcodec=mpgv,vb=4094,scale=1,acodec=mpg,ab=128,channels=2,samplerate=44100}:duplicate{dst=file{dst=" + fileName + "},dst=display}");
                     hiddenMPlayer.playMedia(mediaPath2);
                     recordCount = 1;
                     break;		
-		default:
+            	default:
                     break;
-                }			
-            }else {
-                switch(switchCount){
-                    case 0:
-			mPlayer1.playMedia(mediaPath1);
-                        hiddenMPlayer.playMedia(mediaPath1);
-			recordCount = 0;
-			break;
-                    case 1:
-			mPlayer1.playMedia(mediaPath4);
-                        hiddenMPlayer.playMedia(mediaPath4);
-			recordCount = 0;
-			break;
-                    case 2:
-			mPlayer1.playMedia(mediaPath3);
-                        hiddenMPlayer.playMedia(mediaPath3);
-			recordCount = 0;
-			break;
-                    case 3:
-			mPlayer1.playMedia(mediaPath2);
-                        hiddenMPlayer.playMedia(mediaPath2);
-			recordCount = 0;
-			break;
-                    default:
-                        break;
-                }
+            }			
+        }else {
+        		switch(switchCount){
+                	case 0:
+                		mPlayer1.playMedia(mediaPath1);
+                		hiddenMPlayer.playMedia(mediaPath1);
+                		recordCount = 0;
+                		break;
+                	case 1:
+                		mPlayer1.playMedia(mediaPath4);
+                		hiddenMPlayer.playMedia(mediaPath4);
+                		recordCount = 0;
+                		break;
+                	case 2:
+                		mPlayer1.playMedia(mediaPath3);
+                		hiddenMPlayer.playMedia(mediaPath3);
+                		recordCount = 0;
+                		break;
+                	case 3:
+                		mPlayer1.playMedia(mediaPath2);
+                		hiddenMPlayer.playMedia(mediaPath2);
+                		recordCount = 0;
+                		break;
+                	default:
+                		break;
+        		}
         }
     }
     
-    
+    //Rotates camera position counterclockwise
     public void switchCam(){
         recordCount = 0;
 	switch(switchCount) {
             case 0:
                 hiddenMPlayer.playMedia(mediaPath4);
                 mPlayer1.playMedia(mediaPath4);
-		mPlayer2.playMedia(mediaPath1);
-		mPlayer3.playMedia(mediaPath2);
-		mPlayer4.playMedia(mediaPath3);
-		switchCount = 1;
-		break;
+                mPlayer2.playMedia(mediaPath1);
+                mPlayer3.playMedia(mediaPath2);
+                mPlayer4.playMedia(mediaPath3);
+                switchCount = 1;
+                break;
             case 1: 
                 hiddenMPlayer.playMedia(mediaPath3);
-		mPlayer1.playMedia(mediaPath3);
-		mPlayer2.playMedia(mediaPath4);
-		mPlayer3.playMedia(mediaPath1);
-		mPlayer4.playMedia(mediaPath2);
-		switchCount = 2;
-		break;
+                mPlayer1.playMedia(mediaPath3);
+                mPlayer2.playMedia(mediaPath4);
+                mPlayer3.playMedia(mediaPath1);
+                mPlayer4.playMedia(mediaPath2);
+                switchCount = 2;
+                break;
             case 2:
                 hiddenMPlayer.playMedia(mediaPath2);
-		mPlayer1.playMedia(mediaPath2);
-		mPlayer2.playMedia(mediaPath3);
-		mPlayer3.playMedia(mediaPath4);
-		mPlayer4.playMedia(mediaPath1);
-		switchCount = 3;
-		break;
+                mPlayer1.playMedia(mediaPath2);
+                mPlayer2.playMedia(mediaPath3);
+                mPlayer3.playMedia(mediaPath4);
+                mPlayer4.playMedia(mediaPath1);
+                switchCount = 3;
+                break;
             case 3:
                 hiddenMPlayer.playMedia(mediaPath1);
-		mPlayer1.playMedia(mediaPath1);
-		mPlayer2.playMedia(mediaPath2);
-		mPlayer3.playMedia(mediaPath3);
-		mPlayer4.playMedia(mediaPath4);
-		switchCount = 0;
-		break;
+                mPlayer1.playMedia(mediaPath1);
+                mPlayer2.playMedia(mediaPath2);
+                mPlayer3.playMedia(mediaPath3);
+                mPlayer4.playMedia(mediaPath4);
+                switchCount = 0;
+                break;
             default:
-		break;
-	}
+            	break;
+		}
     }
     
     

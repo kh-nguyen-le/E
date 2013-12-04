@@ -37,7 +37,6 @@ import javax.swing.JFrame;
 
 public class ServerListener extends Listener {
 	private Server server;
-        private BufferedImage img;
         private String host, username, password;
         private int port;
         private MyOzSmsClient osc;
@@ -49,14 +48,14 @@ public class ServerListener extends Listener {
         
         
         public void init(Server server, ServerController sc, boolean alarm) {
-		this.server = server;
-                this.alarm = alarm;
-                this.controller = sc;
-                //Initialising parameters for Ozeki SMS Client
-                host = "localhost";
-                port = 9500;
-                username = "admin";
-                password = "ozekiTeddy";                
+    		this.server = server;
+            this.alarm = alarm;
+            this.controller = sc;
+            //Initialising parameters for Ozeki SMS Client
+            host = "localhost";
+            port = 9500;
+            username = "admin";
+            password = "sysc3010";                
 	}
                 
         public void connected(Connection c){
@@ -175,7 +174,7 @@ public class ServerListener extends Listener {
 		}
                 
 		if (o instanceof AlertPacket) {
-                        //This is what happens when the server receives the snapshot image
+        //This is what happens when the server receives the snapshot image
 			if (((AlertPacket) o).alarmOn) {
 				//sets off alarm on alarm client
 				Connection[] list = server.getConnections();
@@ -184,7 +183,7 @@ public class ServerListener extends Listener {
 				}
                                 alarm = true;
                         }		
-                        
+                        controller.snapshot();
                         //Alert owner of intruder through SMS message and picture sent to email
                         if(osc.isLoggedIn()) {
                             try {	
@@ -221,7 +220,7 @@ public class ServerListener extends Listener {
                             }
                         }
                         
-		}
+			}
         }
 }
 

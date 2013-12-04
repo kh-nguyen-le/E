@@ -15,37 +15,34 @@ public class AlarmClient {
 		client = new Client();
 		Network.register(client);
 		AlarmListener listener = new AlarmListener();
-                listener.init(client);
+        listener.init(client);
 		client.addListener(listener);
 		
 		do {
-                    gateway =client.discoverHost(Network.port, 5000);
+                gateway =client.discoverHost(Network.port, 5000);
 		}while (gateway==null);	
-                    client.start();
+                client.start();
 		
 		try {
-                    Log.set(Log.LEVEL_TRACE);
-                    client.connect(60000, gateway, Network.port, Network.port);
-                    client.setTimeout(0);
-                    client.setKeepAliveTCP(0);
-                    client.setKeepAliveUDP(0);
+			Log.set(Log.LEVEL_TRACE);
+            client.connect(60000, gateway, Network.port, Network.port);
+            client.setTimeout(0);
+            client.setKeepAliveTCP(0);
+            client.setKeepAliveUDP(0);
 		}catch(IOException e){
 			e.printStackTrace();
 			client.stop();
 		}
-                while(!client.isConnected()){
-                    try {
-                        client.reconnect(60000);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+        while(!client.isConnected()){
+            try {
+                client.reconnect(60000);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 	
 	public static void main(String[] args) throws InterruptedException  {
 		new AlarmClient();
-                while(true){
-        		Thread.sleep(999999);
-                }
          }
 }

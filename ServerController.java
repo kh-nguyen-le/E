@@ -15,10 +15,7 @@ class ServerController implements java.awt.event.ActionListener
     
     ServerController(){
         login = new LoginView();
-        //UserInformation user = new UserInformation();
         login.addListener(this);
-        //view = new ServerView();
-        //view.addController(this);
     }
     
     public UserInformation getInfo(){
@@ -178,5 +175,9 @@ class ServerController implements java.awt.event.ActionListener
     public void init(Server server, boolean alarm){
         this.server = server;
         this.alarm = alarm;
+    }
+    //allows server to take snapshot after motion detected
+    public void snapshot(){
+    	view.snapshot();
     }
 }

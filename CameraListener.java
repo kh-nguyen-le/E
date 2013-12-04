@@ -19,13 +19,10 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
-
-
 public class CameraListener extends Listener {
-    
-        private Client client;
-	private GpioController gpio;
-        private StreamingThread st;
+	private Client client;
+	private GpioController gpio; //used to control motor: to be implement
+    private StreamingThread st;
         
         public void init(Client client, GpioController gpio) {
             this.client = client;
@@ -33,20 +30,9 @@ public class CameraListener extends Listener {
         }
         
         public void connected(Connection c) {
-                // Video stream from the  PI_CAMERA with the use of command line command
-                //try{
-                    //System.out.println("Begin stream");
-                    //java.lang.Runtime rt = Runtime.getRuntime();
-                    //java.lang.Process pr = rt.exec("raspivid -o - -w 920 -h 540 -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");
-				
-                //}catch(IOException e){
-                  //  e.printStackTrace();
-                //}
-                  // Video stream from the  PI_CAMERA with the use of command line command
                 st = new StreamingThread();
                 st.start();
                 System.out.println("Camera Connected");
-              
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
                 client.sendTCP(request);
@@ -65,12 +51,8 @@ public class CameraListener extends Listener {
                         }
                 }
                 if (o instanceof MotorPacket) {
-                        //turn motor
+                        //turn motor to be implemented
                 }        
-                
-                if (o instanceof SettingsPacket) {
-                        //modify camera settings
-                }
         }
 
 }
@@ -80,10 +62,8 @@ class StreamingThread extends Thread
     public StreamingThread(){}
     
     public void run(){
-                    //System.out.println("Begin stream");
     				try {
                     Process p = Runtime.getRuntime().exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
-                    
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

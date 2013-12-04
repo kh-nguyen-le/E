@@ -85,8 +85,6 @@ public class ServerTest extends TestCase{
         }catch(IOException e){
             e.printStackTrace();
         }
-        
-        //Thread.sleep(30000);
         cObj = null;
         aObj = null;
         
@@ -98,18 +96,18 @@ public class ServerTest extends TestCase{
         
     }
     
+    //simulates part 1 of handshaking
     public static void testAuthentication() throws InterruptedException{
         AuthenticationPacket ap = new AuthenticationPacket();
         ac.sendTCP(ap);
         cc.sendTCP(ap);
-        
-        Thread.sleep(5000);
-        
+        Thread.sleep(1000);
         assertTrue(aObj instanceof HandshakePacket && cObj instanceof HandshakePacket);
         aObj = null;
         cObj = null;
     }
 
+    //simulates part 2 of handshaking
     public static void testMessage(){
         MessagePacket alarm = new MessagePacket();
         MessagePacket camera = new MessagePacket();
@@ -123,9 +121,9 @@ public class ServerTest extends TestCase{
         cObj = null;
     }
     
+    //simulates camera sending alert packet
     public static void testAlert() throws IOException, InterruptedException{
-
-       AlertPacket ap = new AlertPacket();
+    	AlertPacket ap = new AlertPacket();
         ap.alarmOn = false;
         cc.sendTCP(ap);
         Thread.sleep(5000);

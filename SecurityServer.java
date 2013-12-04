@@ -9,23 +9,24 @@ import com.esotericsoftware.minlog.Log;
 import java.util.Scanner;
 import securitySystem.Network.*;
 
-public class SecurityServer {//implements ActionListener {
+public class SecurityServer {
 
 	private Server server;
         private boolean alarm = false;
 	public SecurityServer() throws IOException {
-                
 		server = new Server();
-                //Registering Packets
+        //Registering Packets
 		Network.register(server);
 		server.bind(Network.port, Network.port);
-                //Set up Server listener
-                ServerController sc = new ServerController();		
-                ServerListener listener = new ServerListener();
+        //Set up Server Controller for GUI
+        ServerController sc = new ServerController();
+        //Set up Server listener
+        ServerListener listener = new ServerListener();
+        //Controller is passed to listener for setting camera paths/taking snapshot
 		listener.init(server,sc,alarm);
 		server.addListener(listener);
-                server.start();
-                sc.init(server, alarm);
+        server.start();
+        sc.init(server, alarm);
 	}
 	
 	

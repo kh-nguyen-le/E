@@ -13,7 +13,6 @@ public class Network {
                 kryo.register(MotorPacket.class);
                 kryo.register(AuthenticationPacket.class);
                 kryo.register(HandshakePacket.class);
-                kryo.register(SettingsPacket.class);
 	}
 	
         public static class MessagePacket { public String message; }
@@ -21,5 +20,4 @@ public class Network {
 	public static class MotorPacket { public boolean direction; }
 	public static class AuthenticationPacket { }
 	public static class HandshakePacket {public boolean success = false; }
-	public static class SettingsPacket { }
 }

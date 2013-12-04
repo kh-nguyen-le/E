@@ -52,10 +52,6 @@ public class AlarmListener extends Listener {
                     
 			
 		}
-
-		if (o instanceof SettingsPacket) {
-			//modify alarm settings
-		}
 	}
 }
 
@@ -71,7 +67,7 @@ class AlarmThread extends Thread{
         java.lang.Runtime rt = java.lang.Runtime.getRuntime(); //get runtime
         while(true){
            try{ 
-                sleep(200);
+                sleep(200);//gives thread time to check change in alarmOn
                 if(alarmOn){  
                 	try {
                         java.lang.Process p = rt.exec("aplay alarm.wav"); //play alarm.wav sound
