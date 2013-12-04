@@ -62,11 +62,11 @@ class StreamingThread extends Thread
     public StreamingThread(){}
     
     public void run(){
-    				try {
-    					Process p = Runtime.getRuntime().exec("python stream.py");
+    				//try {
+    					//Process p = Runtime.getRuntime().exec("python stream.py");
     					//Process p = Runtime.getRuntime().exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					//} catch (IOException e) {
+						//e.printStackTrace();
+					//}
     }
 }
