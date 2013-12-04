@@ -81,9 +81,9 @@ class StreamingThread extends Thread
     
     public void run(){
                     //System.out.println("Begin stream");
-                    ProcessBuilder p = new ProcessBuilder("sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264");//"python stream.py");
-                    try {
-						p.start();
+    				try {
+                    Process p = Runtime.getRuntime().exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
+                    
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
