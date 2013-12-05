@@ -36,7 +36,7 @@ import javax.swing.JFrame;
 
 public class ServerListener extends Listener {
 	private Server server;
-        private String host, username, password;
+        private String host, username, password,email,epass;
         private int port;
         private MyOzSmsClient osc;
         private ServerController controller;
@@ -53,6 +53,8 @@ public class ServerListener extends Listener {
             port = 9500;
             username = "admin";
             password = "sysc3010";
+            email="GroupE_F13@yahoo.com";
+            epass="gEfall2013";
             try {    
                 //Connect to Ozeki NG SMS Gateway and logging in.
                 osc = new MyOzSmsClient(host, port);
@@ -70,7 +72,7 @@ public class ServerListener extends Listener {
                 session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
                             protected PasswordAuthentication getPasswordAuthentication() {
-                                    return new PasswordAuthentication("aeakai@yahoo.com","yahooTeddy91");
+                                    return new PasswordAuthentication(email,epass);
                             }
                     });
             
