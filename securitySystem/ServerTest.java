@@ -3,18 +3,21 @@ package securitySystem;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
 import static junit.framework.Assert.assertNull;
 import junit.framework.TestCase;
 import securitySystem.Network.*;
 
+//This class tests that SecurityServer responds properly when receiving packets
 public class ServerTest extends TestCase{
     private static Object cObj, aObj;
     private static Client ac, cc;
-    private static Connection aCon, cCon;
     
     public static void main(String [] args) throws IOException, InterruptedException{
         
@@ -70,7 +73,7 @@ public class ServerTest extends TestCase{
         SecurityServer ss = new SecurityServer();
         ac.start();
         cc.start();
-        
+        Thread.sleep(10000);//allows time to fill login credentials in order to avoid null ServerView
         try{
             ac.connect(60000, "localhost", Network.port, Network.port);
             cc.connect(60000, "localhost", Network.port, Network.port);
@@ -87,49 +90,52 @@ public class ServerTest extends TestCase{
         }
         cObj = null;
         aObj = null;
-        
         testAuthentication();
         testMessage();
         testAlert();
         cc.stop();
         ac.stop();
-        
+        System.exit(0);
     }
     
-    //simulates part 1 of handshaking
+    //test part 1 of handshaking
     public static void testAuthentication() throws InterruptedException{
         AuthenticationPacket ap = new AuthenticationPacket();
         ac.sendTCP(ap);
         cc.sendTCP(ap);
         Thread.sleep(1000);
+        //expects server to handshake with clients
         assertTrue(aObj instanceof HandshakePacket && cObj instanceof HandshakePacket);
         aObj = null;
         cObj = null;
     }
 
-    //simulates part 2 of handshaking
-    public static void testMessage(){
+    //test clients being named
+    public static void testMessage() throws InterruptedException{
         MessagePacket alarm = new MessagePacket();
         MessagePacket camera = new MessagePacket();
         alarm.message = "Alarm";
         camera.message = "Camera";
-        
         ac.sendTCP(alarm);
         cc.sendTCP(camera);
-         
+        Thread.sleep(5000);
+        //expects no packets from servers
+        assertNull(aObj);
+        assertNull(cObj); 
         aObj = null;
         cObj = null;
     }
     
-    //simulates camera sending alert packet
+    //simulates motion detected with camera sending alert packet
     public static void testAlert() throws IOException, InterruptedException{
+    	//test invalid packet:expect no response from server
     	AlertPacket ap = new AlertPacket();
         ap.alarmOn = false;
         cc.sendTCP(ap);
         Thread.sleep(5000);
         assertNull(aObj);
         assertNull(cObj);
-        
+        //test proper packet: expect only alarm client to receive alert
         ap.alarmOn = true;
         cc.sendTCP(ap);
         Thread.sleep(5000);

@@ -28,7 +28,7 @@ public class ClientTest extends TestCase{
             Logger.getLogger(ClientTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 	
-	server.addListener(new Listener(){//barebones server functions to isolate clients
+        server.addListener(new Listener(){//barebones server functions to isolate clients
             public void received(Connection c, Object o){
                 if(o instanceof MessagePacket){
                    obj = (MessagePacket)o;
@@ -61,6 +61,7 @@ public class ClientTest extends TestCase{
         //test clients handshaking
         CameraClient cc = new CameraClient();
         Thread.sleep(1000);//allow time for client to authenticate
+        //expecting proper names from clients
         assertTrue(obj instanceof MessagePacket);
         assertTrue(((MessagePacket)obj).message.contains("Camera"));       
         obj = null;
@@ -71,15 +72,11 @@ public class ClientTest extends TestCase{
         obj = null;
         testHandshake();
         testAlert();
-        
+        server.stop();
     }
-    
-    public static void testMessage(){}
-    
-    public static void testAuthentication(){}
             
     public static void testHandshake() throws InterruptedException{
-        //Testing server sending invalid HandshakePacket
+        //Testing server sending invalid HandshakePacket; expects clients not to respond
         HandshakePacket hf = new HandshakePacket();
         hf.success = false;
         Connection[] list = server.getConnections();
@@ -101,7 +98,7 @@ public class ClientTest extends TestCase{
     //Testing server sending MotorPacket
     }
     public static void testAlert() throws InterruptedException{
-        //Testing server sending AlertPacket
+        //Testing server sending AlertPacket to alarm; expects alarm to ring with no packets sent back
         AlertPacket alert = new AlertPacket();
         alert.alarmOn = true;
         Connection[] list = server.getConnections();
@@ -111,12 +108,6 @@ public class ClientTest extends TestCase{
         Thread.sleep(1000);
         assertNull(obj);
         obj = null;
-        
-        alert.alarmOn = false;
-        for (int i=0; i<list.length; i++){
-                if (list[i].toString().contains("Alarm")) list[i].sendTCP(alert);
-        }
-        
     }
 
 }
