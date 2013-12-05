@@ -11,7 +11,7 @@ class ServerController implements java.awt.event.ActionListener
     private SettingsView setting;
     private Server server;
     private UserInformation user  = new UserInformation();
-    public boolean alarm;
+    private boolean alarm = false;
     
     ServerController(){
         login = new LoginView();
@@ -172,12 +172,12 @@ class ServerController implements java.awt.event.ActionListener
         return view.getSnapshotStoragePath();
     }
     
-    public void init(Server server, boolean alarm){
+    public void init(Server server){
         this.server = server;
-        this.alarm = alarm;
     }
-    //allows server to take snapshot after motion detected
-    public void snapshot(){
+    //runs after motion detected
+    public void intrusion(){
     	view.snapshot();
+    	this.alarm = true;
     }
 }

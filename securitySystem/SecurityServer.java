@@ -12,7 +12,6 @@ import securitySystem.Network.*;
 public class SecurityServer {
 
 	private Server server;
-        private boolean alarm = false;
 	public SecurityServer() throws IOException {
 		server = new Server();
         //Registering Packets
@@ -23,10 +22,10 @@ public class SecurityServer {
         //Set up Server listener
         ServerListener listener = new ServerListener();
         //Controller is passed to listener for setting camera paths/taking snapshot
-		listener.init(server,sc,alarm);
+        sc.init(server);
+		listener.init(server,sc);
 		server.addListener(listener);
         server.start();
-        sc.init(server, alarm);
 	}
 	
 	

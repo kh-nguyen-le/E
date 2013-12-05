@@ -1,7 +1,6 @@
 package securitySystem;
 
 
-//import java.awt.Image;
 import securitySystem.Network.*;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -41,15 +40,13 @@ public class ServerListener extends Listener {
         private int port;
         private MyOzSmsClient osc;
         private ServerController controller;
-        private boolean alarm;
         private int cameraID = 0;
         private String cameraIP;
         private Session session;
         
         
-        public void init(Server server, ServerController sc, boolean alarm) {
+        public void init(Server server, ServerController sc) {
     		this.server = server;
-            this.alarm = alarm;
             this.controller = sc;
             //Initialising parameters for Ozeki SMS Client
             host = "localhost";
@@ -85,15 +82,13 @@ public class ServerListener extends Listener {
 	}
                 
         public void connected(Connection c){
-        	
+        	//turn off timeout for each client
                 c.setTimeout(0);
                 c.setKeepAliveTCP(0);
-            
         }
 
         public void disconnected(Connection c){
             String name = c.toString();
-            
             if(name.contains("Camera")){
                 //Extracting the disconnected camera's ID and setting media player blank
                 String[] stringArray = name.split(" ");   
@@ -144,33 +139,33 @@ public class ServerListener extends Listener {
 			//sets the name of each client connection on first connect
 			String name = ((MessagePacket) o).message;
 			if (name.equals("Camera")){
-                            cameraID++;
-                            name = name +" " +Integer.toString(cameraID); //for multiple cameras  
-                            cameraIP = c.getRemoteAddressTCP().getHostName();
-                            switch(cameraID){
-                                case 1:
-                                    controller.setPath1(cameraIP);
-                                    break;
-                                    
-                                case 2:
-                                    controller.setPath2(cameraIP);
-                                    break;
-                                    
-                                case 3:
-                                    controller.setPath3(cameraIP);
-                                    break;
-                                    
-                                case 4:
-                                    controller.setPath4(cameraIP);
-                                    break;
-                                    
-                                default:
-                                    System.out.println("4 cameras already connected");
-                                    break;
-                            }
-                                   
-                        }
-                        c.setName(name);
+                cameraID++;
+                name = name +" " +Integer.toString(cameraID); //for multiple cameras  
+                cameraIP = c.getRemoteAddressTCP().getHostName();
+                switch(cameraID){
+                    case 1:
+                        controller.setPath1(cameraIP);
+                        break;
+                        
+                    case 2:
+                        controller.setPath2(cameraIP);
+                        break;
+                        
+                    case 3:
+                        controller.setPath3(cameraIP);
+                        break;
+                        
+                    case 4:
+                        controller.setPath4(cameraIP);
+                        break;
+                        
+                    default:
+                        System.out.println("4 cameras already connected");
+                        break;
+                }
+                       
+            }
+            c.setName(name);
 		}
                 
 		if (o instanceof AlertPacket) {
@@ -181,45 +176,44 @@ public class ServerListener extends Listener {
 				for (int i=0; i<list.length; i++){
 					if (list[i].toString().contains("Alarm")) list[i].sendTCP(o);
 				}
-                                alarm = true;
-                        }		
-                        controller.snapshot();
-                        //Alert owner of intruder through SMS message and picture sent to email
-                        if(osc.isLoggedIn()) {
-                            try {	
-                                //Send text to predefined number
-                                osc.sendMessage(controller.getInfo().getphoneNumber(), "Check E-mail for snapshot");
-                                
-                                //Define and send email with attachment
-                                BodyPart msgBodyPart = new MimeBodyPart();
-                                Message message = new MimeMessage(session);
-                                message.setFrom(new InternetAddress("aeakai@yahoo.com"));
-                                message.setRecipients(Message.RecipientType.TO,
-                                                InternetAddress.parse(controller.getInfo().getemail()));
-                                message.setSubject("Intruder Alert!");
-                                
-                                msgBodyPart.setText("You have an unexpected visitor\n");
-
-                                Multipart mp = new MimeMultipart();
-                                mp.addBodyPart(msgBodyPart);
-                                msgBodyPart = new MimeBodyPart();                                
-                                String filename = controller.getSnapshotPath();
-                                DataSource source = new FileDataSource(filename);
-                                msgBodyPart.setDataHandler(new DataHandler(source));
-                                msgBodyPart.setFileName(filename);
-                                mp.addBodyPart(msgBodyPart);
-                                message.setContent(mp);
-
-                                Transport.send(message);
-
-                                System.out.println("Done");
-                            } catch (UnsupportedEncodingException ex) {
-                                ex.printStackTrace();
-                            } catch (MessagingException ex) {
-                                Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
+            }
+                controller.intrusion(); //Informs View of intrusion
+                //Alert owner of intruder through SMS message and picture sent to email
+                if(osc.isLoggedIn()) {
+                    try {	
+                        //Send text to predefined number
+                        osc.sendMessage(controller.getInfo().getphoneNumber(), "Check E-mail for snapshot");
                         
+                        //Define and send email with attachment
+                        BodyPart msgBodyPart = new MimeBodyPart();
+                        Message message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress("aeakai@yahoo.com"));
+                        message.setRecipients(Message.RecipientType.TO,
+                                        InternetAddress.parse(controller.getInfo().getemail()));
+                        message.setSubject("Intruder Alert!");
+                        
+                        msgBodyPart.setText("You have an unexpected visitor\n");
+
+                        Multipart mp = new MimeMultipart();
+                        mp.addBodyPart(msgBodyPart);
+                        msgBodyPart = new MimeBodyPart();                                
+                        String filename = controller.getSnapshotPath();
+                        DataSource source = new FileDataSource(filename);
+                        msgBodyPart.setDataHandler(new DataHandler(source));
+                        msgBodyPart.setFileName(filename);
+                        mp.addBodyPart(msgBodyPart);
+                        message.setContent(mp);
+
+                        Transport.send(message);
+
+                        System.out.println("Done");
+                    } catch (UnsupportedEncodingException ex) {
+                        ex.printStackTrace();
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
 			}
         }
 }
