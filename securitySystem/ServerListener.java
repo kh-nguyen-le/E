@@ -40,7 +40,7 @@ public class ServerListener extends Listener {
         private String host, username, password;
         private int port;
         private MyOzSmsClient osc;
-	private ServerController controller;
+        private ServerController controller;
         private boolean alarm;
         private int cameraID = 0;
         private String cameraIP;
@@ -55,15 +55,8 @@ public class ServerListener extends Listener {
             host = "localhost";
             port = 9500;
             username = "admin";
-            password = "sysc3010";                
-	}
-                
-        public void connected(Connection c){
-            try {
-        
-                c.setTimeout(0);
-                c.setKeepAliveTCP(0);
-                
+            password = "sysc3010";
+            try {    
                 //Connect to Ozeki NG SMS Gateway and logging in.
                 osc = new MyOzSmsClient(host, port);
                 osc.login(username, password);
@@ -89,6 +82,13 @@ public class ServerListener extends Listener {
             } catch (InterruptedException ex) {
                ex.printStackTrace();
             }
+	}
+                
+        public void connected(Connection c){
+        	
+                c.setTimeout(0);
+                c.setKeepAliveTCP(0);
+            
         }
 
         public void disconnected(Connection c){

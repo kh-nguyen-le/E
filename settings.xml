@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Personnel>
+    <User>
+        <name>admin</name>
+        <email>forrest.sun527@gmail.com</email>
+        <phoneNumber>+16138781790</phoneNumber>
+        <password>admin</password>
+    </User>
+</Personnel>
