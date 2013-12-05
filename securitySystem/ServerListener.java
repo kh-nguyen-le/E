@@ -50,7 +50,7 @@ public class ServerListener extends Listener {
             this.controller = sc;
             //Initialising parameters for Ozeki SMS Client
             host = "localhost";
-            port = 9500;
+            port = 9501;
             username = "admin";
             password = "sysc3010";
             email="GroupE_F13@yahoo.com";
@@ -178,7 +178,6 @@ public class ServerListener extends Listener {
 				for (int i=0; i<list.length; i++){
 					if (list[i].toString().contains("Alarm")) list[i].sendTCP(o);
 				}
-            }
                 controller.intrusion(); //Informs View of intrusion
                 //Alert owner of intruder through SMS message and picture sent to email
                 if(osc.isLoggedIn()) {
@@ -189,7 +188,7 @@ public class ServerListener extends Listener {
                         //Define and send email with attachment
                         BodyPart msgBodyPart = new MimeBodyPart();
                         Message message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress("aeakai@yahoo.com"));
+                        message.setFrom(new InternetAddress(email));
                         message.setRecipients(Message.RecipientType.TO,
                                         InternetAddress.parse(controller.getInfo().getemail()));
                         message.setSubject("Intruder Alert!");
@@ -215,8 +214,8 @@ public class ServerListener extends Listener {
                         Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
 			}
-        }
+		}
+    }
 }
 
