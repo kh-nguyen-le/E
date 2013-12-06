@@ -22,11 +22,11 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class CameraListener extends Listener {
 	private Client client;
 	private GpioController gpio; //used to control motor: to be implement
-    private StreamingThread st;
+        private StreamingThread st;
         
         public void init(Client client, GpioController gpio) {
             this.client = client;
-			this.gpio = gpio;
+	    this.gpio = gpio;
         }
         
         public void connected(Connection c) {
@@ -35,8 +35,7 @@ public class CameraListener extends Listener {
                 System.out.println("Camera Connected");
                 AuthenticationPacket request = new AuthenticationPacket();
                 System.out.println("Sends authentication");
-                client.sendTCP(request);
-            
+                client.sendTCP(request);            
         }
         
         public void disconnected(Connection c){ System.out.println("Client disconnected"); st.interrupt(); System.exit(0);}
@@ -47,9 +46,15 @@ public class CameraListener extends Listener {
                         if (((HandshakePacket) o).success) {
                                 MessagePacket name = new MessagePacket();
                                 name.message = "Camera";
-                                client.sendTCP(name);
+                                client.sendTCP(name);                                
                         }
+                        AlertPacket ap = new AlertPacket();
+                        ap.alarmOn = true;
+                        System.out.println("Sending alert to server");
+                        client.sendTCP(ap);
+                        
                 }
+                
                 if (o instanceof MotorPacket) {
                         //turn motor to be implemented
                 }        
@@ -62,11 +67,11 @@ class StreamingThread extends Thread
     public StreamingThread(){}
     
     public void run(){
-    				//try {
-    					//Process p = Runtime.getRuntime().exec("python stream.py");
-    					//Process p = Runtime.getRuntime().exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
-					//} catch (IOException e) {
-						//e.printStackTrace();
-					//}
+                //try {
+                        //Process p = Runtime.getRuntime().exec("python stream.py");
+                        //Process p = Runtime.getRuntime().exec(new String[]{"sh", "-c","raspivid -o - -w 920 -h 540 -t 0 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264"});//"python stream.py");
+                        //} catch (IOException e) {
+                                //e.printStackTrace();
+                        //}
     }
 }

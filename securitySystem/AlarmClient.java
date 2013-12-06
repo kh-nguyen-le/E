@@ -15,7 +15,7 @@ public class AlarmClient {
 		client = new Client();
 		Network.register(client);
 		AlarmListener listener = new AlarmListener();
-        listener.init(client);
+                listener.init(client);
 		client.addListener(listener);
 		
 		do {

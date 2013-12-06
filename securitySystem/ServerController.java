@@ -10,17 +10,19 @@ class ServerController implements java.awt.event.ActionListener
     private LoginView login;
     private SettingsView setting;
     private Server server;
-    private UserInformation user  = new UserInformation();
+    private UserInformation user;
     private boolean alarm = false;
     
     ServerController(){
         login = new LoginView();
         login.addListener(this);
+        user = new UserInformation(new ParseXML().getXMLUser());        
     }
     
     public UserInformation getInfo(){
-        return view.getInfo();
+        return user;
     }
+    
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         String label;
@@ -67,28 +69,27 @@ class ServerController implements java.awt.event.ActionListener
                 for (int i=0; i<list.length; i++){
                         if (list[i].toString().contains("Alarm")) list[i].sendTCP(ap);
                 }
-            }
-            else if(label.equals("Settings")) {                
+            }else if(label.equals("Settings")) {                
                 user = new UserInformation(new ParseXML().getXMLUser());
-               System.out.println(user.getemail()+" "+ user.getphoneNumber());
+                System.out.println(user.getemail()+" "+ user.getphoneNumber());
                 setting = new SettingsView(user);       
                 setting.addListener(this);
+            
             }else if(label.equals("Save")) {
                 new ToXML(setting.getUser());
                 setting.setVisible(false);
-            }
-            else if(label.equals("Storage")) {
+            }else if(label.equals("Storage")) {
                 view.openDir(0);
-            }
-            else if(label.equals("Help")) {
+            }else if(label.equals("Help")) {
                 view.openHelp();
             }else if(label.equals("Login")){
                 if(login.getUser().getname().equals(user.getname())&&login.getUser().getpassword().equals(user.getpassword())) {
-                    view = new ServerView();
+                    view = new ServerView();                    
                     view.addController(this);
+                    view.setUser(user);//In case the user information may ever need to be displayed
                     login.setVisible(false);
-                }
-                else
+                    
+                }else
                     JOptionPane.showMessageDialog(null,"The username or password you entered is incorrect.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             }else if(label.equals("Cancel")){
                 System.exit(0);
@@ -105,40 +106,29 @@ class ServerController implements java.awt.event.ActionListener
                 for (int i=0; i<list.length; i++){
                         if (list[i].toString().equals(camera)) list[i].sendTCP(motor);
                 }
-            }
-            else if(label.equals("Zoom In")) {
+            }else if(label.equals("Zoom In")) {
                 System.out.println("Zooming in...");
-            }
-            else if(label.equals("Zoom Out")) {
+            }else if(label.equals("Zoom Out")) {
                 System.out.println("Zooming out...");
-            }
-            else if(label.equals("Screen Capture")) {
+            }else if(label.equals("Screen Capture")) {
                 view.snapshot();
-            }
-            else if(label.equals("Record Video")) {
+            }else if(label.equals("Record Video")) {
                 view.record();
-            }
-            else if(label.equals("Close")) {
+            }else if(label.equals("Close")) {
                 System.exit(0);
-            }
-            else if(label.equals("Video Recorded")) {
+            }else if(label.equals("Video Recorded")) {
                 view.openDir(2);
-            }
-            else if(label.equals("Picture Captured")) {
+            }else if(label.equals("Picture Captured")) {
                 view.openDir(1);
-            }
-            else if(label.equals("Settings")) {
+            }else if(label.equals("Settings")) {
                 user = new UserInformation(new ParseXML().getXMLUser());
                System.out.println(user.getemail()+" "+user.getphoneNumber());
                 setting = new SettingsView(user);
-            }
-            else if(label.equals("Update")) {
+            }else if(label.equals("Update")) {
                 System.out.println("updating...");
-            }
-            else if(label.equals("Help")) {
+            }else if(label.equals("Help")) {
                 view.openHelp();
-            }
-            else if(label.equals("About")) {
+            }else if(label.equals("About")) {
                 System.out.println("about");
             }
         }
@@ -177,6 +167,7 @@ class ServerController implements java.awt.event.ActionListener
     }
     //runs after motion detected
     public void intrusion(){
+        System.out.println("Intrusion snapsot request");
     	view.snapshot();
     	this.alarm = true;
     }

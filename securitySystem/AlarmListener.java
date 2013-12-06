@@ -29,8 +29,7 @@ public class AlarmListener extends Listener {
 
         public void disconnected(Connection c){ System.out.println("Client disconnected"); System.exit(0);}
         
-	public void received(Connection c, Object o) {
-            
+	public void received(Connection c, Object o) {           
             
 		if (o instanceof HandshakePacket) {
 			if (((HandshakePacket) o).success) {
@@ -69,8 +68,9 @@ class AlarmThread extends Thread{
            try{ 
                 sleep(200);//gives thread time to check change in alarmOn
                 if(alarmOn){  
-                	try {
+                    try {
                         java.lang.Process p = rt.exec("aplay alarm.wav"); //play alarm.wav sound
+                        System.out.println("AlertPacket received");
                         sleep(1000);
                     }catch (IOException e) {
                         e.printStackTrace();

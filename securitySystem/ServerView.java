@@ -317,13 +317,13 @@ public class ServerView
     public void updateMedia(){
     	recordCount = 0;
     	switch(switchCount) {
-				case 0:
-			        hiddenMPlayer.playMedia(mediaPath1);
-			        mPlayer1.playMedia(mediaPath1);
-			        mPlayer2.playMedia(mediaPath2);
-			        mPlayer3.playMedia(mediaPath3);
-			        mPlayer4.playMedia(mediaPath4);
-			        break;
+                case 0:
+                    hiddenMPlayer.playMedia(mediaPath1);
+                    mPlayer1.playMedia(mediaPath1);
+                    mPlayer2.playMedia(mediaPath2);
+                    mPlayer3.playMedia(mediaPath3);
+                    mPlayer4.playMedia(mediaPath4);
+                    break;
                 case 1:
                     hiddenMPlayer.playMedia(mediaPath4);
                     mPlayer1.playMedia(mediaPath4);
@@ -393,7 +393,7 @@ public class ServerView
           
     //Records the video stream in the main player
     public void record(){
-        generateFileName();
+        generateFileName(false);//to generate video path
         if(recordCount == 0) {
             switch(switchCount){
             	case 0:
@@ -489,22 +489,28 @@ public class ServerView
     }
     
     
-    public void generateFileName()
+    public void generateFileName(boolean snap)
     {
         DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
-        fileName = videoDir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+        if(!snap)
+            fileName = videoDir.getAbsolutePath() + "/Capture-" + df.format(new Date()) + ".mpg";
+        else
+           fileName =  picDir.getAbsolutePath()+"/Snapshot-"+df.format(new Date())+".png";
+       
     }
     
     //Takes a snapshot image of the main camera. 
     public void snapshot()
     {
+        System.out.println("Taking snapshot");
+        DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
         if(recordCount == 0) {
             mPlayer1.getSnapshot();
-            mPlayer1.saveSnapshot(picDir);
+            mPlayer1.saveSnapshot(new File(getSnapshotStoragePath()));
         }
         else {
             hiddenMPlayer.getSnapshot();
-            hiddenMPlayer.saveSnapshot(picDir);
+            hiddenMPlayer.saveSnapshot(new File(getSnapshotStoragePath()));
         }
     }
     
@@ -535,7 +541,7 @@ public class ServerView
     public void openHelp()
     {        
         try {
-            File myFile = new File("pdf.pdf");
+            File myFile = new File("Readme.pdf");
             Desktop.getDesktop().open(myFile);
         }catch(IOException e) {
             System.out.println(e);
@@ -543,6 +549,7 @@ public class ServerView
     }
     
     public String getSnapshotStoragePath(){
-        return picDir.getAbsolutePath();
+        generateFileName(true);//to generate snapshot image path
+        return fileName;
     }
 }

@@ -19,8 +19,8 @@ import com.esotericsoftware.kryonet.Client;
 public class CameraClient {
         private Client client;
         private static java.net.InetAddress gateway;
-		private final GpioController gpio;
-		private final GpioPinDigitalInput pir;
+	private final GpioController gpio;
+	private final GpioPinDigitalInput pir;
         
         public CameraClient() {
                 
@@ -31,36 +31,30 @@ public class CameraClient {
                 listener.init(client, gpio);
                 client.addListener(listener);
 				
-				// provision gpio pin #06 as an input pin with its internal pull down resistor enabled
-				pir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
-				
+                // provision gpio pin #06 as an input pin with its internal pull down resistor enabled
+                pir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
 
-				// create and register gpio pin listener
-				pir.addListener(new GpioPinListenerDigital() 
-				{
-				
-					@Override
-					public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) 
-					{
-					// if pin has changed to high then motion has been detected
-						if (event.getState().isHigh())
-							
-							
-						{
-							AlertPacket alert = new AlertPacket();
-							alert.alarmOn = true;
-							client.sendTCP(alert);
-							System.out.println("Motion Detected");
-							//send a motion detected packet or some shit to server here
-						}
-						//System.out.println(" Pin #: " + event.getPin() + " Pin State: " + event.getState());
-					}
-            
-                 });
-				
-					
-				
-				
+                // create and register gpio pin listener
+                pir.addListener(new GpioPinListenerDigital() 
+                {
+                        @Override
+                        public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) 
+                        {
+                        // if pin has changed to high then motion has been detected
+                                if (event.getState().isHigh())
+
+
+                                {
+                                        AlertPacket alert = new AlertPacket();
+                                        alert.alarmOn = true;
+                                        client.sendTCP(alert);
+                                        System.out.println("Motion Detected");
+                                        //send a motion detected packet or some shit to server here
+                                }
+                                //System.out.println(" Pin #: " + event.getPin() + " Pin State: " + event.getState());
+                        }
+                });
+                
                 do {
                         gateway =client.discoverHost(Network.port, 5000);
                 }while (gateway==null);

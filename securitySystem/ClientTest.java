@@ -98,7 +98,8 @@ public class ClientTest extends TestCase{
     //Testing server sending MotorPacket
     }
     public static void testAlert() throws InterruptedException{
-        //Testing server sending AlertPacket to alarm; expects alarm to ring with no packets sent back
+        //Testing server sending AlertPacket to alarm;
+        //expects alarm to ring with no packets sent back
         AlertPacket alert = new AlertPacket();
         alert.alarmOn = true;
         Connection[] list = server.getConnections();

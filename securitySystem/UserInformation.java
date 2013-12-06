@@ -48,5 +48,7 @@ public class UserInformation {
     
     public String getpassword(){return password;}    
 
-    public String toString(){return "name: "+name;}
+    public String toString(){
+        return "Username: "+name+"\nEmail: "+email+"\nPhoneNumber: "+phoneNumber+"\nPassword: "+password;
+    }
 }
