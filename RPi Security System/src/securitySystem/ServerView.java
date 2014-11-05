@@ -31,7 +31,7 @@ public class ServerView
 {
     private final EmbeddedMediaPlayer mPlayer1,mPlayer2,mPlayer3,mPlayer4,hiddenMPlayer;
     private final JButton leftButton,rightButton,zoomInButton,zoomOutButton,recordButton,screenCapture,switchCam,alarmToggle,settings,storage,help;
-    private final JMenuItem left,right,zoomIn,zoomOut,capture,record,close,video,pic,setting,update,doc,about;
+    private final JMenuItem left,right,zoomIn,zoomOut,capture,record,close,video,pic,setting,update,doc,about,simulateIntrusion;
     private final File dir,picDir,videoDir;
     
     private final String vlcPath = "C:\\Program Files\\VideoLAN\\VLC";
@@ -102,6 +102,9 @@ public class ServerView
         helpMenu.add(doc);
         about = new JMenuItem("About");
         helpMenu.add(about);
+        //add functionality to simulate intrusion in help menu
+        simulateIntrusion = new JMenuItem("Simulate Intrusion");
+        helpMenu.add(simulateIntrusion);
         
         //------------------------------------------------------------
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcPath);
@@ -310,6 +313,7 @@ public class ServerView
         update.addActionListener(controller);
         doc.addActionListener(controller);
         about.addActionListener(controller);
+        simulateIntrusion.addActionListener(controller);
     }
     
     //In the case of any changes in the media path, the media player is 
@@ -450,7 +454,7 @@ public class ServerView
     //Rotates camera position counterclockwise
     public void switchCam(){
         recordCount = 0;
-	switch(switchCount) {
+        switch(switchCount) {
             case 0:
                 hiddenMPlayer.playMedia(mediaPath4);
                 mPlayer1.playMedia(mediaPath4);

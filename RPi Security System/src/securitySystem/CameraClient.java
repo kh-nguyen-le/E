@@ -1,5 +1,6 @@
 package securitySystem;
 
+import securitySystem.Network;
 import securitySystem.Network.*;
 
 import com.pi4j.io.gpio.GpioController;
@@ -19,20 +20,19 @@ import com.esotericsoftware.kryonet.Client;
 public class CameraClient {
         private Client client;
         private static java.net.InetAddress gateway;
-	private final GpioController gpio;
-	private final GpioPinDigitalInput pir;
+        private final GpioController gpio;
+        private final GpioPinDigitalInput pir;
         
-        public CameraClient() {
-                
+        public CameraClient() {                
                 client = new Client();
-		gpio = GpioFactory.getInstance();
+                gpio = GpioFactory.getInstance();
                 Network.register(client);
                 CameraListener listener = new CameraListener();
                 listener.init(client, gpio);
                 client.addListener(listener);
 				
-                // provision gpio pin #06 as an input pin with its internal pull down resistor enabled
-                pir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
+                // provision gpio pin #07 as an input pin with its internal pull down resistor enabled
+                pir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
 
                 // create and register gpio pin listener
                 pir.addListener(new GpioPinListenerDigital() 
@@ -42,8 +42,6 @@ public class CameraClient {
                         {
                         // if pin has changed to high then motion has been detected
                                 if (event.getState().isHigh())
-
-
                                 {
                                         AlertPacket alert = new AlertPacket();
                                         alert.alarmOn = true;
@@ -51,7 +49,7 @@ public class CameraClient {
                                         System.out.println("Motion Detected");
                                         //send a motion detected packet or some shit to server here
                                 }
-                                //System.out.println(" Pin #: " + event.getPin() + " Pin State: " + event.getState());
+                                System.out.println(" Pin #: " + event.getPin() + " Pin State: " + event.getState());
                         }
                 });
                 

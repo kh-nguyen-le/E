@@ -1,7 +1,28 @@
 package securitySystem;
 
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.esotericsoftware.kryonet.*;
+import com.twilio.sdk.TwilioRestException;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.*;
+
 import securitySystem.Network.*;
 
 class ServerController implements java.awt.event.ActionListener
@@ -12,11 +33,42 @@ class ServerController implements java.awt.event.ActionListener
     private Server server;
     private UserInformation user;
     private boolean alarm = false;
+    private Session session;
+    private String email,epass;
     
     ServerController(){
         login = new LoginView();
         login.addListener(this);
-        user = new UserInformation(new ParseXML().getXMLUser());        
+        user = new UserInformation(new ParseXML().getXMLUser());
+        
+        email="aeakai@yahoo.com";
+        epass="yahooTeddy91";
+        try {    
+            //Connect to Ozeki NG SMS Gateway and logging in.
+            //osc = new MyOzSmsClient(host, port);
+            //osc.login(username, password);
+        	//Use Twilio instead
+        	
+        	
+            //Setting up SMTP server and email 
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class",
+                            "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(email,epass);
+                        }
+                });
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public UserInformation getInfo(){
@@ -57,18 +109,7 @@ class ServerController implements java.awt.event.ActionListener
                 view.switchCam();
             }
             else if(label.equals("Alarm Toggle")) {             
-                AlertPacket ap = new AlertPacket();
-                if(alarm){ 
-                    ap.alarmOn = false; 
-                    alarm = false;
-                }else{
-                    ap.alarmOn = true;
-                    alarm = true;       
-                }
-                Connection[] list = server.getConnections();
-                for (int i=0; i<list.length; i++){
-                        if (list[i].toString().contains("Alarm")) list[i].sendTCP(ap);
-                }
+                toggleAlarm();
             }else if(label.equals("Settings")) {                
                 user = new UserInformation(new ParseXML().getXMLUser());
                 System.out.println(user.getemail()+" "+ user.getphoneNumber());
@@ -130,6 +171,9 @@ class ServerController implements java.awt.event.ActionListener
                 view.openHelp();
             }else if(label.equals("About")) {
                 System.out.println("about");
+            }else if(label.equals("Simulate Intrusion")){
+            	System.out.println("Simulating Intrusion");
+            	intrusion();
             }
         }
     }
@@ -169,6 +213,61 @@ class ServerController implements java.awt.event.ActionListener
     public void intrusion(){
         System.out.println("Intrusion snapsot request");
     	view.snapshot();
-    	this.alarm = true;
+    	this.alarm = false;
+    	toggleAlarm();
+    	sendEmail();
+    	try {
+			TwilioText.sendTextMessage(user.getphoneNumber(), "Intruder! Check your email for image of intruder.");
+		} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Text Message did not send.\n");
+			e.printStackTrace();
+		}
     }
+    
+    private void sendEmail() {
+    	 try{
+             BodyPart msgBodyPart = new MimeBodyPart();
+             Message message = new MimeMessage(session);
+             message.setFrom(new InternetAddress(email));
+             message.setRecipients(Message.RecipientType.TO,
+                             InternetAddress.parse(getInfo().getemail()));
+             message.setSubject("Intruder Alert!");
+
+             msgBodyPart.setText("You have an unexpected visitor\nSee Intruder in attached image\n");
+
+             Multipart mp = new MimeMultipart();
+             mp.addBodyPart(msgBodyPart);
+             msgBodyPart = new MimeBodyPart();                                
+             String filename = getSnapshotPath();
+             DataSource source = new FileDataSource(filename);
+             msgBodyPart.setDataHandler(new DataHandler(source));
+             msgBodyPart.setFileName(filename);
+             mp.addBodyPart(msgBodyPart);
+             message.setContent(mp);
+
+             Transport.send(message);
+
+             System.out.println("Email sent");
+             
+         } catch (MessagingException ex) {
+             Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+         }
+	}
+
+	public void toggleAlarm(){
+    	AlertPacket ap = new AlertPacket();
+        if(alarm){ 
+            ap.alarmOn = false; 
+            alarm = false;
+        }else{
+            ap.alarmOn = true;
+            alarm = true;       
+        }
+        Connection[] list = server.getConnections();
+        for (int i=0; i<list.length; i++){
+                if (list[i].toString().contains("Alarm")) list[i].sendTCP(ap);
+        }
+    }
+    
 }

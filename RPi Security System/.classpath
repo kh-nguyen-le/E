@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/jna-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/kryonet-debug-2.18-all.jar" sourcepath="C:/Users/Teddy/Documents/gitrepo/kryonet-debug-2.18-all.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/mailapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/OzekiSmsClient.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/pi4j-service.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/platform-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/pop3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/smtp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Teddy/Documents/gitrepo/vlcj-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_51/bin/tools/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Tomcat/apache-tomcat-8.0.14/webapps/twilioTutorial/WEB-INF/lib/twilio-java-sdk-3.4.6-jar-with-dependencies.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
